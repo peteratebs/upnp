@@ -1,0 +1,90 @@
+<html>
+<head>
+<title> EBS HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsembeddedsoftware.com/' target='_blank'><img border=0 src='ebs.gif' align=right></a>
+
+<H2>int <A HREF="#DOC.DOCU">HTTP_ManagedClientStartTransaction</A></H2><H2>( HTTPManagedClient* client,<BR>&nbsp;  const HTTP_CHAR* host,<BR>&nbsp;  HTTP_UINT16 port,<BR>&nbsp;  HTTP_INT16 ipType,<BR>&nbsp;  HTTPManagedSessionType type,<BR>&nbsp;  unsigned blocking,<BR>&nbsp;  HTTPManagedClientSession** session )</H2><BLOCKQUOTE>Initiate a transaction with an HTTP server. </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>Every HTTP operation provided by the managed client can be seen as
+a single transaction, or request/response pair.  Each transaction
+takes place within the context of an HTTPManagedClientSession.
+An HTTPManagedClientSession corresponds to a single connection to
+a remote server.  The managed client is designed to handle the
+specifics of establishing and closing connections automatically;
+thus, while calling <!1><A HREF="HTTP_ManagedClientStartTransaction.html">HTTP_ManagedClientStartTransaction</A> may
+cause a new connection to be established, it may just as easily
+find an existing open connection and pass it back through the session
+pointer (see "session" argument below).
+
+<P>This function, therefore, should not be viewed as explicitly opening
+a connection, but rather as setting up the managed client to send an
+HTTP request to a given remote host.
+
+<P>The session returned by this function is only good for a single
+transaction.  Once the transaction is complete (or has been aborted),
+<!1><A HREF="HTTP_ManagedClientFinishTransaction.html">HTTP_ManagedClientFinishTransaction</A> or <!1><A HREF="HTTP_ManagedClientCloseSession.html">HTTP_ManagedClientCloseSession</A>
+(to physically close the connection) must be called.
+
+<P>If the blocking option is set, this function may block until a
+connection is established with the remote host.  If it is not,
+this function will return immediately; but in this case, the
+application should use <!1><A HREF="HTTP_ManagedClientSelect.html">HTTP_ManagedClientSelect</A> to determine
+when a request can be sent.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>client</B> -   a managed client instance 
+<BR><B>host</B> -   the host name of the server 
+<BR><B>port</B> -   the port on the remote host, or 0 for the default 
+<BR><B>ipType</B> -   Type of address IPv4 or IPv6 
+<BR><B>type</B> -   the type of connection (TCP, secure TCP, UDP mulitcast, etc.) 
+<BR><B>blocking</B> -   boolean: use blocking I/O or non-blocking 
+<BR><B>session</B> -   pointer to HTTPManagedClientSession pointer to return the session <BR><DT><B>Returns:</B><DD>  0 on success, negative on failure
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2009.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

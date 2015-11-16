@@ -1,0 +1,77 @@
+<html>
+<head>
+<title> EBS UPnP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+
+<H2>int <A HREF="#DOC.DOCU">UPnP_RegisterRootDevice</A></H2><H2>( UPnPDeviceRuntime* deviceRuntime,<BR>&nbsp;  const UPNP_CHAR* descDocURL,<BR>&nbsp;  IXML_Document* description,<BR>&nbsp;  UPNP_BOOL autoAddr,<BR>&nbsp;  UPnPDeviceCallback callback,<BR>&nbsp;  void* userData,<BR>&nbsp;  UPnPRootDeviceHandle* retHandle,<BR>&nbsp;  UPNP_BOOL deviceAdvertise)</H2><BLOCKQUOTE>Configures the root device and its serives for UPnP </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>Sets up the device to serve UPnP requests from the clients; set up
+devcive for ssdp announcements if deviceAdvertise is turned on.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>deviceRuntime</B> -   device runtime information 
+<BR><B>descDocURL</B> -   relative url of device
+description document 
+<BR><B>description</B> -   address of DOM representation
+of the device description
+document 
+<BR><B>autoAddr</B> -   Select swtich for Auto IP
+if 1 - uses AutoIP
+if 0 - extracts address from the
+device description document 
+<BR><B>callback</B> -   pointer to the callback function
+for the device 
+<BR><B>userData</B> -   user data for callback 
+<BR><B>retHandle</B> -   handle to the current root device 
+<BR><B>deviceAdvertise</B> -   Switch to turn ON and OFF device advertising
+If 1 - device will be set up to send periodic
+SSDP announcements.
+If 0 - no ssdp announcements will be send<BR><DT><B>Returns:</B><DD>  error code
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2005.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

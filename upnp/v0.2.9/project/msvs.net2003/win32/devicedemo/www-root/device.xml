@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <URLBase>http://192.168.0.6:57773/</URLBase>
+   <device>
+      <deviceType>urn:schemas-upnp-org:device:BinaryLight:1</deviceType>
+      <friendlyName>EBS UPnP Light</friendlyName>
+      <manufacturer>EBS Inc</manufacturer>
+      <manufacturerURL>http://www.ebsembeddedsoftware.com</manufacturerURL>
+      <modelDescription>UPnP Test Bulb</modelDescription>
+      <modelName>EBS Light Bulb Demo</modelName>
+      <modelNumber>XPC-L1</modelNumber>
+      <modelURL>http://www.ebsembeddedsoftware.com</modelURL>
+      <UDN>uuid:9de82eea-b4a2-41ae-b182-058befd73af8</UDN>
+      <iconList>
+         <icon>
+            <mimetype>image/png</mimetype>
+            <width>32</width>
+            <height>32</height>
+            <depth>8</depth>
+            <url>/icon.png</url>
+         </icon>
+      </iconList>
+      <serviceList>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:SwitchPower:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:SwitchPower.0001</serviceId>
+            <SCPDURL>_SwitchPower.0001_scpd.xml</SCPDURL>
+            <controlURL>_SwitchPower.0001_control</controlURL>
+            <eventSubURL>_SwitchPower.0001_event</eventSubURL>
+         </service>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:DimmingService:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:DimmingService.0001</serviceId>
+            <SCPDURL>_DimmingService.0001_scpd.xml</SCPDURL>
+            <controlURL>_DimmingService.0001_control</controlURL>
+            <eventSubURL>_DimmingService.0001_event</eventSubURL>
+         </service>
+      </serviceList>
+   </device>
+</root>

@@ -1,0 +1,83 @@
+
+UPnP Device narrative description -
+
+The device stack operates
+
+	UPnP_RuntimeInit (
+    {
+		HTTP_ServerInit (
+        {
+				Initialize server-> ipAddr, port, name, majopr and minor number,root, default file,
+				Initialize http server context arrays, one entry per simultaneously allowed connectiojn.
+				If multi-threading initialize spawn helper threads and initialize the queue and
+				signaling mechanisms to be used by rtp_helper_thread_queue_job() to shedule helpers
+                to process HTTP requests.
+                    Assigns _HTTP_ServerExecuteJob() as andkler for HTTP requests.
+                        _HTTP_ServerExecuteJob is a wrapper wich calls HTTP_ServerProcessOneConnection (
+====
+int  HTTP_ServerProcessOneConnection (HTTPServerContext *server,
+                                      RTP_SOCKET sockHandle,
+                                      RTP_NET_ADDR *clientAddr)
+	result = HTTP_InitSession (&session,
+	HTTP_SetWriteBufferSize(&session, 1452);
+	if (_HTTP_ServerValidateClient(server, clientAddr) < 0)
+	len = HTTP_ReadRequest(&session, &request, tempBuffer, tempBufferSize);
+	serverPath = _HTTP_ServerFindMatchingPath(server, request.target);
+		switch (serverPath->fn(serverPath->userData, &ctx, &session, &request, clientAddr))
+		{
+			case HTTP_REQUEST_STATUS_DONE:
+				requestProcessed = 1;
+				break;
+
+			case HTTP_REQUEST_STATUS_CONTINUE:
+				break;
+		}
+	}
+
+	if (!requestProcessed)
+	{
+		_HTTP_ServerHandleRequest(&ctx, &session, &request, clientAddr);
+	}
+
+	HTTP_FreeSession(&session);
+====
+
+				}
+        }
+
+		SSDP_ServerInit (
+	}
+
+
+	UPnP_DeviceInit (
+    {
+		deviceRuntime->upnpRuntime = rt;
+		deviceRuntime->deviceSSDPCallback = UPnP_DeviceSSDPCallback;
+		rt->deviceRuntime = deviceRuntime;
+    }
+
+	rtpxmlLoadDocument("www-root\\device.xml");
+	UPnP_RegisterRootDevice (
+    {
+	    UPnP_DeviceDescribeRootDevice(description, 32);
+	    DLLIST_INSERT_BEFORE(&deviceRuntime->rootDeviceList, &rootDevice->device.node);
+				rtp_strcpy(rootDevice->descLocation, urlBase);
+				rtp_strcat(rootDevice->descLocation, descDocURL);
+	    if (autoAddr)	{		...	}
+	    rootDevice->deviceRuntime = deviceRuntime;
+	    rootDevice->deviceRuntime->announceAll = UPnP_DeviceSendAllAlive;
+	    rootDevice->userCallback = callback;
+	    rootDevice->userData = userData;
+	    /* add server paths for all services (GENA and SOAP) */
+	    while (service != (UPnPService *) &rootDevice->serviceList)
+	    {
+		    result = UPnP_DeviceControlBindService (deviceRuntime, service);
+		    result = UPnP_DeviceEventBindService   (deviceRuntime, service);
+	    }
+    }
+	UPnP_DeviceAdvertise(rootDevice, ANNOUNCE_FREQUENCY_SEC, REMOTE_CACHE_TIMEOUT_SEC);
+	UPnP_StartDaemon(&rt);
+	/*	while (1)	{   UPnP_ProcessState (&rt,1000); } */
+	UPnP_DeviceFinish(&deviceRuntime);
+	rtpxmlDocument_free(xmlDevice);
+

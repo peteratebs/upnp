@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!--
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+	<specVersion>
+		<major>1</major>
+		<minor>0</minor>
+	</specVersion>
+	<URLBase>http://192.168.1.1:5010/</URLBase>
+	<device>
+		<deviceType>urn:schemas-upnp-org:device:InternetGatewayDevice:1</deviceType>
+		<friendlyName>Aricent Internet Gateway Device</friendlyName>
+		<manufacturer>Aricent UPnP IGD Project</manufacturer>
+		<manufacturerURL>http://www.aricent.com</manufacturerURL>
+		<modelDescription>Internet Gateway Device on Aricent IGD</modelDescription>
+		<modelName>Aricent IGD</modelName>
+		<modelNumber>1.00</modelNumber>
+		<modelURL>http://www.aricent.com</modelURL>
+		<serialNumber>1.00</serialNumber>
+		<UDN>uuid:75802409-bccb-40e7-8e6c-fa095ecce13e</UDN>
+		<UPC>Aricent IGD</UPC>
+		<iconList>
+			<icon>
+				<mimetype>image/gif</mimetype>
+				<width>118</width>
+				<height>119</height>
+				<depth>8</depth>
+				<url>/ligd.gif</url>
+			</icon>
+		</iconList>
+		<serviceList>
+		    <service>
+			    <serviceType>urn:schemas-upnp-org:service:Layer3Forwarding:1</serviceType>
+			    <serviceId>urn:upnp-org:serviceId:L3Forwarding1</serviceId>
+			    <SCPDURL>/Layer3Forwarding.xml</SCPDURL>
+			    <controlURL>URL for control</controlURL>
+			    <eventSubURL>URL for eventing</eventSubURL>
+		    </service>
+		</serviceList>
+xx
+	</device>
+</root>
+-->
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+	<specVersion>
+		<major>1</major>
+		<minor>0</minor>
+	</specVersion>
+	<URLBase>http://192.168.1.1:5010/</URLBase>
+	<device>
+		<deviceType>urn:schemas-upnp-org:device:InternetGatewayDevice:1</deviceType>
+		<friendlyName>Aricent Internet Gateway Device</friendlyName>
+		<manufacturer>Aricent UPnP IGD Project</manufacturer>
+		<manufacturerURL>http://www.aricent.com</manufacturerURL>
+		<modelDescription>Internet Gateway Device on Aricent IGD</modelDescription>
+		<modelName>Aricent IGD</modelName>
+		<modelNumber>1.00</modelNumber>
+		<modelURL>http://www.aricent.com</modelURL>
+		<serialNumber>1.00</serialNumber>
+		<UDN>uuid:75802409-bccb-40e7-8e6c-fa095ecce13e</UDN>
+		<UPC>Aricent IGD</UPC>
+		<iconList>
+			<icon>
+				<mimetype>image/gif</mimetype>
+				<width>118</width>
+				<height>119</height>
+				<depth>8</depth>
+				<url>/ligd.gif</url>
+			</icon>
+		</iconList>
+	<serviceList>
+         <service>
+<!--
+            <serviceType>urn:schemas-upnp-org:service:SwitchPower:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:SwitchPower.0001</serviceId>
+            <SCPDURL>_SwitchPower.0001_scpd.xml</SCPDURL>
+            <controlURL>_SwitchPower.0001_control</controlURL>
+            <eventSubURL>_SwitchPower.0001_event</eventSubURL>
+-->
+		    <serviceType>urn:schemas-upnp-org:service:Layer3Forwarding:1</serviceType>
+		    <serviceId>urn:upnp-org:serviceId:L3Forwarding1</serviceId>
+		    <SCPDURL>/Layer3Forwarding.xml</SCPDURL>
+	        <controlURL>URL for control</controlURL>
+		    <eventSubURL>URL for eventing</eventSubURL>
+         </service>
+<!--
+	    <service>
+		    <serviceType>urn:schemas-upnp-org:service:Layer3Forwarding:1</serviceType>
+		    <serviceId>urn:upnp-org:serviceId:L3Forwarding1</serviceId>
+		    <SCPDURL>/Layer3Forwarding.xml</SCPDURL>
+	    <controlURL>URL for control</controlURL>
+		    <eventSubURL>URL for eventing</eventSubURL>
+	    </service>
+-->
+	</serviceList>
+<!--
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <URLBase>http://192.168.0.6:57773/</URLBase>
+   <device>
+      <deviceType>urn:schemas-upnp-org:device:My2BinaryLight:1</deviceType>
+      <friendlyName>EBS UPnP Light</friendlyName>
+      <manufacturer>EBS Inc</manufacturer>
+      <manufacturerURL>http://www.ebsembeddedsoftware.com</manufacturerURL>
+      <modelDescription>UPnP Test Bulb</modelDescription>
+      <modelName>EBS Light Bulb Demo</modelName>
+      <modelNumber>XPC-L1</modelNumber>
+      <modelURL>http://www.ebsembeddedsoftware.com</modelURL>
+      <UDN>uuid:9de82eea-b4a2-41ae-b182-058befd73af8</UDN>
+      <iconList>
+         <icon>
+            <mimetype>image/png</mimetype>
+            <width>32</width>
+            <height>32</height>
+            <depth>8</depth>
+            <url>/icon.png</url>
+         </icon>
+      </iconList>
+      <serviceList>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:SwitchPower:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:SwitchPower.0001</serviceId>
+            <SCPDURL>_SwitchPower.0001_scpd.xml</SCPDURL>
+            <controlURL>_SwitchPower.0001_control</controlURL>
+            <eventSubURL>_SwitchPower.0001_event</eventSubURL>
+         </service>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:DimmingService:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:DimmingService.0001</serviceId>
+            <SCPDURL>_DimmingService.0001_scpd.xml</SCPDURL>
+            <controlURL>_DimmingService.0001_control</controlURL>
+            <eventSubURL>_DimmingService.0001_event</eventSubURL>
+         </service>
+      </serviceList>
+-->
+   </device>
+</root>

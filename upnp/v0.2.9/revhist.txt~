@@ -1,0 +1,438 @@
+====================================================================
+Functional changes between in version 0.2.9 versus version 0.2.5
+
+Version 2.9 adds new features to the demos, and project files and integrates functional changes that were previously
+only available in a series of internal releases.
+
+Date : (February - 2010)
+
+New features of version 2.9
+===========================
+
+.. http/v0.2.3/project/msvs.net2003/win32/serverdemo - This is a new project providing a stand alone http server and 
+client module example. Only a  Windows version is provided, a linux verison will be provided in a future release.
+
+. http/v0.2.5/source/fileext.c - Minor cleanup issues
+
+.. http/v0.2.5/source/httpmcli.c - Implemented _HTTP_ManagedClientRequestExExperimental, which fixes bugs in 
+_HTTP_ManagedClientRequestEx(). Not all calls to _HTTP_ManagedClientRequestEx() from UPnP have have been changed, 
+so both functions still exist.
+
+
+Note:  Versions 0.2.6 - 0.2.8 were internal releases. Version 2.9 captures those changes
+and integrates them with the previous release version, version 2.5.
+
+
+====================================================================
+Soapcli.c Call new function for posting soap messages. Note.. this is marked experimental but it is actually stabile.
+Some servers were rejecting SOAP POST messages because HTTP_ManagedClientRequestEx() did not include SoapAction in the
+header and miscalculated ContentLen. Other uses of HTTP_ManagedClientRequestEx() by SOAP and Gena have not shown this
+same problem but further study is required to be sure.
+Note: Http managed client library version 2.5 is required because it includes HTTP_ManagedClientRequestExExperimental.
+
+====================================================================
+Functional changes between in version 0.2.8 versus version 0.2.7
+Date : (August - 31/07)
+====================================================================
+ssdpsrv.c - Fixed bug, processing the the wrong time value for cache header control
+Upnpcli.h,
+ControlDiscover.c - Added cacheTimeoutSec to field even UpnpControlEvent structure. Returns cacheTimeoutSec value extracted from SSDP
+            notify messages.
+====================================================================
+Functional changes between in version 0.2.7 releasecandidate versus version 0.2.6
+Date : (March - 18/07)
+====================================================================
+bintoc.exe
+    - Replaced file bintoc.exe in project\msvs.net2003\win32\virtual device demo
+    This new version NULL terminates the data in the array so the parser behaves correctly when bintoc'ed
+    file data is accessed directly.
+DeviceDiscover.c
+  - Corrected problem, was not responding to M-Search to the device type of root device
+  - UPnP_DeviceSSDPCallback () - Corrected problem, not responding to M-Search for the device type of root device
+         added the following additional line to detect if a response is warranted.
+			     (rtp_strcmp(search->target, rootDevice->device.deviceType) == 0))
+deviceDescribe.c
+.  Line 174, fixed a bug caused by inserting the device node into the device list twice.
+    Changed from,
+        /* insert this device at the end of device list */
+        DLLIST_INSERT_BEFORE(&rootDevice->deviceList, &device->node);
+    To:
+        DLLIST_INIT(&device->node)
+    This reverses a change made to version 2.4 to create version2.5.
+====================================================================
+Functional changes between in version 0.2.6 versus version 0.2.5
+Date : (March - 18/07)
+====================================================================
+upnpdev.c - Modified to format messages correctly with GNU 'C'
+1. UPnP_DeviceNotify()
+2. UPnP_AcceptSubscription()
+3. _UPnP_DeviceNotifyThread()
+  These three functions where using the result of an earlier pointer lookup in declarations and were relying on
+  the order in which initializers were executed within a block. This causes problems with GNU compilers and perhaps
+  others. A new method is used to explicitly execute code to initialize the message.
+    THe routines were changed from this form:
+		GENA_CHAR *parts[2] = {"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n", message};
+		GENA_INT32 messageLen = rtp_strlen(message);
+		GENA_INT32 partLen[2] = {40, messageLen};
+    To this form:
+		GENA_CHAR *parts[2] = {"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n", ""};
+		GENA_INT32 messageLen = rtp_strlen(message);
+		GENA_INT32 partLen[2] = {40, 0};
+		parts[1] = message;
+		partLen[1] = messageLen;
+ssdpsrv.c
+  - Changed multicast TTL to 4 from 1
+  - Corrected formatting problems with SSDP messages
+  - Formatted SSDP messages similarly to Intel UPnP
+-- SSDP_ServerInit() - Changed the multicast TTL (time to live) field to 4. This is the value of TTL
+   recommended in the UPnP secification. The previous value was 1.
+1. SSDP_SendNotify() - Removed this function and replaced it with two seperate functions
+2. SSDP_SendAlive()  - New function Sends ssdp:alive message.
+3. SSDP_SendByebye() - New function Sends ssdp:byebye
+These functions change the formatting of messages:
+.. Spaces are inserted after field identifiers
+.. Several identifiers changed to upper case.
+.. now sending byebye instead of bye-bye, which was incorrect
+.. SSDP_SendByebye() Sends only fields associated with the byebye advertisement.
+   previous version was sending additional filed incorrectly
+.. The fields of the ssdp:alive and ssdp:byebye advertisements are now
+   sent in the same order as they are sent by the Intel SDK. The UPnP device
+   specification sates that the order in which the fields are formatted is
+   not important but it seems prudent to use the same formatting as the Intel
+   specification. The order can be changed back to the original order, which
+   is how they are described in the UPnP spec by setting the constant in ssdpsrv.c
+   named "USE_INTEL_SDK_ORDER" to zero
+ssdpsrv.h
+  - Added prototypes for SSDP_SendAlive() and SSDP_SendByebye()
+DeviceDiscover.c
+  - Corrected problems not sending all devices and services in SSDP alive messages
+  - Corrected formatting problems with SSDP alive and bye bye messages
+1. re-declared several functions as static since they are not externally referenced
+2. UPnP_DeviceSendAllAlive() Changed this routine to call _UPnP_DeviceSendRootDeviceAlive() with
+   the deep parameter set to 1. It was being called with deep set to zero, this caused it
+   to only send the root advertisement and not the root advertisementand all services
+   and devices under the root, as it should.
+3. _UPnP_DeviceSendDeviceAlive()     - Changed to call the new SSDP_SendAlive() function instead of SSDP_SendNotify()
+4. _UPnP_DeviceSendServiceAlive()    - Changed to call the new SSDP_SendAlive() function instead of SSDP_SendNotify()
+5. _UPnP_DeviceSendRootDeviceAlive() - Changed to call the new SSDP_SendAlive() function instead of SSDP_SendNotify()
+6. _UPnP_DeviceSendRootDeviceAlive() - Changed so that when iterating through the root's device list sending alive
+                                       advertisements. Do not resend alive message for the root. Was previously
+                                       sending the alive message twice for the root device.
+7. UPnP_DeviceSendAllByeBye() Changed this routine to call _UPnP_DeviceSendRootDeviceAlive() with
+   the deep parameter set to 1. It was being called with deep set to zero, but _UPnP_DeviceSendRootDeviceAlive()
+   was incorrectly interpreting the parameter. Now the calling sequence and the argument interpretation
+   is constistent with the way alive advertisements are processed.
+8. _UPnP_DeviceSendDeviceByebye()      - Changed to call the new SSDP_SendByebye() function instead of SSDP_SendNotify()
+9. _UPnP_DeviceSendServiceByebye()     - Changed to call the new SSDP_SendByebye() function instead of SSDP_SendNotify()
+10. _UPnP_DeviceSendRootDeviceByebye() - Changed to call the new SSDP_SendByebye() function instead of SSDP_SendNotify()
+11. _UPnP_DeviceSendRootDeviceByebye() - Changed so that when iterating through the root's device list sending byebye
+                                         advertisements. Do not resend byebye message for the root. Was previously
+                                         sending the byebye message twice for the root device.
+12. _UPnP_DeviceSendRootDeviceByebye() - Changed interpretation of the deep parameter to send root advertisement and
+     all services and devices under the root, when deep is set to 1, as it should.
+13. _UPnP_DeviceSendServiceByeBye() Changed the code that initialized the USN field.
+        It was incorrectly sending:	ServiceId:Servicetype  Now it is correctly sending UDN:Servicetype
+upnp.h
+1. Changed version number to 0026
+upnp.c
+1. UPnP_RuntimeInit ()
+    Changed UPnP sever id name from:
+      "EBS UPnP/1.0"
+    To
+      "RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.6",
+    The format of the Server ID now adheres to the specification. The OS portion may be edited. For example
+    if yoo are using Vxworks5.3 you could change the server string to:
+      "Vxworks/5.3, UPnP/1.0, EBS UPnPSDK/2.6",
+====================================================================
+Functional changes between in version 0.2.4 versus version 0.2.5
+Date : (Jan - 05/07) 05/01/07
+1.  upnp.h
+    Updated version check for HTTP for http version 0.2.3
+    #if (HTTP_VERSION < 0023)
+    #error USE HTTP VERSION 0.2.3 or greater
+    #endif
+2.  Made the following changes to remove compiler warnings
+    ssdpsrv.c - Line 459
+    From -
+    if(HTTP_InitSession (&session, SSDP_McastRead, 0,
+       (void *)&readSession) < 0 )
+    To -
+    if(HTTP_InitSession (&session, (HTTPStreamReadFn)SSDP_McastRead,
+       0, (void *)&readSession) < 0 )
+
+    deviceControl.c - Line 80
+    From - SOAP_ServerProcessRequest, 0,
+    To - (HTTPRequestHandler)SOAP_ServerProcessRequest,
+
+    deviceEvent.c - Line 80
+    From - GENA_ServerProcessRequest, 0,
+    To - (HTTPRequestHandler)GENA_ServerProcessRequest,
+
+    upnpdev.c - Lines 422, 595, 713
+    explicit typecast (const GENA_CHAR**) to parts;
+
+    controlEvent.c - Lines 119, 167, 210
+    added explicit typecasting -
+    (GENAClientRequestCallback)_UPnP_ControlGENARequestDoneCallback,
+
+    genacli.c - Line 148
+    added explicit typecasting -
+    (HTTPServerHeaderCallback)_GENA_ProcessHttpHeader,
+    Line 772 - (HTTPHeaderCallback)_GENA_ReadHeader
+
+    upnpcli.c - Line 1817
+    added explicit typecasting -
+    (GENAClientCallback)_UPnP_ControlEventGENACallback
+
+    genasrv.h - Moved the following type definition to the start of
+                the file
+    typedef struct s_GENAServerContext GENAServerContext;
+    typedef struct s_GENAServerRequest GENAServerRequest;
+
+    soapsrv.h - Moved the following type definition to the start of
+                the file
+    typedef struct s_SOAPServerContext SOAPServerContext;
+    typedef struct s_SOAPRequest SOAPRequest;
+3.  upnpdev.h line - 66
+    added new member to s_UPnPRootDevice
+    DLListNode               node;
+4.  deviceDescribe.c Line 174, fixed a bug caused by not inserting the
+    the device node into the device list.
+    Changed from,
+    DLLIST_INIT(&device->node)
+    To:
+    /* insert this device at the end of device list */
+    DLLIST_INSERT_BEFORE(&rootDevice->deviceList, &device->node);
+5.  deviceDiscover.c Line 170, fixed bug of traversing wrong device list.
+    Changed from  -
+    rootDevice = (UPnPRootDevice *) rootDevice->device.node.next;
+    To -
+    rootDevice = (UPnPRootDevice *) rootDevice->node.next;
+6.  upnpdev.c Line 157, fixed a bug caused by traversing wrong device
+    list.
+    Changed from -
+    next = (UPnPRootDevice *) rootDevice->device.node.next;
+    To -
+    next = (UPnPRootDevice *) rootDevice->node.next;
+7.  upnpdev.c Line 218, fixed a bug caused by inserting node to a
+    wrong device list.
+    Changed from -
+    DLLIST_INSERT_BEFORE(&deviceRuntime->rootDeviceList, &rootDevice->device.node);
+    To -
+    DLLIST_INSERT_BEFORE(&deviceRuntime->rootDeviceList, &rootDevice->node);
+8.  upnpdev.c funtion UPnP_RegisterRootDevice() at Line 246
+    Added following code to support virtual file
+    result = HTTP_ServerAddPath (
+						&deviceRuntime->upnpRuntime->httpServer,
+						serverPath,
+						1,
+						_UPNP_XmlFileRequestHandler,
+						_UPNP_XmlFileDestructor,
+						rootDevice);
+	if(result == -2) // already exists
+	{
+		HTTP_ServerRemovePath (&deviceRuntime->upnpRuntime->httpServer,
+                       serverPath);
+        result = HTTP_ServerAddPath ( &deviceRuntime->upnpRuntime->httpServer,
+					serverPath,
+					1,
+					_UPNP_XmlFileRequestHandler,
+					_UPNP_XmlFileDestructor,
+					rootDevice);
+    }
+    if(result == 0)
+9.  upnpdev.c function UPnP_DeviceNotify() at line 426
+    , in function UPnP_AcceptSubscription() at line 600
+    and in fucntion UPnP_DeviceNotifyThread() at line 719
+    fixed a compiler complaint by making following changes
+    Changed from -
+    GENA_UINT8 *parts[2] = {"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n", message};
+    GENA_INT32 partLen[2] = {40, rtp_strlen(message)};
+    To -
+    GENA_CHAR* parts[2]; = {"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n", ""};
+	GENA_INT32 messageLen = rtp_strlen(message);
+	GENA_INT32 partLen[2] = {40, 0};
+    parts[1] = message;
+    partLen[1] = messageLen;
+10. upnpdev.c, function UPnP_DeviceNotifyAsync() at line 499, fix the possible error
+    condition caused by not initializing DeviceNotifyContext structure.
+    Added:
+    rtp_memset((DeviceNotifyContext*)ctx, 0, sizeof(DeviceNotifyContext));
+11. controlAction.c, function _UPnP_ControlNewInvokeAction() at line 105,
+    added initialization for UPnPControlInvokeAction structure.
+    Added:
+    rtp_memset((UPnPControlInvokeAction*)invokeSm, 0, sizeof(UPnPControlInvokeAction));
+12. upnpcli.c, function _UPnP_ControlNewService() at line 1788,
+    added initialization for UPnPControlService structure.
+    Added:
+    rtp_memset((UPnPControlService*)service, 0, sizeof(UPnPControlService));
+13. upnpdev.c, function UPnP_AcceptSubscriptionAsync() at line 652,
+    added initialization for DeviceNotifyContext structure.
+    Added:
+    rtp_memset((DeviceNotifyContext*)ctx, 0, sizeof(DeviceNotifyContext));
+02/26/07
+14. genasrv.h, fixed rtsmb server supplying incorrect keys to subscribers
+    by modifying s_GENAServerSubscriber structure. Added element eventkey
+    to this structure.
+    GENA_UINT32        eventKey;
+15. genasrv.h, fixed rtsmb server supplying incorrect keys to subscribers
+    by modifying s_GENAServerNotifier structure. Removed element eventSequence
+    to this structure.
+    removed ---> GENA_UINT32        eventSequence;
+16. genasrv.c, to fixed rtsmb server supplying incorrect keys to subscribers
+    removed all usage of eventSequence.
+    removed following lines
+    function GENA_ServerInitNotifier () line 178, removed
+    who->eventSequence = 0;
+    function GENA_ServerSendNotify () line 405, removed
+    who->eventSequence++;
+    function GENA_ServerCloneAllForNotify (), line 885 removed
+    who->eventSequence++;
+    function GENA_ServerCloneOneForNotify (), line 917 removed
+    who->eventSequence++;
+17. genasrv.c, in function GENA_ServerCloneAllForNotify () To add
+    boundary check and to update eventkey support for new notification
+    for each subscriber added following code at line 892
+    /* increment the subscriber event key after cloning */
+    if (sub->eventKey < 4294967295) /* check for unsigned long limit */
+    {
+        sub->eventKey++;
+    }
+    else
+    {
+        sub->eventKey = 1; /* after wrapping, the new resets to 1 */
+    }
+18. genasrv.c, in function GENA_ServerCloneAllForNotify () To add
+    boundary check and to update eventkey support for new notification
+    for each subscriber added following code at line 892
+    /* increment the subscriber event key after cloning */
+    if (sub->eventKey < 4294967295) /* check for unsigned long limit */
+    {
+        sub->eventKey++;
+    }
+    else
+    {
+        sub->eventKey = 1; /* after wrapping, the new resets to 1 */
+    }
+19. genasrv.c, On a renew subscription request reset the event key to 0
+    by adding following code in function GENA_ServerRenewSubscription ()
+    line 341
+    subscriber->eventKey = 0;
+20. genasrv.c, in function GENA_ServerAddSubscriber () added code to
+    initialize and update eventkey for a new subscription.
+    added
+    subscriber->eventKey = 0; at line 288
+    subscriber->eventKey++;   at line 299
+====================================================================
+Functional changes between in version 0.2.3 versus version 0.2.4
+1.  upnp.h
+    Updated version check for HTTP for http version 0.2.2
+    #if (HTTP_VERSION < 0022)
+    #error USE HTTP VERSION 0.2.2 or greater
+    #endif
+
+    #if (RTPLATFORM_VERSION < 0041)
+    #error USE RTPLATFORM VERSION 0.4.1 or greater
+    #endif
+2.  upnpcli.h
+    In struct s_UPnPControlEvent, changed the type for
+    action.response from
+    IXML_Element*          response;
+    to
+    IXML_Document*         response;
+3.  controlAction.c
+    In function _UPnP_ControlSOAPActionCallback changed the
+    assignment to event.data.action.response to take IXML_Document.
+    This enables use of UPnP_GetPropertyValueByName () to extract
+    response arguments.
+    Changed (line 234)
+    event.data.action.response = response->envelope.bodyElem;
+    to
+    event.data.action.response = response->envelope.doc;
+
+====================================================================
+Functional changes between in version 0.2.2 versus version 0.2.3
+1.  upnp.h
+    Added definitions for UPnP versioning
+    #define UPNP_VERSION         0.2.3      // do not change
+    #define UPNP_VERSION_STR     "0.2.3" 	// do not change
+2.  upnp.h
+    Included "rtp.h" and httpp.h" files for obtaining version
+    definitions
+    #include "rtp.h"
+    #include "httpp.h"
+3.  upnp.h
+    Added version check for HTTP and RTPLATFORM modules
+    #if (HTTP_VERSION < 0021)
+    #error USE HTTP VERSION 0.2.1 or greater
+    #endif
+
+    #if (RTPLATFORM_VERSION < 0041)
+    #error USE RTPLATFORM VERSION 0.4.1 or greater
+    #endif
+
+====================================================================
+Functional changes between in version 0.2.1 versus version 0.2.2
+1. upnp.c - In UPnP_RuntimeInit. At line 129 added the following lines:
+
+ 	     #ifdef UPNP_MULTITHREAD
+  		    if (rtp_sig_mutex_alloc(&rt->mutex, 0) >= 0)
+			{
+				rt->daemonState = UPNP_DAEMON_STOPPED;
+         #endif /* UPNP_MULTITHREAD */
+
+                rt->deviceRuntime = 0;
+				rt->controlPoint = 0;
+				return (0);
+
+         #ifdef UPNP_MULTITHREAD
+			}
+         #endif /* UPNP_MULTITHREAD */
+
+This fixes the error caused due undefined mutex and daemonState.
+mutex and daemonState exists only if UPNP_MULTITHREAD is defined
+
+2. upnpdev.c - In UPnP_AcceptSubscription. At line 568 added
+following line
+#else
+    	if (GENA_ServerSendAccept (
+			&subReq->hidden.service->genaContext,
+			&subReq->hidden.service->genaNotifier,
+			subReq->hidden.genaRequest, subscriptionId,
+			timeoutSec, &firstNotify, 0, 0 ) < 0)
+this fixes the error caused due to undefined genaMutex if
+UPNP_MULTITHREAD is not defined
+
+3. upnpdev.c - In UPnP_AcceptSubscription. At line 659 added
+following line
+#else
+        if (GENA_ServerSendAccept (
+				&subReq->hidden.service->genaContext,
+				&subReq->hidden.service->genaNotifier,
+				subReq->hidden.genaRequest,
+				subscriptionId,
+				timeoutSec,
+				&ctx->notifierClone,
+				0, 0) < 0)
+this fixes the error caused due to undefined genaMutex if
+UPNP_MULTITHREAD is not defined
+
+4. deviceEvent.c - In UPnP_AcceptSubscription. At line 166 added
+following line
+#else
+GENA_ServerSendAccept(ctx, &service->genaNotifier, request, 0, 0,
+				                  0, 0, 0);
+#endif
+this fixes the error caused due to undefined genaMutex if
+UPNP_MULTITHREAD is not defined
+
+5. deviceEvent.c - In UPnP_AcceptSubscription. At line 212 added
+following line
+#else
+GENA_ServerSendAccept(ctx, &service->genaNotifier, request, 0, 0,
+				                  0, 0, 0);
+#endif
+this fixes the error caused due to undefined genaMutex if
+UPNP_MULTITHREAD is not defined
+
+====================================================================

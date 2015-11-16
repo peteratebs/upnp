@@ -1,0 +1,61 @@
+This is pdfTeX, Version 3.141592-1.20a-rc7.2 (MiKTeX 2.4) (preloaded format=plain 2005.12.29)  29 DEC 2005 17:05
+**device device.pdf
+(device.tex
+! Undefined control sequence.
+l.1 \documentclass
+                  {article}
+? 
+! Undefined control sequence.
+l.2 \usepackage
+               {docxx}
+? 
+! Undefined control sequence.
+l.3 \begin
+          {document}
+? 
+! Undefined control sequence.
+l.4 \pagebreak
+              
+? 
+! Undefined control sequence.
+l.5 \sloppy
+           
+? 
+! Undefined control sequence.
+l.6 \cxxTitle
+             {}
+? 
+! Undefined control sequence.
+l.11 \begin
+           {cxxContents}
+? 
+! Undefined control sequence.
+l.12 \cxxContentsEntry
+                      {1}{API Reference }{}
+? 
+! Undefined control sequence.
+l.13 \cxxContentsEntry
+                      {2}{Internal Library Documentation}{}
+? 
+! Undefined control sequence.
+l.14 \begin
+           {cxxContents}
+? 
+! Undefined control sequence.
+l.15 \cxxContentsEntry
+                      {2.1}{Discovery/SSDP}{}
+? 
+! Undefined control sequence.
+l.16 \cxxContentsEntry
+                      {2.2}{Description}{}
+? 
+! Undefined control sequence.
+l.17 \cxxContentsEntry
+                      {2.3}{Control/SOAP}{}
+? 
+! Undefined control sequence.
+l.18 \cxxContentsEntry
+                      {2.4}{Eventing/GENA}{}
+? 
+[1{sfonts.map}] )<C:\texmf\fonts\type1\bluesky\cm\cmr10.pfb>
+Output written on device.pdf (1 page, 11798 bytes).

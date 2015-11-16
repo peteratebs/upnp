@@ -1,0 +1,2205 @@
+\documentclass{article}
+\usepackage{docxx}
+\begin{document}
+\pagebreak
+\sloppy
+\cxxTitle{}
+        {EBS UPNP DEVICE SDK}
+        {}
+        {}
+        {}
+\begin{cxxContents}
+\cxxContentsEntry{1}{API Reference }{}
+\cxxContentsEntry{2}{Internal Library Documentation}{}
+\begin{cxxContents}
+\cxxContentsEntry{2.1}{Discovery/SSDP}{}
+\cxxContentsEntry{2.2}{Description}{}
+\cxxContentsEntry{2.3}{Control/SOAP}{}
+\cxxContentsEntry{2.4}{Eventing/GENA}{}
+\end{cxxContents}
+\cxxContentsEntry{3}{Examples }{}
+\begin{cxxContents}
+\cxxContentsEntry{3.1}{UPnP Device Initialization Example}{Setting up a UPnP Device }
+\end{cxxContents}
+\end{cxxContents}
+\clearpage\pagebreak
+\begin{cxxdoc}
+\<center\>
+Embedded UPnP Library version 1.0 \<br\>
+\<br\>
+\</center\>
+\end{cxxdoc}
+\begin{cxxentry}
+{}
+        {API Reference }
+        {}
+        {}
+        {1}
+\begin{cxxnames}
+\cxxitem{int}
+        {UPnP\_RuntimeInit}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_UINT8*\ serverAddr,\ \ UPNP\_UINT16\ serverPort,\ \ UPNP\_INT16\ ipType,\ \ UPNP\_CHAR*\ wwwRootDir,\ \ UPNP\_INT16\ maxConnections,\ \ UPNP\_INT16\ maxHelperThreads\ )}
+        {Initialize a UPnPRuntime }
+        {1.1}
+\cxxitem{void}
+        {UPnP\_RuntimeDestroy}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Destroy a UPnPRuntime }
+        {1.2}
+\cxxitem{int}
+        {UPnP\_AddVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath,\ const\ UPNP\_UINT8*\ data,\ UPNP\_INT32\ size,\ const\ UPNP\_CHAR*\ contentType\ )}
+        {Create a virtual file on the HTTP server. }
+        {1.3}
+\cxxitem{int}
+        {UPnP\_RemoveVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath\ )}
+        {Remove a virtual file from the server }
+        {1.4}
+\cxxitem{int}
+        {UPnP\_ProcessState}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_INT32\ msecTimeout\ )}
+        {Process asynchronous operations in non-threaded mode. }
+        {1.5}
+\cxxitem{int}
+        {UPnP\_StartDaemon}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Start the UPnP Daemon thread. }
+        {1.6}
+\cxxitem{int}
+        {UPnP\_StopDaemon}
+        {(\ UPnPRuntime*\ rt,\ UPNP\_INT32\ secTimeout\ )}
+        {Kill the UPnP Daemon thread. }
+        {1.7}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByName}
+        {(\ IXML\_Document*\ propertySet,\ \ const\ UPNP\_CHAR*\ name\ )}
+        {Get the value of a named property in a GENA notify message. }
+        {1.8}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyNameByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the name of the nth property. }
+        {1.9}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the value of the nth property. }
+        {1.10}
+\cxxitem{int}
+        {UPnP\_AddToPropertySet}
+        {(\ IXML\_Document**\ doc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Add name and value pair to GENA notify message property set. }
+        {1.11}
+\cxxitem{int}
+        {UPnP\_CreateActionResponse}
+        {(\ UPnPActionRequest*\ request\ \ )}
+        {Creates a SOAP action response message. }
+        {1.12}
+\cxxitem{IXML\_Document*}
+        {UPnP\_CreateAction}
+        {(\ const\ UPNP\_CHAR*\ serviceTypeURI,\ \ const\ UPNP\_CHAR*\ actionName\ )}
+        {Create a SOAP action request. }
+        {1.13}
+\cxxitem{int}
+        {UPnP\_SetActionArg}
+        {(\ IXML\_Document*\ actionDoc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Set an argument for a SOAP action response/request }
+        {1.14}
+\cxxitem{int}
+        {UPnP\_DeviceInit}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPRuntime*\ rt)}
+        {Initialize a UPnPDeviceRuntime }
+        {1.15}
+\cxxitem{void}
+        {UPnP\_DeviceFinish}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime)}
+        {Destroy a UPnPDeviceRuntime }
+        {1.16}
+\cxxitem{int}
+        {UPnP\_RegisterRootDevice}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ const\ UPNP\_CHAR*\ descDocURL,\ \ IXML\_Document*\ description,\ \ UPNP\_BOOL\ autoAddr,\ \ UPnPDeviceCallback\ callback,\ \ void*\ userData,\ \ UPnPRootDeviceHandle*\ retHandle,\ \ UPNP\_BOOL\ deviceAdvertise)}
+        {Configures the root device and its serives for UPnP }
+        {1.17}
+\cxxitem{int}
+        {UPnP\_UnRegisterRootDevice}
+        {(\ UPnPRootDeviceHandle\ rootDevice\ )}
+        {Free root device from its server bindings }
+        {1.18}
+\cxxitem{int}
+        {UPnP\_DeviceAdvertise}
+        {(\ UPnPRootDeviceHandle\ rootDevice,\ \ UPNP\_INT32\ frequencySec,\ \ UPNP\_INT32\ remoteTimeoutSec)}
+        {set up the device to send periodic SSDP announcements }
+        {1.19}
+\cxxitem{int}
+        {UPnP\_DeviceNotify}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPRootDeviceHandle\ rootDevice,\ \ const\ UPNP\_CHAR*\ deviceUDN,\ \ const\ UPNP\_CHAR*\ serviceId,\ \ IXML\_Document*\ propertySet)}
+        {Sends an event notification message to all the subscribers of the service.}
+        {1.20}
+\cxxitem{int}
+        {UPnP\_DeviceNotifyAsync}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPRootDeviceHandle\ rootDevice,\ \ const\ UPNP\_CHAR*\ deviceUDN,\ \ const\ UPNP\_CHAR*\ serviceId,\ \ IXML\_Document*\ propertySet\ )}
+        {Sends a non blocking event notification message to all the subscribers of the service.}
+        {1.21}
+\cxxitem{int}
+        {UPnP\_AcceptSubscription}
+        {(\ UPnPSubscriptionRequest*\ subReq,\ \ const\ GENA\_CHAR*\ subscriptionId,\ \ UPNP\_INT32\ timeoutSec,\ \ IXML\_Document*\ propertySet,\ \ UPNP\_INT32\ firstNotifyDelayMsec\ )}
+        {Accept a new subscription request. }
+        {1.22}
+\cxxitem{int}
+        {UPnP\_AcceptSubscriptionAsync}
+        {(\ UPnPSubscriptionRequest*\ subReq,\ \ const\ GENA\_CHAR*\ subscriptionId,\ \ UPNP\_INT32\ timeoutSec,\ \ IXML\_Document*\ propertySet,\ \ UPNP\_INT32\ firstNotifyDelayMsec\ )}
+        {Send Subscription Accept asynchronously.}
+        {1.23}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetRequestedDeviceName}
+        {(\ void*\ eventStruct,\ \ enum\ e\_UPnPDeviceEventType\ eventType\ )}
+        {Extracts Unique device name for the target device from control/subscription request}
+        {1.24}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetRequestedServiceId}
+        {(\ void*\ eventStruct,\ \ enum\ e\_UPnPDeviceEventType\ eventType\ )}
+        {Extracts service identifier from a control/subscription request}
+        {1.25}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetRequestedActionName}
+        {(\ void*\ eventStruct,\ \ enum\ e\_UPnPDeviceEventType\ eventType\ )}
+        {Extracts name of the target action from action/subscription request}
+        {1.26}
+\cxxitem{void}
+        {UPnP\_SetActionErrorResponse}
+        {(\ UPnPActionRequest*\ request,\ \ UPNP\_CHAR*\ description,\ \ UPNP\_INT32\ value\ \ )}
+        {Sets error code and error description for a response to an action request}
+        {1.27}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetArgValue}
+        {(UPnPActionRequest*\ request,\ \ const\ UPNP\_CHAR*\ argName\ )}
+        {Extracts the value of a given argument from an action.}
+        {1.28}
+\cxxitem{int}
+        {UPnP\_SetActionResponseArg}
+        {(UPnPActionRequest*\ request,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ \ )}
+        {Inserts name and value of an argument to an action response message}
+        {1.29}
+\end{cxxnames}
+\begin{cxxfunction}
+{int}
+        {UPnP\_RuntimeInit}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_UINT8*\ serverAddr,\ \ UPNP\_UINT16\ serverPort,\ \ UPNP\_INT16\ ipType,\ \ UPNP\_CHAR*\ wwwRootDir,\ \ UPNP\_INT16\ maxConnections,\ \ UPNP\_INT16\ maxHelperThreads\ )}
+        {Initialize a UPnPRuntime }
+        {1.1}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to uninitialized UPnPRuntime struct 
+\\
+{\tt\strut serverAddr} & ip address to bind HTTP server to (NULL for IP\_ADDR\_ANY) 
+\\
+{\tt\strut serverPort} & port to bind HTTP server to (0 for ANY\_PORT) 
+\\
+{\tt\strut ipType} & type of ip version used (ipv4 or ipv6), (RTP\_NET\_TYPE\_IPV4 for v4 and RTP\_NET\_TYPE\_IPV6 for v6) 
+\\
+{\tt\strut wwwRootDir} & HTTP root dir on local file system 
+\\
+{\tt\strut maxConnections} & the maximum limit on simultaneous HTTP server connections 
+\\
+{\tt\strut maxHelperThreads} & if UPNP\_MULTITHREAD is defined, the max number of helper threads to spawn 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Initializes the given UPnPRuntime struct, and sets up an HTTP
+server instance to receive control/event messages.  This function
+must be called before any other function in the UPnP SDK.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_RuntimeDestroy}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Destroy a UPnPRuntime }
+        {1.2}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to UPnPRuntime struct 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Must be called after all other UPnP SDK calls to clean up runtime
+data for UPnP.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_AddVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath,\ const\ UPNP\_UINT8*\ data,\ UPNP\_INT32\ size,\ const\ UPNP\_CHAR*\ contentType\ )}
+        {Create a virtual file on the HTTP server. }
+        {1.3}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_RemoveVirtualFile
+\strut}
+\begin{cxxdoc}
+
+Makes the data buffer passed in available at the given path on the
+HTTP server.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_RemoveVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath\ )}
+        {Remove a virtual file from the server }
+        {1.4}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Must be called before UPnP\_RuntimeDestroy to remove any virtual files
+added using UPnP\_AddVirtualFile.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ProcessState}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_INT32\ msecTimeout\ )}
+        {Process asynchronous operations in non-threaded mode. }
+        {1.5}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to UPnPRuntime struct 
+\\
+{\tt\strut msecTimeout} & time in miliseconds for which the function blocks 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+This function blocks for at most msecTimeout milliseconds, processing
+any asynchronous operations that may be in progress on either the
+control point or device runtime attached to the given UPnPRuntime.
+
+This function must be called in order to receive events if an
+application is running with the UPnP SDK in single-threaded mode.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_StartDaemon}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Start the UPnP Daemon thread. }
+        {1.6}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to UPnPRuntime struct 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_StopDaemon
+\strut}
+\begin{cxxdoc}
+
+This function must be called in multithreaded mode to start the
+UPnP daemon, which listens for requests/announcements on the network,
+and sends any events to the attached control point/device runtime.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_StopDaemon}
+        {(\ UPnPRuntime*\ rt,\ UPNP\_INT32\ secTimeout\ )}
+        {Kill the UPnP Daemon thread. }
+        {1.7}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & the device runtime to stop 
+\\
+{\tt\strut secTimeout} & time to wait for daemon to stop 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+This function stops the UPnP daemon from executing.  It will wait
+for at most secTimeout seconds for all helper threads to terminate.
+If this function returns negative error code, it means the timeout
+expired without the successful termination of one or more helper
+threads.  In this case, calling UPnP\_RuntimeDestroy may cause a fault
+since there are still helper threads running that may try to access
+the data structures pointed to by the UPnPRuntime.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByName}
+        {(\ IXML\_Document*\ propertySet,\ \ const\ UPNP\_CHAR*\ name\ )}
+        {Get the value of a named property in a GENA notify message. }
+        {1.8}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut the} & value or NULL if the property was not found
+\end{tabular}}
+\begin{cxxdoc}
+
+The string returned must not be modified in any way.  It is valid until
+the IXML\_Document is deleted.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyNameByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the name of the nth property. }
+        {1.9}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut propertySet} & address of xml property set 
+\\
+{\tt\strut index} & index in property for value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut the} & value or NULL if the property was not found
+\end{tabular}}
+\begin{cxxdoc}
+
+The string returned must not be modified in any way.  It is valid until
+the IXML\_Document is deleted.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the value of the nth property. }
+        {1.10}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut propertySet} & address of xml property set 
+\\
+{\tt\strut index} & index in property for value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut the} & value or NULL if the property was not found
+\end{tabular}}
+\begin{cxxdoc}
+
+The string returned must not be modified in any way.  It is valid until
+the IXML\_Document is deleted.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_AddToPropertySet}
+        {(\ IXML\_Document**\ doc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Add name and value pair to GENA notify message property set. }
+        {1.11}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut doc} & address of property set 
+\\
+{\tt\strut name} & pointer to name for new entry 
+\\
+{\tt\strut value} & address of value of for the new entry 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Add a new name value pair entry to the property set
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_CreateActionResponse}
+        {(\ UPnPActionRequest*\ request\ \ )}
+        {Creates a SOAP action response message. }
+        {1.12}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Creates a response message skeleton for the supplied SOAP action request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{IXML\_Document*}
+        {UPnP\_CreateAction}
+        {(\ const\ UPNP\_CHAR*\ serviceTypeURI,\ \ const\ UPNP\_CHAR*\ actionName\ )}
+        {Create a SOAP action request. }
+        {1.13}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut serviceTypeURI} & string containing service type of the target service 
+\\
+{\tt\strut actionName} & name on action on the target service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut pointer} & to newly created IXML\_Document, which can be passed intoUPnP\_SetActionArg to set the action arguments; NULL on error
+\end{tabular}}
+\begin{cxxdoc}
+
+Creates an XML document which will hold the SOAP action request
+message. This function returns the address of newly formed XML document.
+After finishing the process of sending action request the application
+must release this xml document.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_SetActionArg}
+        {(\ IXML\_Document*\ actionDoc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Set an argument for a SOAP action response/request }
+        {1.14}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut actionDoc} & pointer to action respose message 
+\\
+{\tt\strut name} & argument name *
+\\
+{\tt\strut value} & argument value *
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+This function can be used on an IXML\_Document created by either
+UPnP\_CreateActionResponse ($\rightarrow$ 1.13, {\em page }\pageref{cxx.1.13}) or UPnP\_CreateAction to set
+either the input or output arguments for a SOAP action.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceInit}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPRuntime*\ rt)}
+        {Initialize a UPnPDeviceRuntime }
+        {1.15}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & pointer to the device runtime buffer
+\\
+{\tt\strut rt} & pointer to an initialized upnp runtimebuffer. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_DeviceFinish
+\strut}
+\begin{cxxdoc}
+Initializes all device state data in a UPnPDeviceRuntime
+struct (allocated by the calling application), and binds the
+device to the specified UPnPRuntime.  The UPnPRuntime
+must be initialized via UPnP\_RuntimeInit before this function
+is called.  Only one device may be bound to a single
+UPnPRuntime at once.  This function must be called before
+all other device related functions.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_DeviceFinish}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime)}
+        {Destroy a UPnPDeviceRuntime }
+        {1.16}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & address of runtime of device to destroy 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_DeviceInit
+\strut}
+\begin{cxxdoc}
+Cleans up all data associated with a UPnPDeviceRuntime structure.
+Once this function has been called, it is safe to free the memory used
+by the UPnPDeviceRuntime structure.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_RegisterRootDevice}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ const\ UPNP\_CHAR*\ descDocURL,\ \ IXML\_Document*\ description,\ \ UPNP\_BOOL\ autoAddr,\ \ UPnPDeviceCallback\ callback,\ \ void*\ userData,\ \ UPnPRootDeviceHandle*\ retHandle,\ \ UPNP\_BOOL\ deviceAdvertise)}
+        {Configures the root device and its serives for UPnP }
+        {1.17}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & device runtime information 
+\\
+{\tt\strut descDocURL} & relative url of devicedescription document 
+\\
+{\tt\strut description} & address of DOM representationof the device descriptiondocument 
+\\
+{\tt\strut autoAddr} & Select swtich for Auto IPif 1 - uses AutoIPif 0 - extracts address from thedevice description document 
+\\
+{\tt\strut callback} & pointer to the callback functionfor the device 
+\\
+{\tt\strut userData} & user data for callback 
+\\
+{\tt\strut retHandle} & handle to the current root device 
+\\
+{\tt\strut deviceAdvertise} & Switch to turn ON and OFF device advertisingIf 1 - device will be set up to send periodicSSDP announcements.If 0 - no ssdp announcements will be send
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sets up the device to serve UPnP requests from the clients; set up
+devcive for ssdp announcements if deviceAdvertise is turned on.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_UnRegisterRootDevice}
+        {(\ UPnPRootDeviceHandle\ rootDevice\ )}
+        {Free root device from its server bindings }
+        {1.18}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & Handle to root device 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Unregisters the root device from the internal server, so that the future
+UPnP requests will not be served for this root device.
+
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceAdvertise}
+        {(\ UPnPRootDeviceHandle\ rootDevice,\ \ UPNP\_INT32\ frequencySec,\ \ UPNP\_INT32\ remoteTimeoutSec)}
+        {set up the device to send periodic SSDP announcements }
+        {1.19}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & handle to the device 
+\\
+{\tt\strut frequencySec} & interval in secondsbetween two announcements 
+\\
+{\tt\strut remoteTimeoutSec} & time in seconds for which the remoteclient will cache the information inthe announcement 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+The function prepares the device to send periodic announcements every
+frequecySec seconds.
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceNotify}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPRootDeviceHandle\ rootDevice,\ \ const\ UPNP\_CHAR*\ deviceUDN,\ \ const\ UPNP\_CHAR*\ serviceId,\ \ IXML\_Document*\ propertySet)}
+        {Sends an event notification message to all the subscribers of the service.}
+        {1.20}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & device runtime information 
+\\
+{\tt\strut rootDevice} & handle to the device 
+\\
+{\tt\strut deviceUDN} & unique device identifier (UUID in thedevice description document) forthe device 
+\\
+{\tt\strut serviceId} & unique service identifier (serviceIDin the device description document)for the service 
+\\
+{\tt\strut propertySet} & contains the evented variable andits value in XML format. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends an event notification message to all the subscribers of the service.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceNotifyAsync}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPRootDeviceHandle\ rootDevice,\ \ const\ UPNP\_CHAR*\ deviceUDN,\ \ const\ UPNP\_CHAR*\ serviceId,\ \ IXML\_Document*\ propertySet\ )}
+        {Sends a non blocking event notification message to all the subscribers of the service.}
+        {1.21}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & the runtime for the device
+\\
+{\tt\strut rootDevice} & the root device 
+\\
+{\tt\strut deviceUDN} & the UDN of the specific device 
+\\
+{\tt\strut serviceId} & the ID of the service notifying 
+\\
+{\tt\strut propertySet} & property set to send as new values 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends a non blocking event notification message to all the subscribers of
+the service.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_AcceptSubscription}
+        {(\ UPnPSubscriptionRequest*\ subReq,\ \ const\ GENA\_CHAR*\ subscriptionId,\ \ UPNP\_INT32\ timeoutSec,\ \ IXML\_Document*\ propertySet,\ \ UPNP\_INT32\ firstNotifyDelayMsec\ )}
+        {Accept a new subscription request. }
+        {1.22}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut subReq} & address of structure containing subscriptionrequest information 
+\\
+{\tt\strut subscriptionId} & subscription identifier for the subscriber 
+\\
+{\tt\strut timeoutSec} & duration in seconds for which the subscriptionis valid 
+\\
+{\tt\strut propertySet} & pointer to response message in XML format.
+\\
+{\tt\strut firstNotifyDelayMsec} & delay in milliseconds before sending thefirst event notification to the new subscriber 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+This function adds a new subscriber device's internal subscriber's list,
+generates a unique subscription Id for this subscriber, sets a duration
+in seconds for this subscription to be valid and sends a subscription
+response indicating success or failure to subscription request.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_AcceptSubscriptionAsync}
+        {(\ UPnPSubscriptionRequest*\ subReq,\ \ const\ GENA\_CHAR*\ subscriptionId,\ \ UPNP\_INT32\ timeoutSec,\ \ IXML\_Document*\ propertySet,\ \ UPNP\_INT32\ firstNotifyDelayMsec\ )}
+        {Send Subscription Accept asynchronously.}
+        {1.23}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut subReq} & the request being accepted 
+\\
+{\tt\strut subscriptionId} & alternate subscription ID (optional) 
+\\
+{\tt\strut timeoutSec} & remote cache timeout value inseconds (optional) 
+\\
+{\tt\strut propertySet} & property set for initial notify 
+\\
+{\tt\strut firstNotifyDelayMsec} & delay in milliseconds before sending thefirst event notification to the new subscriber 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Send Subscription Accept asynchronously. Optional parameters may be given
+a value of zero to indicate use default.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetRequestedDeviceName}
+        {(\ void*\ eventStruct,\ \ enum\ e\_UPnPDeviceEventType\ eventType\ )}
+        {Extracts Unique device name for the target device from control/subscription request}
+        {1.24}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut eventStruct} & pointer to request structure 
+\\
+{\tt\strut eventType} & type of event 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts Unique device name for the target device from control/subscription request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetRequestedServiceId}
+        {(\ void*\ eventStruct,\ \ enum\ e\_UPnPDeviceEventType\ eventType\ )}
+        {Extracts service identifier from a control/subscription request}
+        {1.25}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut eventStruct} & pointer to request structure 
+\\
+{\tt\strut eventType} & type of event 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts service identifier from a control/subscription request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetRequestedActionName}
+        {(\ void*\ eventStruct,\ \ enum\ e\_UPnPDeviceEventType\ eventType\ )}
+        {Extracts name of the target action from action/subscription request}
+        {1.26}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut eventStruct} & pointer to request structure 
+\\
+{\tt\strut eventType} & type of event 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut pointer} & to action name is available
+\end{tabular}}
+\begin{cxxdoc}
+Extracts name of the target action from action/subscription request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_SetActionErrorResponse}
+        {(\ UPnPActionRequest*\ request,\ \ UPNP\_CHAR*\ description,\ \ UPNP\_INT32\ value\ \ )}
+        {Sets error code and error description for a response to an action request}
+        {1.27}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut none} & \end{tabular}}
+\begin{cxxdoc}
+Sets error code and error description for a response to an action request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetArgValue}
+        {(UPnPActionRequest*\ request,\ \ const\ UPNP\_CHAR*\ argName\ )}
+        {Extracts the value of a given argument from an action.}
+        {1.28}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts the value of a given argument from an action. Action information is
+stored in form of IXML element.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_SetActionResponseArg}
+        {(UPnPActionRequest*\ request,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ \ )}
+        {Inserts name and value of an argument to an action response message}
+        {1.29}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Inserts name and value of an argument to an action response message
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Internal Library Documentation}
+        {}
+        {}
+        {2}
+\begin{cxxnames}
+\cxxitem{}
+        {Discovery/SSDP}
+        {}
+        {}
+        {2.1}
+\cxxitem{}
+        {Description}
+        {}
+        {}
+        {2.2}
+\cxxitem{}
+        {Control/SOAP}
+        {}
+        {}
+        {2.3}
+\cxxitem{}
+        {Eventing/GENA}
+        {}
+        {}
+        {2.4}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxentry}
+{}
+        {Discovery/SSDP}
+        {}
+        {}
+        {2.1}
+\begin{cxxnames}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_ServerInit}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT8*\ ipAddr,\ \ SSDP\_INT16\ ipType,\ \ const\ SSDP\_CHAR*\ serverId,\ \ SSDPCallback\ cb,\ \ void*\ cookie)}
+        {SSDP server initialization routine. }
+        {2.1.1}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_ServerAddToSelectList}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.2}
+\cxxitem{SSDP\_BOOL}
+        {SSDP\_ServerProcessState}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.3}
+\cxxitem{void}
+        {SSDP\_ServerDestroy}
+        {(\ SSDPServerContext*\ ctx\ pointer\ to\ SSDP\ context*\ /\ )}
+        {}
+        {2.1.4}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_SendNotify}
+        {(\ SSDPServerContext*\ ctx,\ \ const\ SSDP\_CHAR*\ notifyType,\ \ const\ SSDP\_CHAR*\ notifySubType,\ \ const\ SSDP\_CHAR*\ usn,\ \ const\ SSDP\_CHAR*\ location,\ \ SSDP\_UINT32*\ timeout)}
+        {Send a SSDP notification for the device or service. }
+        {2.1.5}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_SendResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPPendingResponse*\ response)}
+        {Deliver a responce to SSDP discovery request.}
+        {2.1.6}
+\cxxitem{SSDP\_INT32}
+        {\_SSDP\_ProcessOneRequest}
+        {(\ SSDPServerContext*\ ctx\ )}
+        {Process an incoming SSDP discovery request. }
+        {2.1.7}
+\cxxitem{int}
+        {SSDP\_ParseRequest}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPServerRequest*\ ssdpRequest\ )}
+        {Extract SSDP request. }
+        {2.1.8}
+\cxxitem{int}
+        {SSDP\_McastRead}
+        {(\ void*\ cookie,\ \ SSDP\_UINT8*\ buffer,\ \ SSDP\_INT32\ min,\ \ SSDP\_INT32\ max)}
+        {Reads all messages posted to the multicast address}
+        {2.1.9}
+\cxxitem{int}
+        {\_SSDP\_ReadMSearchHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.10}
+\cxxitem{int}
+        {\_SSDP\_ReadNotifyHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.11}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_QueueSearchResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPSearch*\ search,\ \ const\ SSDP\_CHAR*\ targetLocation,\ \ const\ SSDP\_CHAR*\ targetURN,\ \ SSDP\_UINT32\ targetTimeoutSec)}
+        {Queues a response to the response list based on its scheduled delivery time.}
+        {2.1.12}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_CheckPendingResponses}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT32\ currentTimeMsec)}
+        {Delivers responses scheduled for delivery. }
+        {2.1.13}
+\cxxitem{void}
+        {SSDP\_ProcessError}
+        {(\ SSDP\_CHAR*\ errMsg)}
+        {Process SSDP Errors}
+        {2.1.14}
+\cxxitem{SSDP\_UINT32}
+        {SSDP\_RandMax}
+        {(\ SSDP\_UINT32\ mxLimit)}
+        {generates a random number between 0 and mxLimit}
+        {2.1.15}
+\cxxitem{int}
+        {UPnP\_DeviceSSDPCallback}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPServerRequest*\ serverRequest,\ \ void*\ cookie\ )}
+        {SSDP callback for UPnP. }
+        {2.1.16}
+\cxxitem{int}
+        {UPnP\_DeviceSendAllAlive}
+        {(\ UPnPDeviceRuntime*\ runtime\ )}
+        {Sends alive advertisements for everything under all the root devices. }
+        {2.1.17}
+\cxxitem{int}
+        {UPnP\_DeviceSendRootDeviceAlive}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends alive advertisements for a root device.}
+        {2.1.18}
+\cxxitem{int}
+        {UPnP\_DeviceSendDeviceAlive}
+        {(\ UPnPDevice*\ device)}
+        {Sends alive notifications for a device}
+        {2.1.19}
+\cxxitem{int}
+        {UPnP\_DeviceSendServiceAlive}
+        {(\ UPnPService*\ service)}
+        {Sends alive notifications for a service}
+        {2.1.20}
+\cxxitem{int}
+        {\_UPnP\_DeviceSendDeviceAlive}
+        {(\ UPnPDevice*\ device)}
+        {Sends alive advertisements for a device.}
+        {2.1.21}
+\cxxitem{int}
+        {\_UPnP\_DeviceSendServiceAlive}
+        {(\ UPnPService*\ service)}
+        {Sends alive advertisements for a service.}
+        {2.1.22}
+\cxxitem{int}
+        {\_UPnP\_DeviceSendRootDeviceAlive}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends alive advertisements for every thing under all root devices. }
+        {2.1.23}
+\cxxitem{int}
+        {UPnP\_DeviceSendAllByeBye}
+        {(\ UPnPDeviceRuntime*\ runtime)}
+        {Sends bye-bye advertisements for each device and associated service for all the root devices.}
+        {2.1.24}
+\cxxitem{int}
+        {UPnP\_DeviceSendRootDeviceByeBye}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends bye-bye notifications for a root device}
+        {2.1.25}
+\cxxitem{int}
+        {UPnP\_DeviceSendDeviceByeBye}
+        {(\ UPnPDevice*\ device)}
+        {Sends bye-bye notifications for the device}
+        {2.1.26}
+\cxxitem{int}
+        {UPnP\_DeviceSendServiceByeBye}
+        {(\ UPnPService*\ service)}
+        {Sends bye-bye notifications for the service}
+        {2.1.27}
+\cxxitem{int}
+        {\_UPnP\_DeviceSendRootDeviceByeBye}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends bye-bye notifications for root device.}
+        {2.1.28}
+\cxxitem{int}
+        {\_UPnP\_DeviceSendDeviceByeBye}
+        {(\ UPnPDevice*\ device)}
+        {Sends bye-bye notifications for the device}
+        {2.1.29}
+\cxxitem{int}
+        {\_UPnP\_DeviceSendServiceByeBye}
+        {(\ UPnPService*\ service)}
+        {Sends bye-bye notifications a service.}
+        {2.1.30}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_ServerInit}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT8*\ ipAddr,\ \ SSDP\_INT16\ ipType,\ \ const\ SSDP\_CHAR*\ serverId,\ \ SSDPCallback\ cb,\ \ void*\ cookie)}
+        {SSDP server initialization routine. }
+        {2.1.1}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to an uninitialized SSDP context structure 
+\\
+{\tt\strut ipAddr} & IP address of the host to bind the UDP socket to, if a NULL issupplied, the UDP socket is bound to the local IP address 
+\\
+{\tt\strut ipType} & ip version 4 or ipversion 6 
+\\
+{\tt\strut serverId} & String holding platform name 
+\\
+{\tt\strut cb} & SSDP Callback routine 
+\\
+{\tt\strut cookie} & cookie(runtime) to be stored in ssdp context to be passedlater to ssdp callback 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+This routine starts up SSDP services by creating a UDP socket, getting the ssdp
+multicast membership for the socket and initlializing ssdp context.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_ServerAddToSelectList}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.2}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_BOOL}
+        {SSDP\_ServerProcessState}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.3}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {SSDP\_ServerDestroy}
+        {(\ SSDPServerContext*\ ctx\ pointer\ to\ SSDP\ context*\ /\ )}
+        {}
+        {2.1.4}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_SendNotify}
+        {(\ SSDPServerContext*\ ctx,\ \ const\ SSDP\_CHAR*\ notifyType,\ \ const\ SSDP\_CHAR*\ notifySubType,\ \ const\ SSDP\_CHAR*\ usn,\ \ const\ SSDP\_CHAR*\ location,\ \ SSDP\_UINT32*\ timeout)}
+        {Send a SSDP notification for the device or service. }
+        {2.1.5}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut notifyType} & the notification type (NT) string 
+\\
+{\tt\strut notifySubType} & pointer to string containing NT subtype 
+\\
+{\tt\strut usn} & pointer to string containing USN header 
+\\
+{\tt\strut location} & pointer to string containing Location header 
+\\
+{\tt\strut timeout} & pointer to max-age header value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+This routine sends ssdp alive and bye-bye notifications on the mulicast
+address for devices and servces
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_SendResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPPendingResponse*\ response)}
+        {Deliver a responce to SSDP discovery request.}
+        {2.1.6}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut response} & buffer holding response information 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Deliver a responce to SSDP discovery request.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {\_SSDP\_ProcessOneRequest}
+        {(\ SSDPServerContext*\ ctx\ )}
+        {Process an incoming SSDP discovery request. }
+        {2.1.7}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Processes a SSDP discovery request available during a period given by
+timeoutMsec milli seconds.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {SSDP\_ParseRequest}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPServerRequest*\ ssdpRequest\ )}
+        {Extract SSDP request. }
+        {2.1.8}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut ssdpRequest} & address of the SSDPServerEvent structure to fill up 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Retrieves messages from the multicast address, if ssdp request is
+detected a buffer holding request information is populated
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {SSDP\_McastRead}
+        {(\ void*\ cookie,\ \ SSDP\_UINT8*\ buffer,\ \ SSDP\_INT32\ min,\ \ SSDP\_INT32\ max)}
+        {Reads all messages posted to the multicast address}
+        {2.1.9}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cookie} & internal cookie 
+\\
+{\tt\strut buffer} & pointer to buffer contaning request message 
+\\
+{\tt\strut min} & \\
+{\tt\strut max} & max size to be read 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Reads all messages posted to the multicast address
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_SSDP\_ReadMSearchHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.10}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut request} & request buffer to be populated 
+\\
+{\tt\strut ptr} & current HTTP session 
+\\
+{\tt\strut type} & HTTP header type 
+\\
+{\tt\strut name} & holds the name of the header 
+\\
+{\tt\strut value} & holds the value of the header
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts MX and St headers from a SSDP request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_SSDP\_ReadNotifyHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.11}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut request} & request buffer to be populated 
+\\
+{\tt\strut ptr} & current HTTP session 
+\\
+{\tt\strut type} & HTTP header type 
+\\
+{\tt\strut name} & holds the name of the header 
+\\
+{\tt\strut value} & holds the value of the header
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts MX and St headers from a SSDP request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_QueueSearchResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPSearch*\ search,\ \ const\ SSDP\_CHAR*\ targetLocation,\ \ const\ SSDP\_CHAR*\ targetURN,\ \ SSDP\_UINT32\ targetTimeoutSec)}
+        {Queues a response to the response list based on its scheduled delivery time.}
+        {2.1.12}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut search} & pointer to the buffer containingthe request information 
+\\
+{\tt\strut targetLocation} & pointer to string containing Location header
+\\
+{\tt\strut targetURN} & pointer to string containing USN header 
+\\
+{\tt\strut targetTimeoutSec} & max-age header value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Queues a response to the response list based on its scheduled delivery time.
+A random delivery time within targetTimeoutSec duration is calculated.
+This response is positioned in the list according to its scheduled delivery time.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_CheckPendingResponses}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT32\ currentTimeMsec)}
+        {Delivers responses scheduled for delivery. }
+        {2.1.13}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut currentTimeMsec} & time against which the scheduledtime is checked 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Scan the pending response list and deliver responses for which the
+scheduled time count is less than supplied time count.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {SSDP\_ProcessError}
+        {(\ SSDP\_CHAR*\ errMsg)}
+        {Process SSDP Errors}
+        {2.1.14}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut errMsg} & error message string 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Process SSDP Errors
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_UINT32}
+        {SSDP\_RandMax}
+        {(\ SSDP\_UINT32\ mxLimit)}
+        {generates a random number between 0 and mxLimit}
+        {2.1.15}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut mxLimit} & upper limit of the random number 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+generates a random number between 0 and mxLimit
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSSDPCallback}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPServerRequest*\ serverRequest,\ \ void*\ cookie\ )}
+        {SSDP callback for UPnP. }
+        {2.1.16}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & the SSDP context 
+\\
+{\tt\strut serverRequest} & address of buffer holding ssdp requestinformation 
+\\
+{\tt\strut cookie} & cookie holds pointer to device run timeinformation 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+The callback function checks the type of SSDP request and creates a
+corresponding response. This response is queued in a list with a scheduled
+delivery time
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendAllAlive}
+        {(\ UPnPDeviceRuntime*\ runtime\ )}
+        {Sends alive advertisements for everything under all the root devices. }
+        {2.1.17}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut runtime} & address of devices current runtime state 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive advertisements for each device and associated service for
+all the root devices.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendRootDeviceAlive}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends alive advertisements for a root device.}
+        {2.1.18}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & address of the root device 
+\\
+{\tt\strut deep} & if 1, send advertisements for all embedded dives and services\<br\>if 0, send advertisements for the device under the root and itsassociated services 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive advertisements for a root device.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendDeviceAlive}
+        {(\ UPnPDevice*\ device)}
+        {Sends alive notifications for a device}
+        {2.1.19}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & pointer to the device 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive notifications for a device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendServiceAlive}
+        {(\ UPnPService*\ service)}
+        {Sends alive notifications for a service}
+        {2.1.20}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut service} & pointer to a service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive notifications for a service
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_UPnP\_DeviceSendDeviceAlive}
+        {(\ UPnPDevice*\ device)}
+        {Sends alive advertisements for a device.}
+        {2.1.21}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & pointer to the device 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive advertisements for a device.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_UPnP\_DeviceSendServiceAlive}
+        {(\ UPnPService*\ service)}
+        {Sends alive advertisements for a service.}
+        {2.1.22}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut service} & pointer to the service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive advertisements for a service.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_UPnP\_DeviceSendRootDeviceAlive}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends alive advertisements for every thing under all root devices. }
+        {2.1.23}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & pointer to the root device 
+\\
+{\tt\strut deep} & if 1, send advertisements for all embedded dives and services\<br\>if 0, send advertisements for the device under the root and itsassociated services 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends alive advertisements for each device and associated service for all the
+root devices.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendAllByeBye}
+        {(\ UPnPDeviceRuntime*\ runtime)}
+        {Sends bye-bye advertisements for each device and associated service for all the root devices.}
+        {2.1.24}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut runtime} & address of devices current runtime state 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye advertisements for each device and associated service for all the
+root devices.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendRootDeviceByeBye}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends bye-bye notifications for a root device}
+        {2.1.25}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & address of the root device 
+\\
+{\tt\strut deep} & if 1, send advertisements for all embedded dives and services\<br\>if 0, send advertisements for the device under the root and itsassociated services 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye notifications for a root device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendDeviceByeBye}
+        {(\ UPnPDevice*\ device)}
+        {Sends bye-bye notifications for the device}
+        {2.1.26}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & pointer to the device 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye notifications for the device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceSendServiceByeBye}
+        {(\ UPnPService*\ service)}
+        {Sends bye-bye notifications for the service}
+        {2.1.27}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut service} & pointer to the service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye notifications for the service
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_UPnP\_DeviceSendRootDeviceByeBye}
+        {(\ UPnPRootDevice*\ rootDevice,\ \ int\ deep)}
+        {Sends bye-bye notifications for root device.}
+        {2.1.28}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & address of the root device 
+\\
+{\tt\strut deep} & if 1, send advertisements for all embedded devicesand services.\<br\>if 0, send advertisements for thedevice under the root and its associated services 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye notifications for root device.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_UPnP\_DeviceSendDeviceByeBye}
+        {(\ UPnPDevice*\ device)}
+        {Sends bye-bye notifications for the device}
+        {2.1.29}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & address of the device 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye notifications for the device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_UPnP\_DeviceSendServiceByeBye}
+        {(\ UPnPService*\ service)}
+        {Sends bye-bye notifications a service.}
+        {2.1.30}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut service} & address of the service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Sends bye-bye notifications a service.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Description}
+        {}
+        {}
+        {2.2}
+\begin{cxxnames}
+\cxxitem{UPnPRootDevice*}
+        {UPnP\_DeviceDescribeRootDevice}
+        {(\ IXML\_Document*\ doc,\ \ int\ maxDepth)}
+        {Get the root device elements needed by SSDP, GENA and SOAP.}
+        {2.2.1}
+\cxxitem{UPnPDevice*}
+        {UPnP\_DeviceDescribeDevice}
+        {(\ IXML\_Element*\ deviceElement,\ \ UPnPRootDevice*\ rootDevice,\ \ int\ maxDepth)}
+        {Extracts the device information needed by SSDP, GENA and SOAP.}
+        {2.2.2}
+\cxxitem{void}
+        {\_UPnP\_DeviceDescribeDevice}
+        {(\ UPnPDevice*\ device,\ \ IXML\_Element*\ deviceElement,\ \ UPnPRootDevice*\ rootDevice,\ \ int\ maxDepth)}
+        {Extracts device information.}
+        {2.2.3}
+\cxxitem{UPnPService*}
+        {UPnP\_DeviceDescribeService}
+        {(\ IXML\_Element*\ serviceElement,\ \ UPnPDevice*\ device)}
+        {Extracts the service information.}
+        {2.2.4}
+\cxxitem{void}
+        {\_UPnP\_DeviceDescribeService}
+        {(\ UPnPService*\ serviceNode,\ \ IXML\_Element*\ serviceElement,\ \ UPnPDevice*\ device)}
+        {Extracts service information.}
+        {2.2.5}
+\cxxitem{void}
+        {UPnP\_DeviceFreeRootDevice}
+        {(\ UPnPRootDevice*\ rootDevice)}
+        {Frees the resources used by a UPnPRootDevice type root device}
+        {2.2.6}
+\cxxitem{void}
+        {UPnP\_DeviceFreeDevice}
+        {(\ UPnPDevice*\ device)}
+        {Frees the resources used by the device}
+        {2.2.7}
+\cxxitem{void}
+        {UPnP\_DeviceFreeService}
+        {(\ UPnPService*\ service)}
+        {Frees the resources used by the device}
+        {2.2.8}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxfunction}
+{UPnPRootDevice*}
+        {UPnP\_DeviceDescribeRootDevice}
+        {(\ IXML\_Document*\ doc,\ \ int\ maxDepth)}
+        {Get the root device elements needed by SSDP, GENA and SOAP.}
+        {2.2.1}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut doc} & pointer to device document xml page 
+\\
+{\tt\strut maxDepth} & indicates the depth level this funtionwill search the dom tree for devicesembedded within this device.\<br\>If maxDepth= x, where x \> 0, then UPnPDevicebuffer will search for embeddeddevices and related services that are xlevel deep in the XML DOM tree.\<br\>IfmaxDepth = 0 then only the device and itsrelated service information are described 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut Address} & of UPnPRootDevice buffer containing root device information
+\end{tabular}}
+\begin{cxxdoc}
+Get the root device elements needed by SSDP, GENA and SOAP.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{UPnPDevice*}
+        {UPnP\_DeviceDescribeDevice}
+        {(\ IXML\_Element*\ deviceElement,\ \ UPnPRootDevice*\ rootDevice,\ \ int\ maxDepth)}
+        {Extracts the device information needed by SSDP, GENA and SOAP.}
+        {2.2.2}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceElement} & location of device information insidexml dom tree 
+\\
+{\tt\strut rootDevice} & pointer to the device's root device 
+\\
+{\tt\strut maxDepth} & indicates the depth level this funtionwill search the dom tree for devicesembedded within this device.\<br\>If maxDepth= x, where x \> 0, then UPnPDevicebuffer will search for embeddeddevices and related services that are xlevel deep in the XML DOM tree.\<br\>IfmaxDepth = 0 then only the device and itsrelated service information are described 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut Address} & of UPnPDevice buffer having device information
+\end{tabular}}
+\begin{cxxdoc}
+Extracts the device information needed by SSDP, GENA and SOAP.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {\_UPnP\_DeviceDescribeDevice}
+        {(\ UPnPDevice*\ device,\ \ IXML\_Element*\ deviceElement,\ \ UPnPRootDevice*\ rootDevice,\ \ int\ maxDepth)}
+        {Extracts device information.}
+        {2.2.3}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & pointer to UPnPDevice buffer to storeextracted information in 
+\\
+{\tt\strut deviceElement} & location of device information insidexml dom tree 
+\\
+{\tt\strut rootDevice} & pointer to the device's root device 
+\\
+{\tt\strut maxDepth} & indicates the depth level this funtionwill search the dom tree for devicesembedded within this device 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Extracts device information.  Gets the required information from a XML
+document searching maxDepth deep for any embedded devices and related
+services under this device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{UPnPService*}
+        {UPnP\_DeviceDescribeService}
+        {(\ IXML\_Element*\ serviceElement,\ \ UPnPDevice*\ device)}
+        {Extracts the service information.}
+        {2.2.4}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut serviceElement} & location of service information insidexml dom tree 
+\\
+{\tt\strut device} & address of device this service belongsto 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut Address} & of UPnPService buffer containing service information
+\end{tabular}}
+\begin{cxxdoc}
+Extracts the service information.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {\_UPnP\_DeviceDescribeService}
+        {(\ UPnPService*\ serviceNode,\ \ IXML\_Element*\ serviceElement,\ \ UPnPDevice*\ device)}
+        {Extracts service information.}
+        {2.2.5}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut serviceNode} & pointer to UPnPService buffer to storeextracted information in 
+\\
+{\tt\strut serviceElement} & location of service information insidexml dom tree 
+\\
+{\tt\strut device} & address of device this service belongsto 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Extracts service information. Gets the service related information from a XML
+document
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_DeviceFreeRootDevice}
+        {(\ UPnPRootDevice*\ rootDevice)}
+        {Frees the resources used by a UPnPRootDevice type root device}
+        {2.2.6}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rootDevice} & pointer to root device whose resourcesare to be freed 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Frees the resources used by a UPnPRootDevice type root device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_DeviceFreeDevice}
+        {(\ UPnPDevice*\ device)}
+        {Frees the resources used by the device}
+        {2.2.7}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & pointer to device whose resources are to be freed 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Frees the resources used by the device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_DeviceFreeService}
+        {(\ UPnPService*\ service)}
+        {Frees the resources used by the device}
+        {2.2.8}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut service} & pointer to service whose resources are to be freed 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Frees the resources used by the device
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Control/SOAP}
+        {}
+        {}
+        {2.3}
+\begin{cxxnames}
+\cxxitem{int}
+        {UPnP\_DeviceControlBindService}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPService*\ service)}
+        {Initialize a service for control.}
+        {2.3.1}
+\cxxitem{int}
+        {UPnP\_DeviceControlUnBindService}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPService*\ service)}
+        {Stop control on a service.}
+        {2.3.2}
+\cxxitem{int}
+        {UPnP\_DeviceControlSOAPCallback}
+        {(\ SOAPServerContext*\ ctx,\ \ SOAPRequest*\ request,\ \ void*\ cookie)}
+        {SOAP callback for UPnP.}
+        {2.3.3}
+\cxxitem{char*}
+        {\_getControlURL}
+        {(\ IXML\_Document*\ descDoc,\ \ IXML\_Element*\ serviceElement)}
+        {Calculates server-relative control URL for a service.}
+        {2.3.4}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceControlBindService}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPService*\ service)}
+        {Initialize a service for control.}
+        {2.3.1}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & the device runtime that owns theservice. 
+\\
+{\tt\strut service} & the service to bind 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Initialize a service for control. Binds a service control URL to the
+HTTP server to enable SOAP action processing for that service.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceControlUnBindService}
+        {(\ UPnPDeviceRuntime*\ deviceRuntime,\ \ UPnPService*\ service)}
+        {Stop control on a service.}
+        {2.3.2}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceRuntime} & the device runtime that owns theservice. 
+\\
+{\tt\strut service} & the service to unbind 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Stop control on a service. Removes the HTTP server binding for this
+service's control URL.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_DeviceControlSOAPCallback}
+        {(\ SOAPServerContext*\ ctx,\ \ SOAPRequest*\ request,\ \ void*\ cookie)}
+        {SOAP callback for UPnP.}
+        {2.3.3}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & the SOAP context 
+\\
+{\tt\strut request} & the action request 
+\\
+{\tt\strut cookie} & the UPnPService being controlled 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code; tells SOAP whether the action was successful orgenerated a fault
+\end{tabular}}
+\begin{cxxdoc}
+SOAP callback for UPnP.  Handles a single incoming SOAP control request by
+parsing the action document and calling the device callback.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{char*}
+        {\_getControlURL}
+        {(\ IXML\_Document*\ descDoc,\ \ IXML\_Element*\ serviceElement)}
+        {Calculates server-relative control URL for a service.}
+        {2.3.4}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut descDoc} & the service's device description document 
+\\
+{\tt\strut serviceElement} & the service element inside descDoc 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Calculates server-relative control URL for a service.  For example, if the
+service's absolute control URL is "http://192.168.1.110:5423/myService.0001",
+this function will allocate and return the string: "/myService.0001".
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Eventing/GENA}
+        {}
+        {}
+        {2.4}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\end{cxxentry}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Examples }
+        {}
+        {}
+        {3}
+\begin{cxxnames}
+\cxxitem{}
+        {UPnP Device Initialization Example}
+        {}
+        {Setting up a UPnP Device }
+        {3.1}
+\end{cxxnames}
+\begin{cxxentry}
+{}
+        {UPnP Device Initialization Example}
+        {}
+        {Setting up a UPnP Device }
+        {3.1}
+\begin{cxxdoc}
+
+This code demonstrates in brief the necessary steps to set up a UPnP device
+for discovery, description, control, and eventing.
+
+\<pre\>
+int main (void)
+{
+int result;
+IXML\_Document *xmlDevice;
+UPnPRuntime rt;
+UPnPRootDeviceHandle rootDevice;
+
+
+// UPnP maintains a runtime structure; The first step is to
+// initialize UPnPRuntime struct. UPnP\_RuntimeInit takes a
+// pointer to an uninitialized UPnPRuntime struct and other
+// necessary necessary data to initialize and populate upnp
+// the engine.
+result = UPnP\_RuntimeInit (
+\&rt,
+0,                  // serverAddr: IP\_ANY\_ADDR
+0,                  // serverPort: any port
+RTP\_NET\_TYPE\_IPV4,  // ipv4
+"c:\\www-root\\",   // web server root dir
+10,                 // maxConnections
+5                   // maxHelperThreads
+);
+
+if (result \< 0)
+{
+return (-1);
+}
+
+// Next, we need a UPnPDeviceRuntime; UPnP\_DeviceInit takes
+//  a pointer to an uninitialized UPnPDeviceRuntime struct
+//  and does all necessary initialization.
+
+result = UPnP\_DeviceInit (
+\&deviceRuntime,
+\&rt
+);
+
+if (result \< 0)
+{
+return (-1);
+}
+
+// Load the root device description page into memory.
+xmlDevice = ixmlLoadDocument("c:\\www-root\\device.xml");
+if (!xmlDevice)
+{
+return (-1);
+}
+
+
+result = UPnP\_RegisterRootDevice (
+\&deviceRuntime,
+"device.xml",
+xmlDevice,
+1,                  // auto address resolution
+testDeviceCallback,
+0,                  // userData for callback
+\&rootDevice,
+1                   // advertise
+);
+
+if (result \< 0)
+{
+return (-1);
+}
+
+UPnP\_DeviceAdvertise(rootDevice, ANNOUNCE\_FREQUENCY\_SEC,
+REMOTE\_CACHE\_TIMEOUT\_SEC);
+
+// start the UPnP daemon thread
+UPnP\_StartDaemon(\&rt);
+
+// for polled mode, use this
+
+//while (1)
+//{
+//UPnP\_ProcessState (\&rt,1000);
+//printf(".");
+//}
+
+}
+
+\</pre\>
+
+\end{cxxdoc}
+\end{cxxentry}
+\end{cxxentry}
+\end{document}

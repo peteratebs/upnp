@@ -1,0 +1,65 @@
+====================================================================
+Functional changes between in version 0.2.2 versus version 0.2.3
+Date: 05/01/07
+1. In file httpsrv.c
+   removed line 46
+   #define rtp_strpbrk     strpbrk
+
+2. In file httpp.c
+   At line 746, added WriteString type for 3rd parameter of function
+   HTTP_SetRequestHeaderFn
+   At line 973, added WriteString type for 3rd parameter of function
+   HTTP_SetResponseHeaderFn
+   At line 1116, explicitly casted _HTTP_WriteStrLenBuffered to WriteFn
+
+3. In file httpmcli.c
+   At line 2370, explicitly casted _HTTP_ManagedClientCookieWrite to WriteString
+   At line 2380, explicitly casted _HTTP_ManagedClientAuthWrite to WriteString
+
+4. In file httpp.h
+   Added new type defination for,
+   typedef HTTP_INT32 (*WriteString) (void* privateData, WriteFn writeFn,
+                       void* requestStream);
+   typedef HTTP_INT32 (*WriteString) (void* privateData, WriteFn writeFn,
+                       void* requestStream);
+   Line 258,
+   updated - structure s_HTTPStringObject
+   Line 372,
+   updated - prototype for function HTTP_SetRequestHeaderFn
+   Line 421,
+   updated - prototype for function HTTP_SetResponseHeaderFn
+
+====================================================================
+Functional changes between in version 0.2.1 versus version 0.2.2
+
+Date: July 21 2006
+1. In file fileext.c
+   At line 25 fixed a bug in upper case calculation.
+   Changed From
+   #define UPPERCASE(X) (((X) >= 'a' || (X) <= 'z')? ((X) + 'A' - 'a') : (X))
+   To:
+   #define UPPERCASE(X) (((X) >= 'a' && (X) <= 'z')? ((X) + 'A' - 'a') : (X))
+
+2. In file fileext.c
+   At line 138, inserted defination for .wmv file type
+   {"WMV",   FILE_TYPE_VIDEO_X_MSVIDEO},
+
+3. In file httpsrv.c
+   At line 322 added following piece of code to fix the the bug in executing
+   the job thread from the last job slot.
+   connectCtxArray[n].job.execute = _HTTP_ServerExecuteJob;
+   connectCtxArray[n].server = server;
+
+====================================================================
+Functional changes between in version 0.2.0 versus version 0.2.1
+
+1. In file httpsrv.c
+   Removed local defination "HTTP_SERVER_LOCAL_PATH_SEPERATOR"
+   All usage of this defination is replaced with rtplatform call
+   rtp_file_get_path_seperator to obtain the path seperator of
+   a local file system.
+
+2. In file HTTPP.H added verion definition
+    #define HTTP_VERSION                       0021  /* 0.2.1 */
+
+====================================================================

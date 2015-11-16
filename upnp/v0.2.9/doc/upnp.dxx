@@ -1,0 +1,56 @@
+/**@name EBS UPNP DEVICE SDK
+ <center>
+ Embedded UPnP Library version 1.0 <br>
+ <br>
+ </center>
+ */
+//@{
+	/** @name API Reference */
+	//@{
+		//@Include: ../source/upnp.c
+		//@Include: ../source/device/upnpdev.c
+	//@}
+
+
+	/** @name Internal Library Documentation
+        @doc These functions are <b>not</b> at the API level and should not be called from
+              code outside the UPnP library. */
+	//@{
+		/** @name Discovery/SSDP
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/ssdpsrv.c
+			//@Include: ../source/device/deviceDiscover.c
+		//@}
+
+		/** @name Description
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/device/deviceDescribe.c
+		//@}
+
+		/** @name Control/SOAP
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/device/soapsrv.c
+			//@Include: ../source/device/deviceControl.c
+		//@}
+
+		/** @name Eventing/GENA
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/device/genasrv.c
+			//@Include: ../source/device/deviceEvent.c
+		//@}
+	//@}
+
+	/** @name Examples */
+	//@{
+		//@Include: devex.dxx
+	//@}
+
+//@}

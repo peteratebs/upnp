@@ -1,0 +1,61 @@
+/**
+ @name Introduction
+ @memo The Features and Basic Design of the HTTP Managed Client and Server.
+ @doc
+
+The EBS HTTP Managed Client supports the following features:
+
+<ul>
+<li>Client side support for GET, POST, and PUT operations
+<li>Server side support web server functions and to layered protociols like SOAP and GENA.
+<li>Optional modules to support:
+<ul>
+<li>Soap Client.
+<li>Soap Server.
+<li>Integrates with UPnP.
+<li>Security (HTTP over SSL)
+<li>Cookies
+<li>Basic/Digest authentication
+</ul>
+<li>Persistent connections
+<li>Blocking and non-blocking operation
+<li>Single thread and Multi-thread safe modes
+</ul>
+
+<H3>Support for GET, POST, and PUT operations</H3>
+The Managed Client uses a transaction model for HTTP operations.  A transaction consists of the following steps:
+<ol>
+<li>The transaction is initiated by specifying the server name, port, and type of network transport to be used (for example, standard TCP/IP or SSL).  The result of initiating a transaction is receiving a handle to a Managed Client Session, which uniquely identifies this transaction in subsequent API calls.
+<li>A single command, such as a GET or POST command, is issued.  Each command has a number of options that may be used.  For example, GET allows you to optionally specify an If-Modified-Since date so that the remote server may opt to not re-send data that has not changed since the last time the data was sent.
+<li>In the case of a POST or PUT command, data is written to the server.  The format of this data is specified as a option to the POST or PUT command.
+<li>The server response is read.  This response includes information like:
+<ul>
+<li>The status code returned by the server, which indicates whether the request was successful, if authorization is needed, whether the requested file has moved, etc.
+<li>The MIME type of the response data that the server has sent
+<li>The date that the request was processed
+<li>The expiration date for caching purposes
+<li>The new location for the file, if it has been moved
+</ul>
+<li>In the case of a POST or GET, the response data is read.
+<li>The transaction is ended in one of two ways:
+<ul>
+<li>Graceful close - this allows the underlying network connection to stay open for future transactions.  This is transparent to the application, however; new transactions must still be explicitly initiated; you can not simple re-use the session handle for more commands.
+<li>Hard close - ensures that the underlying network connection is shut down.
+</ul>
+</ol>
+
+<H3>Optional Add-on Modules</H3>
+Each add-on module to the HTTP Managed Client is independently built and linked into the application.  An add-on module is utilized by initializing a context structure and then handing that structure into the initialization routine for the Managed Client.  Each add-on's context structure contains the necessary function pointers and hooks for the Managed Client to bind to it at runtime and utilize its functionality.  Usually, the add-on also defines some extra functions that operate on the context structure.  For example, the cookies module has functions to explicitly add and remove cookies from the context.
+
+<H3>Persistent Connections</H3>
+The transaction model described above effectively allows the HTTP Managed Client to implement persistent connections in a way that is for the most part transparent to the application.  It is possible, with this model, for the Managed Client to be maintaining active network connections even when no transaction is pending.  Therefore, there are API functions provided to allow the application to explicitly shut down network connections, either by host or universally.
+
+<H3>Blocking and Non-Blocking Operation</H3>
+When a transaction is initiated, blocking or non-blocking mode may be specified.  In the blocking mode, all API calls which involve some kind of lower-level network I/O will not return until the operation has been completed.  This means, for example, that the call to initiate a transaction will not return until the connection has been fully established and it is safe to issue a command.  In the case of reading data, blocking mode may allow the read function to return before the specified number of bytes has been read, but if there is data remaining to be received, it will not return without having received at least some data.
+<p>In non-blocking mode, these same functions will always return as soon as possible.  In this mode, it is often useful to utilize the Managed Client's select functions to block for a certain amount of time waiting for certain events to occur (for example, block waiting for at least one of a set of sessions to receive some data).
+</p>
+
+<H3>Single thread and Multi-thread safe modes</H3>
+The thread-safe option available for the Managed Client is a compile-time only option.  Each add-on module also has its own thread-safe compile-time option which must be enabled.  The Managed Client and the add-ons each require a mutex to be passed in on initialization when thread-safe mode is enabled.
+
+*/

@@ -1,0 +1,67 @@
+<html>
+<head>
+<title> EBS UPnP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+
+<H2>int <A HREF="#DOC.DOCU">UPnP_StopDaemon</A></H2><H2>( UPnPRuntime* rt,  UPNP_INT32 secTimeout )</H2><BLOCKQUOTE>Kill the UPnP Daemon thread. </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+This function stops the UPnP daemon from executing.  It will wait
+for at most secTimeout seconds for all helper threads to terminate.
+If this function returns negative error code, it means the timeout
+expired without the successful termination of one or more helper
+threads.  In this case, calling <!1><A HREF="UPnP_RuntimeDestroy.html">UPnP_RuntimeDestroy</A> may cause a fault
+since there are still helper threads running that may try to access
+the data structures pointed to by the UPnPRuntime.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>rt</B> -   the device runtime to stop 
+<BR><B>secTimeout</B> -   time to wait for daemon to stop <BR><DT><B>Returns:</B><DD>  error code
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2005.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

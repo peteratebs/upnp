@@ -1,0 +1,151 @@
+<html>
+<head>
+<title> EBSnet HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black; 
+	background-color: white; 
+	background-image: URL("background_small.jpeg"); 
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsnetinc.com/' target='_blank'><img border=0 src='ebsnet.gif' align=right></a>
+
+<H2> <A HREF="#DOC.DOCU">HTTP Managed Client Core Module </A></H2></H2>
+<HR>
+<DL>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientInit"></A>
+<A HREF=HTTP_ManagedClientInit.html><B>HTTP_ManagedClientInit</B></A><DD><I>Initialize an HTTP Managed Client instance. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientInitMT"></A>
+<A HREF=HTTP_ManagedClientInitMT.html><B>HTTP_ManagedClientInitMT</B></A><DD><I>Initialize a thread-safe HTTP Managed Client instance. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientDestroy"></A>
+<A HREF=HTTP_ManagedClientDestroy.html><B>HTTP_ManagedClientDestroy</B></A><DD><I>Destroy an HTTP Managed Client instance. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientCloseAll"></A>
+<A HREF=HTTP_ManagedClientCloseAll.html><B>HTTP_ManagedClientCloseAll</B></A><DD><I>Close any open connections </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientCloseHost"></A>
+<A HREF=HTTP_ManagedClientCloseHost.html><B>HTTP_ManagedClientCloseHost</B></A><DD><I>Close any open connections to a particular host </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientCloseStale"></A>
+<A HREF=HTTP_ManagedClientCloseStale.html><B>HTTP_ManagedClientCloseStale</B></A><DD><I>Close any open connections that have been reset or have timed out. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientStartTransaction"></A>
+<A HREF=HTTP_ManagedClientStartTransaction.html><B>HTTP_ManagedClientStartTransaction</B></A><DD><I>Initiate a transaction with an HTTP server. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientGet"></A>
+<A HREF=HTTP_ManagedClientGet.html><B>HTTP_ManagedClientGet</B></A><DD><I>Send a GET request </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientPut"></A>
+<A HREF=HTTP_ManagedClientPut.html><B>HTTP_ManagedClientPut</B></A><DD><I>Send a PUT request </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientPost"></A>
+<A HREF=HTTP_ManagedClientPost.html><B>HTTP_ManagedClientPost</B></A><DD><I>Send a POST request </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientRequestEx"></A>
+<A HREF=HTTPManagedClientCoreModule.html><B>HTTP_ManagedClientRequestEx</B></A><DD><I>Send a request </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientRequestHeaderDone"></A>
+<A HREF=HTTPManagedClientCoreModule.html><B>HTTP_ManagedClientRequestHeaderDone</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientReadResponseInfo"></A>
+<A HREF=HTTP_ManagedClientReadResponseInfo.html><B>HTTP_ManagedClientReadResponseInfo</B></A><DD><I>Get information about the server's response. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientReadResponseInfoEx"></A>
+<A HREF=HTTP_ManagedClientReadResponseInfoEx.html><B>HTTP_ManagedClientReadResponseInfoEx</B></A><DD><I>Get information about the server's response. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientReadSelect"></A>
+<A HREF=HTTP_ManagedClientReadSelect.html><B>HTTP_ManagedClientReadSelect</B></A><DD><I>Wait for input on a managed client session </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientWriteSelect"></A>
+<A HREF=HTTP_ManagedClientWriteSelect.html><B>HTTP_ManagedClientWriteSelect</B></A><DD><I>Wait for a managed client session to be ready to send request/data </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientSelect"></A>
+<A HREF=HTTP_ManagedClientSelect.html><B>HTTP_ManagedClientSelect</B></A><DD><I>Select sessions for read-ready, write-ready or error condition </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientWrite"></A>
+<A HREF=HTTP_ManagedClientWrite.html><B>HTTP_ManagedClientWrite</B></A><DD><I>Write data to a remote server. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientWriteDone"></A>
+<A HREF=HTTP_ManagedClientWriteDone.html><B>HTTP_ManagedClientWriteDone</B></A><DD><I>Indicate that all data for a given request has been sent. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientRead"></A>
+<A HREF=HTTP_ManagedClientRead.html><B>HTTP_ManagedClientRead</B></A><DD><I>Read data from a session </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientReadFrom"></A>
+<A HREF=HTTP_ManagedClientReadFrom.html><B>HTTP_ManagedClientReadFrom</B></A><DD><I>Read a datagram-type HTTP response </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientFinishTransaction"></A>
+<A HREF=HTTP_ManagedClientFinishTransaction.html><B>HTTP_ManagedClientFinishTransaction</B></A><DD><I>Finish a transaction </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientCloseSession"></A>
+<A HREF=HTTP_ManagedClientCloseSession.html><B>HTTP_ManagedClientCloseSession</B></A><DD><I>Close a session and its associated connection </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="HTTP_ManagedClientGetSessionSocket"></A>
+<A HREF=HTTPManagedClientCoreModule.html><B>HTTP_ManagedClientGetSessionSocket</B></A><DD><I>get the socket accociated with the http session </I>
+</DL>
+<A NAME="DOC.DOCU"></A>
+<DL><DT><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBSnet Inc, 1993-2004.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBSnet, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsnetinc.com' target=_blank>www.ebsnetinc.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

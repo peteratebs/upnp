@@ -1,0 +1,74 @@
+<html>
+<head>
+<title> EBSnet HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black; 
+	background-color: white; 
+	background-image: URL("background_small.jpeg"); 
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsnetinc.com/' target='_blank'><img border=0 src='ebsnet.gif' align=right></a>
+
+<H2>int <A HREF="#DOC.DOCU">HTTP_ManagedClientInit</A></H2><H2>( HTTPManagedClient* client,<BR>&nbsp;  const HTTP_CHAR* userAgent,<BR>&nbsp;  const HTTP_CHAR* acceptTypes,<BR>&nbsp;  unsigned useKeepAlive,<BR>&nbsp;  HTTPCookieContext* cookieContext,<BR>&nbsp;  HTTPAuthContext* authContext,<BR>&nbsp;  RTP_HANDLE sslContext,<BR>&nbsp;  unsigned sslEnabled,<BR>&nbsp;  HTTP_INT32 writeBufferSize,<BR>&nbsp;  HTTP_INT32 maxTotalConnections,<BR>&nbsp;  HTTP_INT32 maxHostConnections )</H2><BLOCKQUOTE>Initialize an HTTP Managed Client instance. </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>This function must be called before any other managed client calls
+to create a context in which the client will operate.  Multiple
+independent client contexts may be created from within the same
+application.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>client</B> -   pointer to uninitialized HTTPManagedClient structure 
+<BR><B>userAgent</B> -   string to use to identify client to remote hosts 
+<BR><B>acceptTypes</B> -   string to send to server to indicate what data types we accept 
+<BR><B>useKeepAlive</B> -   boolean: if non-zero, try to keep connections open to speed things up 
+<BR><B>cookieContext</B> -   optional: initialized instance of HTTPCookieContext for cookie support 
+<BR><B>authContext</B> -   optional: initialized instance of HTTPAuthContext for authentication 
+<BR><B>sslContext</B> -   optional: initialized RTSSL context if secure HTTP is to be utilitized 
+<BR><B>sslEnabled</B> -   boolean: if sslContext is valid this MUST be non-zero; otherwise 0 
+<BR><B>writeBufferSize</B> -   number of bytes to buffer when sending 
+<BR><B>maxTotalConnections</B> -   max total connections to open simultaneously 
+<BR><B>maxHostConnections</B> -   max connections allowed to any one remote host <BR><DT><B>Returns:</B><DD>  0 on success, negative on failure
+<BR><DT><B>See Also:</B><DD><!1><A HREF="HTTP_ManagedClientDestroy.html">HTTP_ManagedClientDestroy</A>
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBSnet Inc, 1993-2004.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBSnet, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsnetinc.com' target=_blank>www.ebsnetinc.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

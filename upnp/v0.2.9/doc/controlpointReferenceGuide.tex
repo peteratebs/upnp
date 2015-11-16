@@ -1,0 +1,2455 @@
+\documentclass{article}
+\usepackage{docxx}
+\begin{document}
+\pagebreak
+\sloppy
+\cxxTitle{}
+        {EBS UPNP Control Point SDK}
+        {}
+        {}
+        {}
+\begin{cxxContents}
+\cxxContentsEntry{1}{API Reference }{}
+\cxxContentsEntry{2}{Internal Library Documentation}{}
+\begin{cxxContents}
+\cxxContentsEntry{2.1}{Discovery/SSDP}{}
+\cxxContentsEntry{2.2}{Description}{}
+\cxxContentsEntry{2.3}{Control/SOAP}{}
+\cxxContentsEntry{2.4}{Eventing/GENA}{}
+\end{cxxContents}
+\end{cxxContents}
+\clearpage\pagebreak
+\begin{cxxdoc}
+\<center\>
+Embedded UPnP Library version 1.0 \<br\>
+\<br\>
+\</center\>
+\end{cxxdoc}
+\begin{cxxentry}
+{}
+        {API Reference }
+        {}
+        {}
+        {1}
+\begin{cxxnames}
+\cxxitem{int}
+        {UPnP\_RuntimeInit}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_UINT8*\ serverAddr,\ \ UPNP\_UINT16\ serverPort,\ \ UPNP\_INT16\ ipType,\ \ UPNP\_CHAR*\ wwwRootDir,\ \ UPNP\_INT16\ maxConnections,\ \ UPNP\_INT16\ maxHelperThreads\ )}
+        {Initialize a UPnPRuntime }
+        {1.1}
+\cxxitem{void}
+        {UPnP\_RuntimeDestroy}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Destroy a UPnPRuntime }
+        {1.2}
+\cxxitem{int}
+        {UPnP\_AddVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath,\ const\ UPNP\_UINT8*\ data,\ UPNP\_INT32\ size,\ const\ UPNP\_CHAR*\ contentType\ )}
+        {Create a virtual file on the HTTP server. }
+        {1.3}
+\cxxitem{int}
+        {UPnP\_RemoveVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath\ )}
+        {Remove a virtual file from the server }
+        {1.4}
+\cxxitem{int}
+        {UPnP\_ProcessState}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_INT32\ msecTimeout\ )}
+        {Process asynchronous operations in non-threaded mode. }
+        {1.5}
+\cxxitem{int}
+        {UPnP\_StartDaemon}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Start the UPnP Daemon thread. }
+        {1.6}
+\cxxitem{int}
+        {UPnP\_StopDaemon}
+        {(\ UPnPRuntime*\ rt,\ UPNP\_INT32\ secTimeout\ )}
+        {Kill the UPnP Daemon thread. }
+        {1.7}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByName}
+        {(\ IXML\_Document*\ propertySet,\ \ const\ UPNP\_CHAR*\ name\ )}
+        {Get the value of a named property in a GENA notify message. }
+        {1.8}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyNameByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the name of the nth property. }
+        {1.9}
+\cxxitem{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the value of the nth property. }
+        {1.10}
+\cxxitem{int}
+        {UPnP\_AddToPropertySet}
+        {(\ IXML\_Document**\ doc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Add name and value pair to GENA notify message property set. }
+        {1.11}
+\cxxitem{int}
+        {UPnP\_CreateActionResponse}
+        {(\ UPnPActionRequest*\ request\ \ )}
+        {Creates a SOAP action response message. }
+        {1.12}
+\cxxitem{IXML\_Document*}
+        {UPnP\_CreateAction}
+        {(\ const\ UPNP\_CHAR*\ serviceTypeURI,\ \ const\ UPNP\_CHAR*\ actionName\ )}
+        {Create a SOAP action request. }
+        {1.13}
+\cxxitem{int}
+        {UPnP\_SetActionArg}
+        {(\ IXML\_Document*\ actionDoc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Set an argument for a SOAP action response/request }
+        {1.14}
+\cxxitem{int}
+        {UPnP\_ControlPointInit}
+        {(\ UPnPControlPoint*\ cp,\ \ UPnPRuntime*\ rt,\ \ UPnPControlPointCallback\ callbackFn,\ \ void*\ callbackData\ )}
+        {Initialize a UPnPControlPoint }
+        {1.15}
+\cxxitem{void}
+        {UPnP\_ControlPointDestroy}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_INT32\ gracefulTimeoutMsec\ )}
+        {Destroy a UPnPControlPoint }
+        {1.16}
+\cxxitem{int}
+        {UPnP\_ControlFindAll}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices. }
+        {1.17}
+\cxxitem{int}
+        {UPnP\_ControlFindAllDevices}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices. }
+        {1.18}
+\cxxitem{int}
+        {UPnP\_ControlFindDevicesByType}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ deviceType,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices of a certain type. }
+        {1.19}
+\cxxitem{int}
+        {UPnP\_ControlFindDevicesByUUID}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ uuid,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for a particular UPnP device. }
+        {1.20}
+\cxxitem{int}
+        {UPnP\_ControlFindDevicesByService}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ serviceType,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices that offer a certain service. }
+        {1.21}
+\cxxitem{UPnPControlDeviceHandle}
+        {UPnP\_ControlOpenDevice}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ url\ )}
+        {Open a remote device for description, control, and eventing. }
+        {1.22}
+\cxxitem{int}
+        {UPnP\_ControlOpenDeviceAsync}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ url,\ \ void*\ userData\ )}
+        {Asynchronously open a remote device for description, control, and eventing. }
+        {1.23}
+\cxxitem{void}
+        {UPnP\_ControlCloseDevice}
+        {(\ UPnPControlDeviceHandle\ deviceHandle\ )}
+        {Close an open device handle }
+        {1.24}
+\cxxitem{int}
+        {UPnP\_ControlGetDeviceInfo}
+        {(\ UPnPControlDeviceHandle\ device,\ \ UPnPControlDeviceInfo*\ info\ )}
+        {Get information for an open device. }
+        {1.25}
+\cxxitem{int}
+        {UPnP\_ControlGetServiceOwnerDeviceInfo}
+        {(\ UPnPControlDeviceHandle\ handle,\ \ UPNP\_CHAR*\ serviceId,\ \ UPnPControlDeviceInfo*\ info\ )}
+        {Get information for the parent device of a service }
+        {1.26}
+\cxxitem{UPNP\_CHAR*}
+        {UPnP\_ControlGetServiceType}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId\ )}
+        {Get the type of a service }
+        {1.27}
+\cxxitem{int}
+        {UPnP\_ControlGetServices}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPnPControlServiceIterator*\ i\ )}
+        {Enumerate the services on a device }
+        {1.28}
+\cxxitem{int}
+        {UPnP\_ControlGetServicesByType}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPnPControlServiceIterator*\ i,\ \ UPNP\_CHAR*\ serviceType\ )}
+        {Enumerate the services of a certain type on a device }
+        {1.29}
+\cxxitem{UPNP\_CHAR*}
+        {UPnP\_ControlNextService}
+        {(\ UPnPControlServiceIterator*\ i\ )}
+        {Enumerate the next service on the device. }
+        {1.30}
+\cxxitem{void}
+        {UPnP\_ControlServiceIteratorDone}
+        {(\ UPnPControlServiceIterator*\ i\ )}
+        {Clean up when done enumerating services. }
+        {1.31}
+\cxxitem{IXML\_Document*}
+        {UPnP\_ControlGetServiceInfo}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId\ )}
+        {Get detailed information about a service. }
+        {1.32}
+\cxxitem{int}
+        {UPnP\_ControlGetServiceInfoAsync}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ void*\ userData\ )}
+        {Asynchronous get detailed information about a service. }
+        {1.33}
+\cxxitem{int}
+        {UPnP\_ControlInvokeAction}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ const\ UPNP\_CHAR*\ actionName,\ \ IXML\_Document*\ action,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Invoke an action on a remote service }
+        {1.34}
+\cxxitem{int}
+        {UPnP\_ControlSubscribe}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ UPNP\_INT32\ timeoutSec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Subscribe to a service or renew a subscription }
+        {1.35}
+\cxxitem{UPNP\_BOOL}
+        {UPnP\_ControlSubscribedToService}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId\ )}
+        {Return whether or not the control point is subscribed to the given service }
+        {1.36}
+\cxxitem{void}
+        {UPnP\_ControlSetServiceSubscriptionExpireWarning}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ UPNP\_INT32\ warningMsec\ )}
+        {Sets the time offset before subscription expiration at which a warning event will be generated. }
+        {1.37}
+\cxxitem{int}
+        {UPnP\_ControlUnsubscribe}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Cancel a subscribed service }
+        {1.38}
+\end{cxxnames}
+\begin{cxxfunction}
+{int}
+        {UPnP\_RuntimeInit}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_UINT8*\ serverAddr,\ \ UPNP\_UINT16\ serverPort,\ \ UPNP\_INT16\ ipType,\ \ UPNP\_CHAR*\ wwwRootDir,\ \ UPNP\_INT16\ maxConnections,\ \ UPNP\_INT16\ maxHelperThreads\ )}
+        {Initialize a UPnPRuntime }
+        {1.1}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to uninitialized UPnPRuntime struct 
+\\
+{\tt\strut serverAddr} & ip address to bind HTTP server to (NULL for IP\_ADDR\_ANY) 
+\\
+{\tt\strut serverPort} & port to bind HTTP server to (0 for ANY\_PORT) 
+\\
+{\tt\strut ipType} & type of ip version used (ipv4 or ipv6), (RTP\_NET\_TYPE\_IPV4 for v4 and RTP\_NET\_TYPE\_IPV6 for v6) 
+\\
+{\tt\strut wwwRootDir} & HTTP root dir on local file system 
+\\
+{\tt\strut maxConnections} & the maximum limit on simultaneous HTTP server connections 
+\\
+{\tt\strut maxHelperThreads} & if UPNP\_MULTITHREAD is defined, the max number of helper threads to spawn 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Initializes the given UPnPRuntime struct, and sets up an HTTP
+server instance to receive control/event messages.  This function
+must be called before any other function in the UPnP SDK.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_RuntimeDestroy}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Destroy a UPnPRuntime }
+        {1.2}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to UPnPRuntime struct 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Must be called after all other UPnP SDK calls to clean up runtime
+data for UPnP.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_AddVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath,\ const\ UPNP\_UINT8*\ data,\ UPNP\_INT32\ size,\ const\ UPNP\_CHAR*\ contentType\ )}
+        {Create a virtual file on the HTTP server. }
+        {1.3}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_RemoveVirtualFile
+\strut}
+\begin{cxxdoc}
+
+Makes the data buffer passed in available at the given path on the
+HTTP server.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_RemoveVirtualFile}
+        {(\ UPnPRuntime*\ rt,\ const\ UPNP\_CHAR*\ serverPath\ )}
+        {Remove a virtual file from the server }
+        {1.4}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Must be called before UPnP\_RuntimeDestroy to remove any virtual files
+added using UPnP\_AddVirtualFile.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ProcessState}
+        {(\ UPnPRuntime*\ rt,\ \ UPNP\_INT32\ msecTimeout\ )}
+        {Process asynchronous operations in non-threaded mode. }
+        {1.5}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to UPnPRuntime struct 
+\\
+{\tt\strut msecTimeout} & time in miliseconds for which the function blocks 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+This function blocks for at most msecTimeout milliseconds, processing
+any asynchronous operations that may be in progress on either the
+control point or device runtime attached to the given UPnPRuntime.
+
+This function must be called in order to receive events if an
+application is running with the UPnP SDK in single-threaded mode.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_StartDaemon}
+        {(\ UPnPRuntime*\ rt\ )}
+        {Start the UPnP Daemon thread. }
+        {1.6}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & pointer to UPnPRuntime struct 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_StopDaemon
+\strut}
+\begin{cxxdoc}
+
+This function must be called in multithreaded mode to start the
+UPnP daemon, which listens for requests/announcements on the network,
+and sends any events to the attached control point/device runtime.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_StopDaemon}
+        {(\ UPnPRuntime*\ rt,\ UPNP\_INT32\ secTimeout\ )}
+        {Kill the UPnP Daemon thread. }
+        {1.7}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut rt} & the device runtime to stop 
+\\
+{\tt\strut secTimeout} & time to wait for daemon to stop 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+This function stops the UPnP daemon from executing.  It will wait
+for at most secTimeout seconds for all helper threads to terminate.
+If this function returns negative error code, it means the timeout
+expired without the successful termination of one or more helper
+threads.  In this case, calling UPnP\_RuntimeDestroy may cause a fault
+since there are still helper threads running that may try to access
+the data structures pointed to by the UPnPRuntime.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByName}
+        {(\ IXML\_Document*\ propertySet,\ \ const\ UPNP\_CHAR*\ name\ )}
+        {Get the value of a named property in a GENA notify message. }
+        {1.8}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut the} & value or NULL if the property was not found
+\end{tabular}}
+\begin{cxxdoc}
+
+The string returned must not be modified in any way.  It is valid until
+the IXML\_Document is deleted.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyNameByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the name of the nth property. }
+        {1.9}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut propertySet} & address of xml property set 
+\\
+{\tt\strut index} & index in property for value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut the} & value or NULL if the property was not found
+\end{tabular}}
+\begin{cxxdoc}
+
+The string returned must not be modified in any way.  It is valid until
+the IXML\_Document is deleted.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{const\ UPNP\_CHAR*}
+        {UPnP\_GetPropertyValueByIndex}
+        {(\ IXML\_Document*\ propertySet,\ \ int\ index\ )}
+        {Get the value of the nth property. }
+        {1.10}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut propertySet} & address of xml property set 
+\\
+{\tt\strut index} & index in property for value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut the} & value or NULL if the property was not found
+\end{tabular}}
+\begin{cxxdoc}
+
+The string returned must not be modified in any way.  It is valid until
+the IXML\_Document is deleted.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_AddToPropertySet}
+        {(\ IXML\_Document**\ doc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Add name and value pair to GENA notify message property set. }
+        {1.11}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut doc} & address of property set 
+\\
+{\tt\strut name} & pointer to name for new entry 
+\\
+{\tt\strut value} & address of value of for the new entry 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Add a new name value pair entry to the property set
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_CreateActionResponse}
+        {(\ UPnPActionRequest*\ request\ \ )}
+        {Creates a SOAP action response message. }
+        {1.12}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+Creates a response message skeleton for the supplied SOAP action request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{IXML\_Document*}
+        {UPnP\_CreateAction}
+        {(\ const\ UPNP\_CHAR*\ serviceTypeURI,\ \ const\ UPNP\_CHAR*\ actionName\ )}
+        {Create a SOAP action request. }
+        {1.13}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut serviceTypeURI} & string containing service type of the target service 
+\\
+{\tt\strut actionName} & name on action on the target service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut pointer} & to newly created IXML\_Document, which can be passed intoUPnP\_SetActionArg to set the action arguments; NULL on error
+\end{tabular}}
+\begin{cxxdoc}
+
+Creates an XML document which will hold the SOAP action request
+message. This function returns the address of newly formed XML document.
+After finishing the process of sending action request the application
+must release this xml document.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_SetActionArg}
+        {(\ IXML\_Document*\ actionDoc,\ \ const\ UPNP\_CHAR*\ name,\ \ const\ UPNP\_CHAR*\ value\ )}
+        {Set an argument for a SOAP action response/request }
+        {1.14}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut actionDoc} & pointer to action respose message 
+\\
+{\tt\strut name} & argument name *
+\\
+{\tt\strut value} & argument value *
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+
+This function can be used on an IXML\_Document created by either
+UPnP\_CreateActionResponse ($\rightarrow$ 1.13, {\em page }\pageref{cxx.1.13}) or UPnP\_CreateAction to set
+either the input or output arguments for a SOAP action.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlPointInit}
+        {(\ UPnPControlPoint*\ cp,\ \ UPnPRuntime*\ rt,\ \ UPnPControlPointCallback\ callbackFn,\ \ void*\ callbackData\ )}
+        {Initialize a UPnPControlPoint }
+        {1.15}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & pointer to control pointcontext instance 
+\\
+{\tt\strut rt} & UPnP runtime to associate withthis control point 
+\\
+{\tt\strut callbackFn} & callback for this controlpoint 
+\\
+{\tt\strut callbackData} & application-specific datawhich will be passed into thecallback 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlPointDestroy
+\strut}
+\begin{cxxdoc}
+
+Initializes all control point state data in a UPnPControlPoint
+struct (allocated by the calling application), and binds the
+control point to the specified UPnPRuntime. The UPnPRuntime
+must be initialized via UPnP\_RuntimeInit before this function
+is called.  Only one control point may be bound to a single
+UPnPRuntime at once.  This function must be called before
+all other control point related functions.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_ControlPointDestroy}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_INT32\ gracefulTimeoutMsec\ )}
+        {Destroy a UPnPControlPoint }
+        {1.16}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & the control point to destroy 
+\\
+{\tt\strut gracefulTimeoutMsec} & if this control point has anyoutstanding operations, wait forthis many milliseconds to allow themto complete gracefully.  Aftertimeout expires, do hard close. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlPointInit
+\strut}
+\begin{cxxdoc}
+
+Cleans up all data associated with a UPnPControlPoint structure.
+Once this function has been called, it is safe to free the memory used
+by the UPnPControlPoint structure.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlFindAll}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices. }
+        {1.17}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut timeoutMsec} & total duration of time, in milliseconds, for the search 
+\\
+{\tt\strut userData} & passed to callback as userRequestDatafor UPNP\_CONTROL\_EVENT\_DEVICE\_FOUNDevent 
+\\
+{\tt\strut waitForCompletion} & if UPNP\_TRUE, this function will notreturn until the search completes; elsethe function will return immediatelyafter sending the multicast searchrequest. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlFindAllDevices
+\strut}
+\begin{cxxdoc}
+
+Sends a request for all UPnP devices on the network to make their
+presence known to the control point.  If this search method is
+used, then seperate UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND events will be
+generated for each root device, embedded device, and service that
+responds.
+
+When the timeout has been reached, a UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+event will be sent to the control point.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND
+UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlFindAllDevices}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices. }
+        {1.18}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut timeoutMsec} & total duration of time, in milliseconds, for the search 
+\\
+{\tt\strut userData} & passed to callback as userRequestDatafor UPNP\_CONTROL\_EVENT\_DEVICE\_FOUNDevent 
+\\
+{\tt\strut waitForCompletion} & if UPNP\_TRUE, this function will notreturn until the search completes; elsethe function will return immediatelyafter sending the multicast searchrequest. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlFindAll
+\strut}
+\begin{cxxdoc}
+
+Sends a request for all UPnP devices on the network to make their
+presence known to the control point.  Only one
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND event per root device will be generated
+if this function is used.
+
+When the timeout has been reached, a UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+event will be sent to the control point.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND
+UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlFindDevicesByType}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ deviceType,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices of a certain type. }
+        {1.19}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut deviceType} & device type to search for, as specifiedby the UPnP Forum. 
+\\
+{\tt\strut timeoutMsec} & total duration of time, in milliseconds, for the search 
+\\
+{\tt\strut userData} & passed to callback as userRequestDatafor UPNP\_CONTROL\_EVENT\_DEVICE\_FOUNDevent 
+\\
+{\tt\strut waitForCompletion} & if UPNP\_TRUE, this function will notreturn until the search completes; elsethe function will return immediatelyafter sending the multicast searchrequest. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlFindDevicesByUUID,\ UPnP\_ControlFindDevicesByService
+\strut}
+\begin{cxxdoc}
+
+Sends a request for all UPnP devices of a certain type on the network
+to make their presence known to the control point.  One
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND event per device that matches the
+search type will be generated if this function is used.
+
+When the timeout has been reached, a UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+event will be sent to the control point.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND
+UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlFindDevicesByUUID}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ uuid,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for a particular UPnP device. }
+        {1.20}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut uuid} & uuid to search for, as specified by theUPnP Forum. 
+\\
+{\tt\strut timeoutMsec} & total duration of time, in milliseconds, for the search 
+\\
+{\tt\strut userData} & passed to callback as userRequestDatafor UPNP\_CONTROL\_EVENT\_DEVICE\_FOUNDevent 
+\\
+{\tt\strut waitForCompletion} & if UPNP\_TRUE, this function will notreturn until the search completes; elsethe function will return immediatelyafter sending the multicast searchrequest. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlFindDevicesByType
+\strut}
+\begin{cxxdoc}
+
+Sends a request for UPnP devices with the given UUID(unique identifier)
+to make their presence known to the control point.  One
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND event per device that matches the
+search type will be generated if this function is used.
+
+When the timeout has been reached, a UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+event will be sent to the control point.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND
+UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlFindDevicesByService}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ serviceType,\ \ UPNP\_INT32\ timeoutMsec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Search for UPnP devices that offer a certain service. }
+        {1.21}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut serviceType} & service type to search for, asspecified by the UPnP Forum. 
+\\
+{\tt\strut timeoutMsec} & total duration of time, in milliseconds,for the search 
+\\
+{\tt\strut userData} & passed to callback as userRequestDatafor UPNP\_CONTROL\_EVENT\_DEVICE\_FOUNDevent 
+\\
+{\tt\strut waitForCompletion} & if UPNP\_TRUE, this function will notreturn until the search completes; elsethe function will return immediatelyafter sending the multicast searchrequest. 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlFindDevicesByType
+\strut}
+\begin{cxxdoc}
+
+Sends a request for UPnP devices with one or more services of the given
+type to make their  presence known to the control point.  One
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND event per device that matches the
+search type will be generated if this function is used.
+
+When the timeout has been reached, a UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+event will be sent to the control point.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_DEVICE\_FOUND
+UPNP\_CONTROL\_EVENT\_SEARCH\_COMPLETE
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{UPnPControlDeviceHandle}
+        {UPnP\_ControlOpenDevice}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ url\ )}
+        {Open a remote device for description, control, and eventing. }
+        {1.22}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut url} & url of device to open 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut UPnPControlDeviceHandle} & for the open device, or 0 on failure
+\end{tabular}}
+\cxxSee{UPnP\_ControlOpenDeviceAsync
+\strut}
+\begin{cxxdoc}
+
+Opens the device at the specified URL.  This function is used to
+obtain a UPnPControlDeviceHandle, which is used for most functions
+which operate within the UPnP description, control, and eventing
+phases.
+
+This function will block until the device open has completed or failed.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlOpenDeviceAsync}
+        {(\ UPnPControlPoint*\ cp,\ \ UPNP\_CHAR*\ url,\ \ void*\ userData\ )}
+        {Asynchronously open a remote device for description, control, and eventing. }
+        {1.23}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cp} & control point, initialized byUPnP\_ControlPointInit 
+\\
+{\tt\strut url} & url of device to open 
+\\
+{\tt\strut userData} & passed to callback as userRequestData forUPNP\_CONTROL\_EVENT\_DEVICE\_OPEN event 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut UPnPControlDeviceHandle} & for the open device, or 0 on failure
+\end{tabular}}
+\cxxSee{UPnP\_ControlOpenDeviceAsync
+\strut}
+\begin{cxxdoc}
+
+Opens the device at the specified URL.  This function is used to
+obtain a UPnPControlDeviceHandle, which is used for most functions
+which operate within the UPnP description, control, and eventing
+phases.
+
+This function will return immediately if the control point is able to
+initiate the device open successfully.  One of the events listed
+below will be sent to the control point once the open completes (and
+the UPnPControlDeviceHandle is available) or an error occurs.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_DEVICE\_OPEN
+UPNP\_CONTROL\_EVENT\_DEVICE\_OPEN\_FAILED
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_ControlCloseDevice}
+        {(\ UPnPControlDeviceHandle\ deviceHandle\ )}
+        {Close an open device handle }
+        {1.24}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned byUPnP\_ControlOpenDevice
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut UPnPControlDeviceHandle} & for the open device, or 0 on failure
+\end{tabular}}
+\cxxSee{UPnP\_ControlOpenDevice,\ UPnP\_ControlOpenDeviceAsync
+\strut}
+\begin{cxxdoc}
+
+Closes a device opened with UPnP\_ControlOpenDevice or
+UPnP\_ControlOpenDeviceAsync ($\rightarrow$ 1.22, {\em page }\pageref{cxx.1.22}).  The device handle passed in may
+not be used after this function is called.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlGetDeviceInfo}
+        {(\ UPnPControlDeviceHandle\ device,\ \ UPnPControlDeviceInfo*\ info\ )}
+        {Get information for an open device. }
+        {1.25}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut device} & handle returned byUPnP\_ControlOpenDevice 
+\\
+{\tt\strut info} & UPnPControlDeviceInfo to populate 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetServiceOwnerDeviceInfo
+\strut}
+\begin{cxxdoc}
+
+Populates the fields of the specified UPnPControlDeviceInfo
+structure with various information about the given device, such as
+device type, UDN, manufacturer, model number, etc.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlGetServiceOwnerDeviceInfo}
+        {(\ UPnPControlDeviceHandle\ handle,\ \ UPNP\_CHAR*\ serviceId,\ \ UPnPControlDeviceInfo*\ info\ )}
+        {Get information for the parent device of a service }
+        {1.26}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut handle} & handle returned byUPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & serviceId of service for whoseparent to get info 
+\\
+{\tt\strut info} & UPnPControlDeviceInfo topopulate 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetDeviceInfo,\ UPnP\_ControlGetServiceType
+\strut}
+\begin{cxxdoc}
+
+Populates the fields of the specified UPnPControlDeviceInfo
+structure with various information about the parent device of the
+given service.  By contrast, UPnP\_ControlGetDeviceInfo gets
+information about the root device ONLY.  This function is useful for
+gathering information about embedded UPnP devices.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{UPNP\_CHAR*}
+        {UPnP\_ControlGetServiceType}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId\ )}
+        {Get the type of a service }
+        {1.27}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & serviceId of service to gettype for 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlDeviceClose,\ UPnP\_ControlGetServiceOwnerDeviceInfo
+\strut}
+\begin{cxxdoc}
+
+Returns the service type (as defined by the UPnP Forum) of the given
+service instance on an open device.  The string passed back by this
+function must not be modified in any way.  It is valid until
+UPnP\_ControlDeviceClose is called on the given device handle.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlGetServices}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPnPControlServiceIterator*\ i\ )}
+        {Enumerate the services on a device }
+        {1.28}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut i} & uninitialized UPnPControlServiceIteratorto use for this enumeration
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetServicesByType,\ UPnP\_ControlNextService,
+UPnP\_ControlServiceIteratorDone
+\strut}
+\begin{cxxdoc}
+
+Initializes a UPnPControlServiceIterator to enumerate all the
+services on all embedded devices on the given device.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlGetServicesByType}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPnPControlServiceIterator*\ i,\ \ UPNP\_CHAR*\ serviceType\ )}
+        {Enumerate the services of a certain type on a device }
+        {1.29}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut i} & uninitialized UPnPControlServiceIteratorto use for this enumeration
+\\
+{\tt\strut serviceType} & type of service toenumerate 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetServices,\ UPnP\_ControlNextService,
+UPnP\_ControlServiceIteratorDone
+\strut}
+\begin{cxxdoc}
+
+Initializes a UPnPControlServiceIterator to enumerate all the
+services of the given type (as defined by the UPnP Forum) on the given
+device.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{UPNP\_CHAR*}
+        {UPnP\_ControlNextService}
+        {(\ UPnPControlServiceIterator*\ i\ )}
+        {Enumerate the next service on the device. }
+        {1.30}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut i} & UPnPControlServiceIteratorinitialized by UPnP\_ControlGetServices or UPnP\_ControlGetServicesByType ($\rightarrow$ 1.28, {\em page }\pageref{cxx.1.28}) 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut serviceId} & if there is a next service; otherwise NULL
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetServices,\ UPnP\_ControlGetServicesByType,
+UPnP\_ControlServiceIteratorDone
+\strut}
+\begin{cxxdoc}
+
+Returns the unique serviceId of the next service instance in the
+given enumeration (initialized by UPnP\_ControlGetServices or
+UPnP\_ControlGetServicesByType ($\rightarrow$ 1.28, {\em page }\pageref{cxx.1.28})).  The string returned by this
+function must not be modified in any way, and is valid until
+UPnP\_ControlDeviceClose is called for this device.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_ControlServiceIteratorDone}
+        {(\ UPnPControlServiceIterator*\ i\ )}
+        {Clean up when done enumerating services. }
+        {1.31}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut i} & UPnPControlServiceIteratorinitialized by UPnP\_ControlGetServices or UPnP\_ControlGetServicesByType ($\rightarrow$ 1.28, {\em page }\pageref{cxx.1.28}) 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut nothing} & \end{tabular}}
+\cxxSee{UPnP\_ControlGetServices,\ UPnP\_ControlGetServicesByType,
+UPnP\_ControlNextService
+\strut}
+\begin{cxxdoc}
+
+Must be called when done enumerating services using
+UPnP\_ControlNextService.
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{IXML\_Document*}
+        {UPnP\_ControlGetServiceInfo}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId\ )}
+        {Get detailed information about a service. }
+        {1.32}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service to get detailedinfo for 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut XML} & DOM tree for the given document, or NULL on error
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetServiceInfoAsync
+\strut}
+\begin{cxxdoc}
+
+This function retrieves the service description document(SCPD) from the
+given device and parses it into an XML DOM structure.  The resulting
+IXML\_Document returned by this function is owned by the caller of this
+function.  See the UPnP Forum SCPD definition for more information on
+the content and structure of this document.
+
+When this function returns, the document has either successfully loaded,
+or an error has occurred
+
+Generates:
+(no events)
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlGetServiceInfoAsync}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ void*\ userData\ )}
+        {Asynchronous get detailed information about a service. }
+        {1.33}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service to get detailedinfo for 
+\\
+{\tt\strut userData} & passed to callback asuserRequestData for generatedevents 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlGetServiceInfo
+\strut}
+\begin{cxxdoc}
+
+This function retrieves the service description document (SCPD) from
+the given device and parses it into an XML DOM structure.  The
+IXML\_Document is passed back to the control point through a
+UPNP\_CONTROL\_EVENT\_SERVICE\_INFO\_READ event.
+
+This function will return immediately; an event from the list below
+is sent to the control point when the SCPD has been downloaded, or the
+operation fails due to some error.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_SERVICE\_INFO\_READ,
+UPNP\_CONTROL\_EVENT\_SERVICE\_GET\_INFO\_FAILED
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlInvokeAction}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ const\ UPNP\_CHAR*\ actionName,\ \ IXML\_Document*\ action,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Invoke an action on a remote service }
+        {1.34}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service to invokeaction on 
+\\
+{\tt\strut actionName} & name of action to invoke 
+\\
+{\tt\strut action} & SOAP action message createdusing UPnP\_CreateActionand UPnP\_SetActionArg 
+\\
+{\tt\strut userData} & passed to callback asuserRequestData for generatedevents 
+\\
+{\tt\strut waitForCompletion} & see above description 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{\strut}
+\begin{cxxdoc}
+
+This function will send the given action to a service on a remote
+device and generate an event that contains the response to that action.
+If waitForCompletion is UPNP\_TRUE, then UPnP\_ControlInvokeAction will
+not return until the UPNP\_CONTROL\_EVENT\_ACTION\_COMPLETE event is
+passed to the control point callback.  Otherwise, it will return
+immediately and the event is sent to the control point when the
+action completes or an error occurs.
+
+The action passed into this function must be generated using
+UPnP\_CreateAction and UPnP\_SetActionArg.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_ACTION\_COMPLETE
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlSubscribe}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ UPNP\_INT32\ timeoutSec,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Subscribe to a service or renew a subscription }
+        {1.35}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service to subscribeto 
+\\
+{\tt\strut timeoutSec} & duration in seconds for thesubscription 
+\\
+{\tt\strut userData} & passed to callback asuserRequestData for generatedevents 
+\\
+{\tt\strut waitForCompletion} & see above description 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{UPnP\_ControlUnsubscribe,\ UPnP\_ControlSubscribedToService
+\strut}
+\begin{cxxdoc}
+
+Subscribes to a service on a remote device to receive notifications
+when the service's state changes.  If the control point is already
+subscribed to the given service, this function has the effect of
+renewing the existing subscription for the given period of time.
+
+If waitForCompletion is UPNP\_TRUE, this function will wait until the
+subscription request has been either accepted or rejected.  Otherwise
+it returns immediately and a UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_ACCEPTED
+or UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_REJECTED event is generated once
+the device responds.
+
+Once the control point is subscribed to service,
+UPNP\_CONTROL\_EVENT\_SERVICE\_STATE\_UPDATE	events may be generated to
+indicate the service's state has been updated. If such a notification
+is dropped, a UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_OUT\_OF\_SYNC event will be
+sent to the control point, which gives the application the opportunity
+to indicate through the callback return value whether to drop the
+subscription or attempt to re-subscribe.  If the application chooses to
+re-subscribe (synchronize), a UPNP\_CONTROL\_EVENT\_SYNCHRONIZE\_FAILED
+event may be generated, if the synchronization fails.  If the
+UPNP\_CONTROL\_EVENT\_SYNCHRONIZE\_FAILED is not handled by the control
+point callback, the default action is to try to synchronize the
+subscription by re-subscribing.
+
+When the subscription is close to expiring, the control point will
+receive a UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_NEAR\_EXPIRATION event, to
+give the application a chance to renew the subscription.
+
+Once subscription expires, a UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_EXPIRED
+event is sent to the control point.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_ACCEPTED,
+UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_REJECTED,
+UPNP\_CONTROL\_EVENT\_SERVICE\_STATE\_UPDATE,
+UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_OUT\_OF\_SYNC,
+UPNP\_CONTROL\_EVENT\_SYNCHRONIZE\_FAILED,
+UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_NEAR\_EXPIRATION,
+UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_EXPIRED
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{UPNP\_BOOL}
+        {UPnP\_ControlSubscribedToService}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId\ )}
+        {Return whether or not the control point is subscribed to the given service }
+        {1.36}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut UPNP\_TRUE} & if subscribed, UPNP\_FALSE otherwise
+\end{tabular}}
+\cxxSee{UPnP\_ControlSubscribe,\ UPnP\_ControlUnsubscribe
+\strut}
+\begin{cxxdoc}
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {UPnP\_ControlSetServiceSubscriptionExpireWarning}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ UPNP\_INT32\ warningMsec\ )}
+        {Sets the time offset before subscription expiration at which a warning event will be generated. }
+        {1.37}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service 
+\\
+{\tt\strut warningMsec} & time offset to generatewarning, in milliseconds 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut nothing} & \end{tabular}}
+\cxxSee{UPnP\_ControlSubscribe,\ UPnP\_ControlUnsubscribe
+\strut}
+\begin{cxxdoc}
+
+This function should be called, if desired, before subscribing to
+the given service.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {UPnP\_ControlUnsubscribe}
+        {(\ UPnPControlDeviceHandle\ deviceHandle,\ \ UPNP\_CHAR*\ serviceId,\ \ void*\ userData,\ \ UPNP\_BOOL\ waitForCompletion\ )}
+        {Cancel a subscribed service }
+        {1.38}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut deviceHandle} & handle returned by UPnP\_ControlOpenDevice 
+\\
+{\tt\strut serviceId} & id of service to unsubscribefrom 
+\\
+{\tt\strut userData} & passed to callback asuserRequestData for generatedevents 
+\\
+{\tt\strut waitForCompletion} & see above description 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\cxxSee{\strut}
+\begin{cxxdoc}
+
+If waitForCompletion is UPNP\_TRUE, this function waits for the
+unsubscribe operation to complete before returning.  Otherwise, it
+returns immediately and a UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_CANCELLED
+event is generated when the operation completes.
+
+Generates:
+UPNP\_CONTROL\_EVENT\_SUBSCRIPTION\_CANCELLED
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Internal Library Documentation}
+        {}
+        {}
+        {2}
+\begin{cxxnames}
+\cxxitem{}
+        {Discovery/SSDP}
+        {}
+        {}
+        {2.1}
+\cxxitem{}
+        {Description}
+        {}
+        {}
+        {2.2}
+\cxxitem{}
+        {Control/SOAP}
+        {}
+        {}
+        {2.3}
+\cxxitem{}
+        {Eventing/GENA}
+        {}
+        {}
+        {2.4}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxentry}
+{}
+        {Discovery/SSDP}
+        {}
+        {}
+        {2.1}
+\begin{cxxnames}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_ServerInit}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT8*\ ipAddr,\ \ SSDP\_INT16\ ipType,\ \ const\ SSDP\_CHAR*\ serverId,\ \ SSDPCallback\ cb,\ \ void*\ cookie)}
+        {SSDP server initialization routine. }
+        {2.1.1}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_ServerAddToSelectList}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.2}
+\cxxitem{SSDP\_BOOL}
+        {SSDP\_ServerProcessState}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.3}
+\cxxitem{void}
+        {SSDP\_ServerDestroy}
+        {(\ SSDPServerContext*\ ctx\ pointer\ to\ SSDP\ context*\ /\ )}
+        {}
+        {2.1.4}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_SendNotify}
+        {(\ SSDPServerContext*\ ctx,\ \ const\ SSDP\_CHAR*\ notifyType,\ \ const\ SSDP\_CHAR*\ notifySubType,\ \ const\ SSDP\_CHAR*\ usn,\ \ const\ SSDP\_CHAR*\ location,\ \ SSDP\_UINT32*\ timeout)}
+        {Send a SSDP notification for the device or service. }
+        {2.1.5}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_SendResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPPendingResponse*\ response)}
+        {Deliver a responce to SSDP discovery request.}
+        {2.1.6}
+\cxxitem{SSDP\_INT32}
+        {\_SSDP\_ProcessOneRequest}
+        {(\ SSDPServerContext*\ ctx\ )}
+        {Process an incoming SSDP discovery request. }
+        {2.1.7}
+\cxxitem{int}
+        {SSDP\_ParseRequest}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPServerRequest*\ ssdpRequest\ )}
+        {Extract SSDP request. }
+        {2.1.8}
+\cxxitem{int}
+        {SSDP\_McastRead}
+        {(\ void*\ cookie,\ \ SSDP\_UINT8*\ buffer,\ \ SSDP\_INT32\ min,\ \ SSDP\_INT32\ max)}
+        {Reads all messages posted to the multicast address}
+        {2.1.9}
+\cxxitem{int}
+        {\_SSDP\_ReadMSearchHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.10}
+\cxxitem{int}
+        {\_SSDP\_ReadNotifyHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.11}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_QueueSearchResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPSearch*\ search,\ \ const\ SSDP\_CHAR*\ targetLocation,\ \ const\ SSDP\_CHAR*\ targetURN,\ \ SSDP\_UINT32\ targetTimeoutSec)}
+        {Queues a response to the response list based on its scheduled delivery time.}
+        {2.1.12}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_CheckPendingResponses}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT32\ currentTimeMsec)}
+        {Delivers responses scheduled for delivery. }
+        {2.1.13}
+\cxxitem{void}
+        {SSDP\_ProcessError}
+        {(\ SSDP\_CHAR*\ errMsg)}
+        {Process SSDP Errors}
+        {2.1.14}
+\cxxitem{SSDP\_UINT32}
+        {SSDP\_RandMax}
+        {(\ SSDP\_UINT32\ mxLimit)}
+        {generates a random number between 0 and mxLimit}
+        {2.1.15}
+\cxxitem{int}
+        {SSDP\_SearchInit}
+        {(\ SSDPClientSearch*\ search,\ HTTPManagedClient*\ httpClient,\ SSDP\_INT16\ ipType,\ SSDP\_CHAR*\ searchType,\ SSDP\_INT32\ maxResponseTimeoutSec,\ SSDPSearchCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.1.16}
+\cxxitem{void}
+        {SSDP\_SearchDestroy}
+        {(\ SSDPClientSearch*\ search\ )}
+        {}
+        {2.1.17}
+\cxxitem{int}
+        {SSDP\_SearchExecute}
+        {(\ SSDPClientSearch*\ search\ )}
+        {}
+        {2.1.18}
+\cxxitem{SSDP\_INT32}
+        {SSDP\_SearchAddToSelectList}
+        {(\ SSDPClientSearch*\ search,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.19}
+\cxxitem{SSDP\_BOOL}
+        {SSDP\_SearchProcessState}
+        {(\ SSDPClientSearch*\ search,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.20}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_ServerInit}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT8*\ ipAddr,\ \ SSDP\_INT16\ ipType,\ \ const\ SSDP\_CHAR*\ serverId,\ \ SSDPCallback\ cb,\ \ void*\ cookie)}
+        {SSDP server initialization routine. }
+        {2.1.1}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to an uninitialized SSDP context structure 
+\\
+{\tt\strut ipAddr} & IP address of the host to bind the UDP socket to, if a NULL issupplied, the UDP socket is bound to the local IP address 
+\\
+{\tt\strut ipType} & ip version 4 or ipversion 6 
+\\
+{\tt\strut serverId} & String holding platform name 
+\\
+{\tt\strut cb} & SSDP Callback routine 
+\\
+{\tt\strut cookie} & cookie(runtime) to be stored in ssdp context to be passedlater to ssdp callback 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+This routine starts up SSDP services by creating a UDP socket, getting the ssdp
+multicast membership for the socket and initlializing ssdp context.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_ServerAddToSelectList}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.2}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_BOOL}
+        {SSDP\_ServerProcessState}
+        {(\ SSDPServerContext*\ ctx,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.3}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {SSDP\_ServerDestroy}
+        {(\ SSDPServerContext*\ ctx\ pointer\ to\ SSDP\ context*\ /\ )}
+        {}
+        {2.1.4}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_SendNotify}
+        {(\ SSDPServerContext*\ ctx,\ \ const\ SSDP\_CHAR*\ notifyType,\ \ const\ SSDP\_CHAR*\ notifySubType,\ \ const\ SSDP\_CHAR*\ usn,\ \ const\ SSDP\_CHAR*\ location,\ \ SSDP\_UINT32*\ timeout)}
+        {Send a SSDP notification for the device or service. }
+        {2.1.5}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut notifyType} & the notification type (NT) string 
+\\
+{\tt\strut notifySubType} & pointer to string containing NT subtype 
+\\
+{\tt\strut usn} & pointer to string containing USN header 
+\\
+{\tt\strut location} & pointer to string containing Location header 
+\\
+{\tt\strut timeout} & pointer to max-age header value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+This routine sends ssdp alive and bye-bye notifications on the mulicast
+address for devices and servces
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_SendResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPPendingResponse*\ response)}
+        {Deliver a responce to SSDP discovery request.}
+        {2.1.6}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut response} & buffer holding response information 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Deliver a responce to SSDP discovery request.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {\_SSDP\_ProcessOneRequest}
+        {(\ SSDPServerContext*\ ctx\ )}
+        {Process an incoming SSDP discovery request. }
+        {2.1.7}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Processes a SSDP discovery request available during a period given by
+timeoutMsec milli seconds.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {SSDP\_ParseRequest}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPServerRequest*\ ssdpRequest\ )}
+        {Extract SSDP request. }
+        {2.1.8}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut ssdpRequest} & address of the SSDPServerEvent structure to fill up 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Retrieves messages from the multicast address, if ssdp request is
+detected a buffer holding request information is populated
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {SSDP\_McastRead}
+        {(\ void*\ cookie,\ \ SSDP\_UINT8*\ buffer,\ \ SSDP\_INT32\ min,\ \ SSDP\_INT32\ max)}
+        {Reads all messages posted to the multicast address}
+        {2.1.9}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut cookie} & internal cookie 
+\\
+{\tt\strut buffer} & pointer to buffer contaning request message 
+\\
+{\tt\strut min} & \\
+{\tt\strut max} & max size to be read 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Reads all messages posted to the multicast address
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_SSDP\_ReadMSearchHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.10}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut request} & request buffer to be populated 
+\\
+{\tt\strut ptr} & current HTTP session 
+\\
+{\tt\strut type} & HTTP header type 
+\\
+{\tt\strut name} & holds the name of the header 
+\\
+{\tt\strut value} & holds the value of the header
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts MX and St headers from a SSDP request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {\_SSDP\_ReadNotifyHeader}
+        {(\ void*\ request,\ \ HTTPSession*\ ptr,\ \ HTTPHeaderType\ type,\ \ const\ HTTP\_CHAR*\ name,\ \ const\ HTTP\_CHAR*\ value\ )}
+        {Extracts MX and St headers from a SSDP request}
+        {2.1.11}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut request} & request buffer to be populated 
+\\
+{\tt\strut ptr} & current HTTP session 
+\\
+{\tt\strut type} & HTTP header type 
+\\
+{\tt\strut name} & holds the name of the header 
+\\
+{\tt\strut value} & holds the value of the header
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Extracts MX and St headers from a SSDP request
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_QueueSearchResponse}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDPSearch*\ search,\ \ const\ SSDP\_CHAR*\ targetLocation,\ \ const\ SSDP\_CHAR*\ targetURN,\ \ SSDP\_UINT32\ targetTimeoutSec)}
+        {Queues a response to the response list based on its scheduled delivery time.}
+        {2.1.12}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut search} & pointer to the buffer containingthe request information 
+\\
+{\tt\strut targetLocation} & pointer to string containing Location header
+\\
+{\tt\strut targetURN} & pointer to string containing USN header 
+\\
+{\tt\strut targetTimeoutSec} & max-age header value 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Queues a response to the response list based on its scheduled delivery time.
+A random delivery time within targetTimeoutSec duration is calculated.
+This response is positioned in the list according to its scheduled delivery time.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_CheckPendingResponses}
+        {(\ SSDPServerContext*\ ctx,\ \ SSDP\_UINT32\ currentTimeMsec)}
+        {Delivers responses scheduled for delivery. }
+        {2.1.13}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut ctx} & pointer to SSDP context 
+\\
+{\tt\strut currentTimeMsec} & time against which the scheduledtime is checked 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+Scan the pending response list and deliver responses for which the
+scheduled time count is less than supplied time count.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {SSDP\_ProcessError}
+        {(\ SSDP\_CHAR*\ errMsg)}
+        {Process SSDP Errors}
+        {2.1.14}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut errMsg} & error message string 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut None} & \end{tabular}}
+\begin{cxxdoc}
+Process SSDP Errors
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_UINT32}
+        {SSDP\_RandMax}
+        {(\ SSDP\_UINT32\ mxLimit)}
+        {generates a random number between 0 and mxLimit}
+        {2.1.15}
+\cxxParameter{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut mxLimit} & upper limit of the random number 
+\end{tabular}}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+generates a random number between 0 and mxLimit
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {SSDP\_SearchInit}
+        {(\ SSDPClientSearch*\ search,\ HTTPManagedClient*\ httpClient,\ SSDP\_INT16\ ipType,\ SSDP\_CHAR*\ searchType,\ SSDP\_INT32\ maxResponseTimeoutSec,\ SSDPSearchCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.1.16}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {SSDP\_SearchDestroy}
+        {(\ SSDPClientSearch*\ search\ )}
+        {}
+        {2.1.17}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{int}
+        {SSDP\_SearchExecute}
+        {(\ SSDPClientSearch*\ search\ )}
+        {}
+        {2.1.18}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_INT32}
+        {SSDP\_SearchAddToSelectList}
+        {(\ SSDPClientSearch*\ search,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.19}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SSDP\_BOOL}
+        {SSDP\_SearchProcessState}
+        {(\ SSDPClientSearch*\ search,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.1.20}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Description}
+        {}
+        {}
+        {2.2}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Control/SOAP}
+        {}
+        {}
+        {2.3}
+\begin{cxxnames}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_ActionInit}
+        {(\ SOAPAction*\ action,\ HTTPManagedClient*\ httpClient,\ SOAP\_INT16\ ipType,\ const\ SOAP\_CHAR*\ destUri,\ const\ SOAP\_CHAR*\ soapAction,\ SOAP\_CHAR*\ headerStr,\ SOAP\_INT32\ headerLen,\ SOAP\_CHAR*\ bodyStr,\ SOAP\_INT32\ bodyLen,\ SOAPActionCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.3.1}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_ActionInitEx}
+        {(\ SOAPAction*\ action,\ HTTPManagedClient*\ httpClient,\ SOAP\_INT16\ ipType,\ URLDescriptor*\ postURL,\ URLDescriptor*\ baseURL,\ const\ SOAP\_CHAR*\ soapAction,\ SOAP\_CHAR*\ headerStr,\ SOAP\_INT32\ headerLen,\ SOAP\_CHAR*\ bodyStr,\ SOAP\_INT32\ bodyLen,\ SOAPActionCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.3.2}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_CreateHttpSession}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.3}
+\cxxitem{void}
+        {SOAP\_ActionDestroy}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.4}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_ActionExecute}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.5}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_ActionAddToSelectList}
+        {(\ SOAPAction*\ action,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.3.6}
+\cxxitem{SOAP\_BOOL}
+        {SOAP\_ActionProcessState}
+        {(\ SOAPAction*\ action,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.3.7}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_SendActionRequest}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.8}
+\cxxitem{SOAP\_INT32}
+        {SOAP\_ReadActionResponse}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.9}
+\cxxitem{SOAPActionState}
+        {\_SOAP\_ParseActionRespose}
+        {(\ HTTPResponseInfo*\ info,\ HTTPManagedClientSession*\ session,\ SOAPActionResponse*\ response\ )}
+        {}
+        {2.3.10}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_ActionInit}
+        {(\ SOAPAction*\ action,\ HTTPManagedClient*\ httpClient,\ SOAP\_INT16\ ipType,\ const\ SOAP\_CHAR*\ destUri,\ const\ SOAP\_CHAR*\ soapAction,\ SOAP\_CHAR*\ headerStr,\ SOAP\_INT32\ headerLen,\ SOAP\_CHAR*\ bodyStr,\ SOAP\_INT32\ bodyLen,\ SOAPActionCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.3.1}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc::: this will be called each time a soap action is to be performed. This will
+open a http client, and send an POST, the request structure is filled and
+send to be upnp client manager to add the request to its list.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_ActionInitEx}
+        {(\ SOAPAction*\ action,\ HTTPManagedClient*\ httpClient,\ SOAP\_INT16\ ipType,\ URLDescriptor*\ postURL,\ URLDescriptor*\ baseURL,\ const\ SOAP\_CHAR*\ soapAction,\ SOAP\_CHAR*\ headerStr,\ SOAP\_INT32\ headerLen,\ SOAP\_CHAR*\ bodyStr,\ SOAP\_INT32\ bodyLen,\ SOAPActionCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.3.2}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc::: this will be called each time a soap action is to be performed. This will
+open a http client, and send an POST, the request structure is filled and
+send to be upnp client manager to add the request to its list.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_CreateHttpSession}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.3}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {SOAP\_ActionDestroy}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.4}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+close the session ::
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_ActionExecute}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.5}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_ActionAddToSelectList}
+        {(\ SOAPAction*\ action,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.3.6}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc:: add to select list, and return timeout milliseconds to select for
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_BOOL}
+        {SOAP\_ActionProcessState}
+        {(\ SOAPAction*\ action,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.3.7}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_SendActionRequest}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.8}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAP\_INT32}
+        {SOAP\_ReadActionResponse}
+        {(\ SOAPAction*\ action\ )}
+        {}
+        {2.3.9}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{SOAPActionState}
+        {\_SOAP\_ParseActionRespose}
+        {(\ HTTPResponseInfo*\ info,\ HTTPManagedClientSession*\ session,\ SOAPActionResponse*\ response\ )}
+        {}
+        {2.3.10}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\end{cxxentry}
+\begin{cxxentry}
+{}
+        {Eventing/GENA}
+        {}
+        {}
+        {2.4}
+\begin{cxxnames}
+\cxxitem{GENA\_INT32}
+        {GENA\_ClientInit}
+        {(\ GENAClientContext*\ ctx,\ GENAClientCallback\ callback,\ void*\ cookie\ )}
+        {}
+        {2.4.1}
+\cxxitem{void}
+        {GENA\_ClientDestroy}
+        {(\ GENAClientContext*\ ctx\ )}
+        {}
+        {2.4.2}
+\cxxitem{GENA\_INT32}
+        {GENA\_ClientProcessEvent}
+        {(\ GENAClientContext*\ ctx,\ HTTPServerRequestContext*\ srv,\ HTTPSession*\ session,\ HTTPRequest*\ request,\ RTP\_NET\_ADDR*\ notifierAddr\ )}
+        {}
+        {2.4.3}
+\cxxitem{GENA\_INT32}
+        {GENA\_SendEventResponse}
+        {(\ GENAClientEvent*\ genaEvent,\ HTTPServerRequestContext*\ srv,\ HTTPSession*\ session,\ HTTPRequest*\ request\ )}
+        {}
+        {2.4.4}
+\cxxitem{GENA\_INT32}
+        {GENA\_SubscribeRequestInit}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_INT16\ ipType,\ GENA\_CHAR*\ relUrlStr,\ URLDescriptor*\ baseURL,\ GENA\_CHAR*\ callbackUrl,\ GENA\_INT32\ timeoutSec,\ GENAClientRequestCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.4.5}
+\cxxitem{GENA\_INT32}
+        {GENA\_RenewRequestInit}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_INT16\ ipType,\ GENA\_CHAR*\ serverUrl,\ URLDescriptor*\ baseURL,\ GENA\_CHAR*\ sid,\ GENA\_INT32\ timeoutSec,\ GENAClientRequestCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.4.6}
+\cxxitem{GENA\_INT32}
+        {GENA\_UnsubscribeRequestInit}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_INT16\ ipType,\ GENA\_CHAR*\ serverUrl,\ URLDescriptor*\ baseURL,\ GENA\_CHAR*\ sid,\ GENAClientRequestCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.4.7}
+\cxxitem{GENA\_INT32}
+        {GENA\_CreateHttpSession}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_CHAR*\ relUrlStr,\ URLDescriptor*\ baseURL,\ GENA\_INT16\ ipType\ )}
+        {}
+        {2.4.8}
+\cxxitem{void}
+        {GENA\_ClientRequestDestroy}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.9}
+\cxxitem{GENA\_INT32}
+        {GENA\_ClientRequestExecute}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.10}
+\cxxitem{GENA\_INT32}
+        {GENA\_ClientRequestAddToSelectList}
+        {(\ GENAClientRequest*\ request,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.4.11}
+\cxxitem{GENA\_BOOL}
+        {GENA\_ClientRequestProcessState}
+        {(\ GENAClientRequest*\ request,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.4.12}
+\cxxitem{GENA\_INT32}
+        {GENA\_SendRequest}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.13}
+\cxxitem{GENA\_INT32}
+        {GENA\_ReadResponse}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.14}
+\cxxitem{GENA\_INT32}
+        {\_GENA\_ReadHeader}
+        {(\ void*\ userData,\ HTTPSession*\ session,\ HTTPHeaderType\ type,\ const\ GENA\_CHAR*\ name,\ const\ GENA\_CHAR*\ value)}
+        {}
+        {2.4.15}
+\end{cxxnames}
+\begin{cxxdoc}
+These functions are \<b\>not\</b\> at the API level and should not be called from
+code outside the UPnP library. 
+\end{cxxdoc}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_ClientInit}
+        {(\ GENAClientContext*\ ctx,\ GENAClientCallback\ callback,\ void*\ cookie\ )}
+        {}
+        {2.4.1}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {GENA\_ClientDestroy}
+        {(\ GENAClientContext*\ ctx\ )}
+        {}
+        {2.4.2}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_ClientProcessEvent}
+        {(\ GENAClientContext*\ ctx,\ HTTPServerRequestContext*\ srv,\ HTTPSession*\ session,\ HTTPRequest*\ request,\ RTP\_NET\_ADDR*\ notifierAddr\ )}
+        {}
+        {2.4.3}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_SendEventResponse}
+        {(\ GENAClientEvent*\ genaEvent,\ HTTPServerRequestContext*\ srv,\ HTTPSession*\ session,\ HTTPRequest*\ request\ )}
+        {}
+        {2.4.4}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_SubscribeRequestInit}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_INT16\ ipType,\ GENA\_CHAR*\ relUrlStr,\ URLDescriptor*\ baseURL,\ GENA\_CHAR*\ callbackUrl,\ GENA\_INT32\ timeoutSec,\ GENAClientRequestCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.4.5}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc::: this will be called each time a GENA request is to be performed. This will
+open a http client, and send an POST, the request structure is filled and
+send to be upnp client manager to add the request to its list.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_RenewRequestInit}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_INT16\ ipType,\ GENA\_CHAR*\ serverUrl,\ URLDescriptor*\ baseURL,\ GENA\_CHAR*\ sid,\ GENA\_INT32\ timeoutSec,\ GENAClientRequestCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.4.6}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc::: this will be called each time a GENA request is to be performed. This will
+open a http client, and send an POST, the request structure is filled and
+send to be upnp client manager to add the request to its list.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_UnsubscribeRequestInit}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_INT16\ ipType,\ GENA\_CHAR*\ serverUrl,\ URLDescriptor*\ baseURL,\ GENA\_CHAR*\ sid,\ GENAClientRequestCallback\ callbackFn,\ void*\ callbackData\ )}
+        {}
+        {2.4.7}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc::: this will be called each time a GENA request is to be performed. This will
+open a http client, and send an POST, the request structure is filled and
+send to be upnp client manager to add the request to its list.
+
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_CreateHttpSession}
+        {(\ GENAClientRequest*\ request,\ HTTPManagedClient*\ httpClient,\ GENA\_CHAR*\ relUrlStr,\ URLDescriptor*\ baseURL,\ GENA\_INT16\ ipType\ )}
+        {}
+        {2.4.8}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{void}
+        {GENA\_ClientRequestDestroy}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.9}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_ClientRequestExecute}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.10}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_ClientRequestAddToSelectList}
+        {(\ GENAClientRequest*\ request,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.4.11}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+desc:: add to select list, and return timeout milliseconds to select for
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_BOOL}
+        {GENA\_ClientRequestProcessState}
+        {(\ GENAClientRequest*\ request,\ RTP\_FD\_SET*\ readList,\ RTP\_FD\_SET*\ writeList,\ RTP\_FD\_SET*\ errList\ )}
+        {}
+        {2.4.12}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_SendRequest}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.13}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {GENA\_ReadResponse}
+        {(\ GENAClientRequest*\ request\ )}
+        {}
+        {2.4.14}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & codeIMPORTANT - response.sid is allocated memory in read header callback, it needs to be freed
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\begin{cxxfunction}
+{GENA\_INT32}
+        {\_GENA\_ReadHeader}
+        {(\ void*\ userData,\ HTTPSession*\ session,\ HTTPHeaderType\ type,\ const\ GENA\_CHAR*\ name,\ const\ GENA\_CHAR*\ value)}
+        {}
+        {2.4.15}
+\cxxReturn{
+\begin{tabular}[t]{lp{0.5\textwidth}}
+{\tt\strut error} & code
+\end{tabular}}
+\begin{cxxdoc}
+/*
+
+\end{cxxdoc}
+\end{cxxfunction}
+\end{cxxentry}
+\end{cxxentry}
+\end{document}

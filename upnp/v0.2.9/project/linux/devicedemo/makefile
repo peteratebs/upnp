@@ -1,0 +1,135 @@
+# GNU Makefile for UPNPDEVICE DEMO
+
+### Usage ##############################################################
+### :make clean  
+### :make
+### :make DEBUG=1              ------------------ For debugging purposes
+########################################################################
+incpath = .
+
+### Set this to find mkgnu.inc, rulesgnu.inc and lib_xxx dirs in mkgnu
+UPNP_PATH = ../../../../../upnp
+
+include $(UPNP_PATH)/mkgnu.inc
+
+includes = . $(lib_to_upnp_common_include) $(lib_to_upnp_server_include) $(lib_to_upnp_client_include) $(lib_to_xml1_include) $(lib_to_xml2_include) $(lib_to_http_include) $(lib_to_rtptarget_include) $(lib_to_rtpgeneric_include)
+
+########################################################################
+# SOURCE PATHS
+########################################################################
+vpath %.c   . $(lib_to_upnp_examples_path) $(lib_to_upnp_common_path) $(lib_to_upnp_server_path) $(lib_to_upnp_client_path) $(lib_to_xml_path) $(lib_to_http_path) $(lib_to_rtptarget) $(lib_to_rtpgeneric)
+
+vpath %.h   .. $(lib_to_upnp_common_include) $(lib_to_upnp_server_include) $(lib_to_upnp_client_include) $(lib_to_xml1_include) $(lib_to_xml2_include) $(lib_to_http_include) $(lib_to_rtptarget_include) $(lib_to_rtpgeneric_include)
+
+########################################################################
+# OPERATING SYSTEM/ENVIRONMENT SPECIFIC MODULES
+########################################################################
+# The only files that should go here are files that are specific to one
+# particular target, operating system, compiler, etc. and must go into
+# the library.  Make sure your conditional(s) are as general as possible.
+
+ifeq ($(os),LINUX)
+#modules +=
+endif
+
+########################################################################
+# EBS PACKAGES
+########################################################################
+
+ifeq ($(dortupnp),"Y")
+# defines +=
+defines +=
+endif
+
+
+#############################################################################
+# SETUP
+#############################################################################
+
+# The basic required list of modules, defines, includes.
+
+dirs := 
+
+cpfiles := $(foreach dir,$(dirs),$(wildcard $(dir)/*.cpp))
+cpmodules := $(patsubst %.cpp,%,$(cpfiles))
+cfiles := $(foreach dir,$(dirs),$(wildcard $(dir)/*.c))
+
+#RTPLATFORM FILES USED
+cfiles += $(lib_to_rtptarget)/rtpterm.c
+cfiles += $(lib_to_rtptarget)/rtpthrd.c
+cfiles += $(lib_to_rtptarget)/rtptime.c
+cfiles += $(lib_to_rtpgeneric)/rtp.c
+cfiles += $(lib_to_rtpgeneric)/rtpchar.c
+cfiles += $(lib_to_rtpgeneric)/rtpdutil.c
+cfiles += $(lib_to_rtpgeneric)/rtprand.c
+cfiles += $(lib_to_rtpgeneric)/rtpscnv.c
+cfiles += $(lib_to_rtpgeneric)/rtpstr.c
+cfiles += $(lib_to_rtpgeneric)/rtphelper.c
+cfiles += $(lib_to_rtpgeneric)/rtpnetsm.c
+cfiles += $(lib_to_rtpgeneric)/rtpprint.c
+cfiles += $(lib_to_rtpgeneric)/rtpstdup.c
+cfiles += $(lib_to_rtptarget)/rtpdate.c
+cfiles += $(lib_to_rtptarget))/rtpdebug.c
+cfiles += $(lib_to_rtptarget)/rtpdobj.c
+cfiles += $(lib_to_rtptarget)/rtpfile.c
+cfiles += $(lib_to_rtptarget)/rtpmem.c
+cfiles += $(lib_to_rtptarget)/rtpnet.c
+cfiles += $(lib_to_rtptarget)/rtpsignl.c
+cfiles += $(lib_to_rtpgeneric)/rtplog.c
+cfiles += $(lib_to_rtpgeneric)/rtpxml.c
+#UPNP COMMON FILES USED
+cfiles += $(lib_to_upnp_common_path)/upnp.c
+cfiles += $(lib_to_upnp_common_path)/ssdpsrv.c
+cfiles += $(lib_to_upnp_common_path)/upnpdom.c
+#UPNP DEVICE FILES USED
+cfiles += $(lib_to_upnp_server_path)/deviceControl.c
+cfiles += $(lib_to_upnp_server_path)/deviceDescribe.c
+cfiles += $(lib_to_upnp_server_path)/deviceDiscover.c
+cfiles += $(lib_to_upnp_server_path)/deviceEvent.c
+cfiles += $(lib_to_upnp_server_path)/genasrv.c
+cfiles += $(lib_to_upnp_server_path)/soapsrv.c
+cfiles += $(lib_to_upnp_server_path)/upnpdev.c
+#XML FILES USED
+cfiles += $(lib_to_xml_path)/attr.c
+cfiles += $(lib_to_xml_path)/document.c
+cfiles += $(lib_to_xml_path)/element.c
+cfiles += $(lib_to_xml_path)/ixml.c
+cfiles += $(lib_to_xml_path)/ixmlmembuf.c
+cfiles += $(lib_to_xml_path)/ixmlparser.c
+cfiles += $(lib_to_xml_path)/namedNodeMap.c
+cfiles += $(lib_to_xml_path)/node.c
+cfiles += $(lib_to_xml_path)/nodeList.c
+#HTTP MODULE FILES USED
+cfiles += $(lib_to_http_path)/fileext.c
+cfiles += $(lib_to_http_path)/filetype.c
+cfiles += $(lib_to_http_path)/httpp.c
+cfiles += $(lib_to_http_path)/httpsrv.c
+#EXAMPLES C FILES USED
+cfiles += $(lib_to_upnp_examples_path)/device_demo.c
+
+cmodules := $(patsubst %.c,%,$(cfiles))
+
+modules += $(cpmodules)
+modules += $(cmodules)
+
+modules  := $(sort $(modules))
+defines  := $(sort $(defines))
+
+# now set up the object list
+blah1 = $(modules:%=%.$(obj))
+objects = $(notdir $(blah1))
+OBJDIR=./bin
+OUT_OBJS = $(addprefix $(OBJDIR)/,$(objects))
+
+#############################################################################
+# RULESa
+#############################################################################
+all: ddemo.out
+$(OBJDIR)/ddemo.a: $(OUT_OBJS)
+$(OBJDIR)/devdemo.o: devdemo.c
+ddemo.out: $(OBJDIR)/devdemo.o $(OBJDIR)/ddemo.a
+
+include $(UPNP_PATH)/rulesgnu.inc
+#############################################################################
+
+

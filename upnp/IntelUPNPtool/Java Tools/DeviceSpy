@@ -1,0 +1,2 @@
+javaw -classpath ".;crimson.jar;jaxp.jar;xalan.jar" Intel.DeviceSpy.MainApp
+

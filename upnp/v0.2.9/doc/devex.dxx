@@ -1,0 +1,92 @@
+/**
+ @name UPnP Device Initialization Example
+ @memo Setting up a UPnP Device
+ @doc  This code demonstrates in brief the necessary steps to set up a UPnP device
+       for discovery, description, control, and eventing.
+
+<pre>
+int main (void)
+{
+	int result;
+	IXML_Document *xmlDevice;
+	UPnPRuntime rt;
+	UPnPRootDeviceHandle rootDevice;
+
+
+	// UPnP maintains a runtime structure; The first step is to
+	// initialize UPnPRuntime struct. UPnP_RuntimeInit takes a
+	// pointer to an uninitialized UPnPRuntime struct and other
+	// necessary necessary data to initialize and populate upnp
+	// the engine.
+	result = UPnP_RuntimeInit (
+			&rt,
+			0,                  // serverAddr: IP_ANY_ADDR
+			0,                  // serverPort: any port
+			RTP_NET_TYPE_IPV4,  // ipv4
+			"c:\\www-root\\",   // web server root dir
+			10,                 // maxConnections
+			5                   // maxHelperThreads
+		);
+
+	if (result < 0)
+	{
+		return (-1);
+	}
+
+	// Next, we need a UPnPDeviceRuntime; UPnP_DeviceInit takes
+	//  a pointer to an uninitialized UPnPDeviceRuntime struct
+	//  and does all necessary initialization.
+
+	result = UPnP_DeviceInit (
+				&deviceRuntime,
+				&rt
+			);
+
+	if (result < 0)
+	{
+		return (-1);
+	}
+
+	// Load the root device description page into memory.
+	xmlDevice = ixmlLoadDocument("c:\\www-root\\device.xml");
+	if (!xmlDevice)
+	{
+		return (-1);
+	}
+
+
+	result = UPnP_RegisterRootDevice (
+			&deviceRuntime,
+			"device.xml",
+			xmlDevice,
+			1,                  // auto address resolution
+			testDeviceCallback,
+			0,                  // userData for callback
+			&rootDevice,
+			1                   // advertise
+		);
+
+	if (result < 0)
+	{
+		return (-1);
+	}
+
+	UPnP_DeviceAdvertise(rootDevice, ANNOUNCE_FREQUENCY_SEC,
+						 REMOTE_CACHE_TIMEOUT_SEC);
+
+	// start the UPnP daemon thread
+	UPnP_StartDaemon(&rt);
+
+	// for polled mode, use this
+
+	//while (1)
+	//{
+      	//UPnP_ProcessState (&rt,1000);
+		//printf(".");
+	//}
+
+}
+
+</pre>
+
+ */

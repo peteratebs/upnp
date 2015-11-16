@@ -1,0 +1,78 @@
+<html>
+<head>
+<title> EBS Runtime Platform Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=800>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsembeddedsoftware.com/' target='_blank'><img border=0 src='ebs.gif' align=right></a>
+
+<H2>int <A HREF="#DOC.DOCU">rtp_net_socket_datagram_dual</A></H2><H2>( RTP_HANDLE*  sockHandle,<BR>&nbsp;  int type )</H2><BLOCKQUOTE>Allocate datagram type (UDP) socket of type IPv6 or IPv4. </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>This function is similar to "rtp_net_socket_datagram ( )" with
+the difference being this function supports creation of both IPv6
+and IPv4 sockets depending on the input type.
+Following are excerpt from rtp_net_socket_datagram ( ):
+Allocates, if possible, a datagram (UDP, connectionless)
+type socket.  The handle then may later be used as an argument
+to the other RTPlatform Socket API functions.  The number of
+sockets available at any one time is dependant on the native
+TCP/IP stack.  When use of the socket handle is completed,
+rtp_net_closesocket() should be called to make it available
+for other calls to rtp_net_socket_datagram().
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>sockHandle</B> -   Address of a socket handle to store
+the allocated socket. 
+<BR><B>type</B> -   ip version type for the new socket:
+type for IPv4-RTP_NET_TYPE_IPV4
+type for IPv6-RTP_NET_TYPE_IPV6 <BR><DT><B>Returns:</B><DD>  0 if successful, -1 otherwise.  If a -1 is returned the
+value of *sockeHandle is undefined.  For debugging purposes;
+if the cause of the error is obtainable at the native TCP/IP
+layer, turn on RTP_DEBUG in rtpdebug.h to display the
+native error value.
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2009.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

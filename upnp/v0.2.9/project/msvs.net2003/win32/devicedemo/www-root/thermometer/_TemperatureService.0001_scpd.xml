@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <actionList>
+      <action>
+         <name>GetTemperatureStatus</name>
+         <argumentList>
+            <argument>
+               <name>RetCurrentTemperatureStatus</name>
+               <direction>out</direction>
+               <relatedStateVariable>CurrentTemperatureStatus</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>      
+      <action>
+         <name>ChangeTemperatureValue</name>
+         <argumentList>
+            <argument>
+               <name>NewTemperatureValue</name>
+               <direction>in</direction>
+               <relatedStateVariable>CurrentTemperatureTarget</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+   </actionList>
+   <serviceStateTable>      
+      <stateVariable sendEvents="yes">
+         <name>CurrentTemperatureStatus</name>
+         <dataType>ui1</dataType>
+      </stateVariable>
+      <stateVariable sendEvents="no">
+         <name>CurrentTemperatureTarget</name>
+         <dataType>ui1</dataType>
+      </stateVariable>
+   </serviceStateTable>
+</scpd>

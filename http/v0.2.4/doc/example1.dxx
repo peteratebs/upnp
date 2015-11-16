@@ -1,0 +1,91 @@
+/**
+ @name Simple GET Example
+ @memo Downloading a file using GET
+ @doc  This code demonstrates the necessary steps to connect to a
+       server and download a file using the GET command.
+
+<pre>
+#include "httpmcli.h"
+
+...
+
+HTTPManagedClient managedClient;
+unsigned success = 0;
+
+/* Create an HTTP Managed Client context; this is necessary for all
+   managed client calls * /
+if (HTTP_ManagedClientInit (
+        &managedClient,
+        "EBSnet Test Application" /* User-Agent * /,
+        "text/*"                  /* Accept (mime types) * /,
+        0                         /* KeepAlive (bool) * /,
+        0                         /* Cookie context * /,
+        0                         /* Authentication context * /,
+        0                         /* SSL context * /,
+        0                         /* SSL enabled? (bool) * /,
+        8192                      /* write buffer size * /,
+        0                         /* max connections (0 == no limit) * /,
+        0                         /* max connections per host (0 == no limit) * /
+    ) >= 0)
+{
+    HTTPManagedClientSession* session = 0;
+
+    /* A HTTPManagedClientSession is the abstraction for a SINGLE
+       HTTP request/response pair.  Thus a new session must be opened
+       for each HTTP operation (although this may not cause a new connection
+       to be established, if keep alive is used), and closed when the
+       operation has completed (though, again, this may not actually
+       close a physical network connection) * /
+
+    if (HTTP_ManagedClientStartTransaction (
+            &managedClient,
+            "www.google.com",
+            80,
+            HTTP_SESSION_TYPE_TCP,
+            1, /* blocking? * /
+            &session
+        ) >= 0)
+    {
+        HTTP_INT32 result;
+        HTTP_UINT8 buffer[1024];
+        HTTP_INT32 size = 1024;
+        HTTPResponseInfo info;
+
+        /* Once the session is open, one command may be issued; in this case
+           a GET (by calling HTTP_ManagedClientGet) * /
+        HTTP_ManagedClientGet(session, "/", 0 /* if-modified-since * /);
+
+        /* This may be called at any time after the command is issued to
+           get information about the server response; this info includes
+           the status code given, date when the request was processed,
+           file mime type information (if a file is transferred as the
+           result of a command), authentication information, etc. * /
+
+        HTTP_ManagedClientReadResponseInfo(session, &info);
+
+        do
+        {
+            /* Read data from the session * /
+            result = HTTP_ManagedClientRead(session, buffer, size);
+        }
+        while (result > 0);
+
+        if (result == 0)
+        {
+            success = 1;
+        }
+
+        /* Now we are done; close the session (see note above about sessions) * /
+        HTTP_ManagedClientCloseSession(session);
+    }
+
+    /* When all HTTP client activity is completed, the managed client context
+       may safely be destroyed * /
+    HTTP_ManagedClientDestroy(&managedClient);
+}
+
+</pre>
+
+ */
+
+ 

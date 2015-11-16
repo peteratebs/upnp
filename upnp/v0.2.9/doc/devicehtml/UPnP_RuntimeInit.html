@@ -1,0 +1,68 @@
+<html>
+<head>
+<title> EBS UPnP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+
+<H2>int <A HREF="#DOC.DOCU">UPnP_RuntimeInit</A></H2><H2>( UPnPRuntime* rt,   UPNP_UINT8* serverAddr,<BR>&nbsp;  UPNP_UINT16 serverPort,<BR>&nbsp;  UPNP_INT16 ipType,<BR>&nbsp;  UPNP_CHAR* wwwRootDir,<BR>&nbsp;  UPNP_INT16 maxConnections,<BR>&nbsp;  UPNP_INT16 maxHelperThreads )</H2><BLOCKQUOTE>Initialize a UPnPRuntime </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+Initializes the given UPnPRuntime struct, and sets up an HTTP
+server instance to receive control/event messages.  This function
+must be called before any other function in the UPnP SDK.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>rt</B> -   pointer to uninitialized UPnPRuntime struct 
+<BR><B>serverAddr</B> -   ip address to bind HTTP server to (NULL for IP_ADDR_ANY) 
+<BR><B>serverPort</B> -   port to bind HTTP server to (0 for ANY_PORT) 
+<BR><B>ipType</B> -   type of ip version used (ipv4 or ipv6), (RTP_NET_TYPE_IPV4 for v4 and RTP_NET_TYPE_IPV6 for v6) 
+<BR><B>wwwRootDir</B> -   HTTP root dir on local file system 
+<BR><B>maxConnections</B> -   the maximum limit on simultaneous HTTP server connections 
+<BR><B>maxHelperThreads</B> -   if UPNP_MULTITHREAD is defined, the max number of helper threads to spawn <BR><DT><B>Returns:</B><DD>  error code
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2005.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

@@ -1,0 +1,75 @@
+# This file evaluates the variables set on the command line and acts on them.
+# targ is set to something such as POLG68K, RTPXMSP3, etc.
+# RELENV should be N for ebsenv, Y otherwise.
+# v=v for debug, v=o for optimized.
+
+########################################################################
+targ = LINUX
+
+# set the following to "Y" for RTUPnP, "N" otherwise.
+dortupnp = "Y"
+
+
+########################################################################
+# Select the version (o)ptimzed or (dbv)debug here or pass it in on the command line
+dbv = v
+
+root    = ..
+kernel  = c:
+
+app_to_UPNP_path               =
+#source path
+lib_to_upnp_common_path      = ../../../../v0.2.5/source
+lib_to_upnp_server_path      = ../../../../v0.2.5/source/device
+lib_to_upnp_client_path      = ../../../../v0.2.5/source/controlPoint
+lib_to_examples_path         = ../../../../v0.2.5/source/examples
+lib_to_xml_path              = ../../../../../ixml/v1.2/src
+lib_to_http_path             = ../../../../../http/v0.2.3/source
+lib_to_rtptarget             = ../../../../../rtplatform/v0.4.1/source/linux
+lib_to_rtpgeneric            = ../../../../../rtplatform/v0.4.1/source/generic
+
+#include path
+lib_to_upnp_common_include   = ../../../../v0.2.5/include
+lib_to_upnp_server_include   = ../../../../v0.2.5/include/device
+lib_to_upnp_client_include   = ../../../../v0.2.5/include/controlPoint
+lib_to_xml1_include          = ../../../../../ixml/v1.2/inc
+lib_to_xml2_include          = ../../../../../ixml/v1.2/src/inc
+lib_to_http_include          = ../../../../../http/v0.2.3/include
+lib_to_rtptarget_include     = ../../../../../rtplatform/v0.4.1/include/linux
+lib_to_rtpgeneric_include    = ../../../../../rtplatform/v0.4.1/include
+
+########################################################################
+
+known = "N"
+
+ifeq ($(targ),LINUXGENERIC)
+known = "Y"
+# Set the compiler type for later conditionals
+compiler = GNUCOMPILER
+endif
+
+ifneq ($(known),"Y")
+.PHONY: error
+error:
+ifneq ($(targ),)
+	@echo Incorrect target: $(targ)
+else
+	@echo Please set the targ and v variables.
+endif
+	@echo Please edit
+endif
+
+########################################################################
+
+ifeq ($(compiler),GNUCOMPILER)
+# Set the file extensions
+obj = o
+lib = a
+exe = out
+
+ifeq ($(dbv),v)
+ccflags += -g
+ldflags += -g
+endif
+endif
+

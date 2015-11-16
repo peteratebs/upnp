@@ -1,0 +1,100 @@
+/**
+ @name POST Example
+ @memo Shows how to POST data to a server
+ @doc  This code demonstrates the necessary steps to connect to a
+       server and POST data.
+
+<pre>
+#include "httpmcli.h"
+
+...
+
+HTTPManagedClient managedClient;
+unsigned success = 0;
+
+/* Create an HTTP Managed Client context; this is necessary for all 
+   managed client calls * /
+if (HTTP_ManagedClientInit (
+        &managedClient,
+        "EBSnet Test Application" /* User-Agent * /,
+        "text/*"                  /* Accept (mime types) * /,
+        0                         /* KeepAlive (bool) * /,
+        0                         /* Cookie context * /,
+        0                         /* Authentication context * /,
+        0                         /* SSL context * /,
+        0                         /* SSL enabled? (bool) * /,
+        8192                      /* write buffer size * /,
+        0                         /* max connections (0 == no limit) * /,
+        0                         /* max connections per host (0 == no limit) * /
+    ) >= 0)
+{
+    HTTPManagedClientSession* session = 0;
+
+    /* Simple POST test * /
+       
+    if (HTTP_ManagedClientStartTransaction (
+            &managedClient,
+            "www.amazon.com",
+            80,
+            HTTP_SESSION_TYPE_TCP,
+            1, /* blocking? * /
+            &session
+        ) >= 0)
+    {
+        HTTP_INT32 result;
+        HTTP_INT8 postData[] = "url=index%3Dblended&field-keywords=keaggy&Go.x=15&Go.y=5&Go=Go";
+        HTTP_UINT8 buffer[10240];
+        HTTP_INT32 size = 10240;
+        HTTPResponseInfo info;
+        HTTP_INT32 contentLength = 62;
+
+        /* Once the session is open, one command may be issued; in this case
+           a GET (by calling HTTP_ManagedClientGet) * /
+        HTTP_ManagedClientPost (
+                session, 
+                "/exec/obidos/search-handle-form/102-1363755-4184135" /* path * /,
+                "application/x-www-form-urlencoded" /* content-type * /, 
+                &contentLength /* content-length * /
+            );
+        
+        /* write the POST data * /
+        HTTP_ManagedClientWrite (session, (HTTP_UINT8*) postData, 62);
+                        
+        /* this function must be called when all data has been written * /
+        HTTP_ManagedClientWriteDone (session);
+
+        /* This may be called at any time after the command is issued to 
+           get information about the server response; this info includes 
+           the status code given, date when the request was processed, 
+           file mime type information (if a file is transferred as the 
+           result of a command), authentication information, etc. * /
+           
+        HTTP_ManagedClientReadResponseInfo(session, &info);
+
+        do
+        {
+            /* Read data from the session * /
+            result = HTTP_ManagedClientRead(session, buffer, size);
+        }
+        while (result > 0);
+
+        if (result == 0)
+        {
+            success = 1;
+        }
+
+        /* Now we are done; close the session (see note above about sessions) * /
+        HTTP_ManagedClientCloseSession(session);
+    }
+
+    /* When all HTTP client activity is completed, the managed client context 
+       may safely be destroyed * /
+    HTTP_ManagedClientDestroy(&managedClient);
+}
+    
+
+</pre>
+
+ */
+
+ 

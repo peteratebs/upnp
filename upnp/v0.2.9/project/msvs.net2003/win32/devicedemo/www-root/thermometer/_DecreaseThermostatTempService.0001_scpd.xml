@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <actionList>
+      <action>
+         <name>GetLoadLevelStatus</name>
+         <argumentList>
+            <argument>
+               <name>RetLoadLevelStatus</name>
+               <direction>out</direction>
+               <relatedStateVariable>LowerThermostatSetting</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>      
+      <action>
+         <name>SetThermostatLowValue</name>
+         <argumentList>
+            <argument>
+               <name>NewLowValue</name>
+               <direction>in</direction>
+               <relatedStateVariable>DecreaseThermostatTarget</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+   </actionList>
+   <serviceStateTable>      
+      <stateVariable sendEvents="yes">
+         <name>LowerThermostatSetting</name>
+         <dataType>ui1</dataType>
+      </stateVariable>
+      <stateVariable sendEvents="no">
+         <name>DecreaseThermostatTarget</name>
+         <dataType>ui1</dataType>
+      </stateVariable>
+   </serviceStateTable>
+</scpd>

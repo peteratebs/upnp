@@ -1,0 +1,103 @@
+/**
+ @name Secure HTTP Example
+ @memo Shows how to use HTTPS to perform secure operations
+ @doc  The Managed Client provides the option of performing
+       HTTP transactions over a secure socket layer (SSL)
+       connection.  To use this capability, the application
+       must first create an RTPlatform SSL context and pass
+       it into HTTP_ManagedClientInit (or HTTP_ManagedClientInitMT
+       if running the managed client in threadsafe mode).
+
+       Example of initializing managed client to use SSL:
+<pre>
+if (rtp_ssl_init_context (
+        &sslContext,
+        RTP_SSL_MODE_CLIENT|RTP_SSL_MODE_SSL2|RTP_SSL_MODE_SSL3|RTP_SSL_MODE_TLS1,
+        RTP_SSL_VERIFY_NONE
+    ) < 0)
+{
+    /* handle error here * /
+}
+
+/* Create an HTTP Managed Client context; this is necessary for all
+   managed client calls * /
+if (HTTP_ManagedClientInit (
+        &managedClient,
+        "EBS Test Application"    /* User-Agent * /,
+        "text/*"                  /* Accept (mime types) * /,
+        1                         /* KeepAlive (bool) * /,
+        0                         /* Cookie context * /,
+        0                         /* Authentication context * /,
+        sslContext                /* SSL context * /,
+        1                         /* SSL enabled? (bool) * /,
+        8192                      /* write buffer size * /,
+        0                         /* max connections (0 == no limit) * /,
+        0                         /* max connections per host (0 == no limit) * /
+    ) < 0)
+{
+    /* handle error here * /
+}
+
+</pre>
+
+       It is possible to use a single SSL context to enable security
+       in multiple HTTP managed clients.
+
+       Once the managed client has been initialized, transactions
+       can be performed using secure or non-secure connections
+       depending on the session type passed into
+       \Ref{HTTP_ManagedClientStartTransaction}.  For secure
+       transactions, use HTTP_SESSION_TYPE_SECURE_TCP, for normal (non-secure)
+       transactions, use HTTP_SESSION_TYPE_TCP.
+
+       Note that when \Ref{HTTP_ManagedClientDestroy} is called, it will
+       NOT destroy the RTPlatform SSL context.  This must be done
+       separately by the application after all managed clients
+       using the SSL context have been destroyed.
+
+       Example of performing a secure transaction (assuming the above
+       steps have already been taken to initialize the SSL context and
+       managed client):
+<pre>
+if (HTTP_ManagedClientStartTransaction (
+        &managedClient,
+        "www.verisign.com",
+        0,
+        HTTP_SESSION_TYPE_SECURE_TCP,
+        1, /* blocking? * /
+        &session
+    ) >= 0)
+{
+    HTTP_UINT8 buffer[1024];
+    HTTP_INT32 size = 1024;
+    HTTP_INT32 totalSize = 0;
+    HTTPResponseInfo info;
+
+    /* Once the session is open, one command may be issued; in this case
+       a GET (by calling HTTP_ManagedClientGet) * /
+    HTTP_ManagedClientGet(session, "/", 0 /* if-modified-since * /);
+
+    /* This may be called at any time after the command is issued to
+       get information about the server response; this info includes
+       the status code given, date when the request was processed,
+       file mime type information (if a file is transferred as the
+       result of a command), authentication information, etc. * /
+
+    HTTP_ManagedClientReadResponseInfo(session, &info);
+
+    do
+    {
+        /* Read data from the session * /
+        result = HTTP_ManagedClientRead(session, buffer, size);
+        totalSize += result;
+    }
+    while (result > 0);
+
+    /* Now we are done; close the session (see note above about sessions) * /
+    HTTP_ManagedClientFinishTransaction(session);
+}
+</pre>
+
+ */
+
+

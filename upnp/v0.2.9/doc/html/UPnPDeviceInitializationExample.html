@@ -1,0 +1,139 @@
+<html>
+<head>
+<title> EBS UPnP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+
+<H2> <A HREF="#DOC.DOCU">UPnP Device Initialization Example</A></H2></H2><BLOCKQUOTE>Setting up a UPnP Device </BLOCKQUOTE>
+<A NAME="DOC.DOCU"></A>
+<BLOCKQUOTE>
+This code demonstrates in brief the necessary steps to set up a UPnP device
+for discovery, description, control, and eventing.
+
+<P><PRE>
+int main (void)
+{
+	int result;
+	IXML_Document *xmlDevice;
+	UPnPRuntime rt;
+	UPnPRootDeviceHandle rootDevice;
+
+<P>
+	// UPnP maintains a runtime structure; The first step is to
+	// initialize UPnPRuntime struct. UPnP_RuntimeInit takes a
+	// pointer to an uninitialized UPnPRuntime struct and other
+	// necessary necessary data to initialize and populate upnp
+	// the engine.
+	result = UPnP_RuntimeInit (
+			&rt,
+			0,                // serverAddr: IP_ANY_ADDR
+			0,                // serverPort: any port
+			"c:\\www-root\\", // web server root dir
+			10,               // maxConnections
+			5                 // maxHelperThreads
+		);
+
+<P>	if (result < 0)
+	{
+		return (-1);
+	}
+
+<P>	// Next, we need a UPnPDeviceRuntime; UPnP_DeviceInit takes
+	//  a pointer to an uninitialized UPnPDeviceRuntime struct
+	//  and does all necessary initialization.
+
+<P>	result = UPnP_DeviceInit (
+				&deviceRuntime,
+				&rt
+			);
+
+<P>	if (result < 0)
+	{
+		return (-1);
+	}
+
+<P>	// Load the root device description page into memory.
+	xmlDevice = ixmlLoadDocument("c:\\www-root\\device.xml");
+	if (!xmlDevice)
+	{
+		return (-1);
+	}
+
+<P>
+	result = UPnP_RegisterRootDevice (
+			&deviceRuntime,
+			"device.xml",
+			xmlDevice,
+			1,                  // auto address resolution
+			testDeviceCallback,
+			0,                  // userData for callback
+			&rootDevice,
+			1                   // advertise
+		);
+
+<P>	if (result < 0)
+	{
+		return (-1);
+	}
+
+<P>	UPnP_DeviceAdvertise(rootDevice, ANNOUNCE_FREQUENCY_SEC,
+						 REMOTE_CACHE_TIMEOUT_SEC);
+
+<P>	// start the UPnP daemon thread
+	UPnP_StartDaemon(&rt);
+
+<P>	// for polled mode, use this
+
+<P>	//while (1)
+	//{
+       // UPnP_DevicePoll(&deviceRuntime, 1000);
+	//}
+
+<P>}
+
+<P></PRE>
+</BLOCKQUOTE>
+<DL><DT><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2005.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

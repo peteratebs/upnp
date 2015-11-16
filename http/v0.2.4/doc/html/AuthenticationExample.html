@@ -1,0 +1,188 @@
+<html>
+<head>
+<title> EBSnet HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black; 
+	background-color: white; 
+	background-image: URL("background_small.jpeg"); 
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsnetinc.com/' target='_blank'><img border=0 src='ebsnet.gif' align=right></a>
+
+<H2> <A HREF="#DOC.DOCU">Authentication Example</A></H2></H2><BLOCKQUOTE>Downloading a file using authentication </BLOCKQUOTE>
+<A NAME="DOC.DOCU"></A>
+<BLOCKQUOTE>
+This code demonstrates the necessary steps to connect to a
+server and use GET to download a file from a server that
+requires authentication.
+
+<P><PRE>
+#include "httpmcli.h"
+#include "httpauth.h"
+
+<P>...
+
+<P>HTTPAuthContext authContext;
+HTTPManagedClient managedClient;
+unsigned success = 0;
+
+<P>if (HTTP_AuthContextInit(&authContext) < 0)
+{
+    return (0);
+}
+
+<P>HTTP_SetAuthorization (
+        &authContext,
+        "66.189.87.81",
+        80,
+        "/restricted/",
+        "tony",
+        "______", /* password removed for security reasons * /
+        RTP_TIMEOUT_INFINITE
+    );
+
+<P>/* Create an HTTP Managed Client context; this is necessary for all 
+   managed client calls * /
+if (HTTP_ManagedClientInit (
+        &managedClient,
+        "EBSnet Test Application" /* User-Agent * /,
+        "text/*"                  /* Accept (mime types) * /,
+        0                         /* KeepAlive (bool) * /,
+        0                         /* Cookie context * /,
+        &authContext              /* Authentication context * /,
+        0                         /* SSL context * /,
+        0                         /* SSL enabled? (bool) * /,
+        8192                      /* write buffer size * /,
+        0                         /* max connections (0 == no limit) * /,
+        0                         /* max connections per host (0 == no limit) * /
+    ) >= 0)
+{
+    HTTPManagedClientSession* session = 0;
+
+<P>    /* Simple GET test with authentication * /
+
+<P>    if (HTTP_ManagedClientStartTransaction (
+            &managedClient,
+            "66.189.87.81",
+            80,
+            HTTP_SESSION_TYPE_TCP,
+            1, /* blocking? * /
+            &session
+        ) >= 0)
+    {
+        HTTP_INT32 result;
+        HTTP_UINT8 buffer[1024];
+        HTTP_INT32 size = 1024;
+        HTTPResponseInfo info;
+
+<P>        /* Once the session is open, one command may be issued; in this case
+           a GET (by calling HTTP_ManagedClientGet) * /
+        HTTP_ManagedClientGet(session, "/restricted/", 0 /* if-modified-since * /);
+
+<P>        /* This may be called at any time after the command is issued to 
+           get information about the server response; this info includes 
+           the status code given, date when the request was processed, 
+           file mime type information (if a file is transferred as the 
+           result of a command), authentication information, etc. * /
+
+<P>        HTTP_ManagedClientReadResponseInfo(session, &info);
+
+<P>        /* If the first attempt fails, it may be because the server wants to
+           use a different authentication scheme or different options for 
+           that scheme.  In this case, the initial rejection doesn't mean
+           the user/password are invalid.  This is what an authStatus value of
+           HTTP_AUTH_STATUS_RETRY_REQUEST means. * /
+
+<P>        if (info.authStatus == HTTP_AUTH_STATUS_RETRY_REQUEST)
+        {
+            HTTP_ManagedClientCloseSession(session);
+
+<P>            if (HTTP_ManagedClientStartTransaction (
+                    &managedClient,
+                    "66.189.87.81",
+                    80,
+                    HTTP_SESSION_TYPE_TCP,
+                    1, /* blocking? * /
+                    &session
+                ) >= 0)
+            {
+                HTTP_ManagedClientGet(session, "/restricted/", 0 /* if-modified-since * /);         
+                HTTP_ManagedClientReadResponseInfo(session, &info);
+            }
+            else
+            {
+                session = 0;
+            }
+        }
+
+<P>        if (session)
+        {
+            if (info.status == HTTP_STATUS_200_OK)
+            {
+                do
+                {
+                    /* Read data from the session * /
+                    result = HTTP_ManagedClientRead(session, buffer, size);
+                }
+                while (result > 0);
+
+<P>                if (result == 0)
+                {
+                    success = 1;
+                }
+            }
+
+<P>            /* Now we are done; close the session (see note above about sessions) * /
+            HTTP_ManagedClientCloseSession(session);
+        }
+    }
+
+<P>    /* When all HTTP client activity is completed, the managed client context 
+       may safely be destroyed * /
+    HTTP_ManagedClientDestroy(&managedClient);
+}
+
+<P>HTTP_AuthContextDestroy(&authContext);
+
+<P></PRE>
+</BLOCKQUOTE>
+<DL><DT><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBSnet Inc, 1993-2004.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBSnet, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsnetinc.com' target=_blank>www.ebsnetinc.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

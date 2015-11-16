@@ -1,0 +1,66 @@
+====================================================================
+Changes between version 0.4.2 versus version 0.4.1
+
+Updated terminal IO functions for linux.
+Support is included for 64 bit types but it is disabled in rtptypes.h
+
+Added few more diagnostics.
+
+====================================================================
+Changes between in version 0.4.0 versus version 0.4.1
+
+Date: July 14, 2006
+1. In file rtpfile.h
+   Added function prototype
+   char rtp_file_get_path_seperator(void);
+
+2. In include/linux
+   Added file rtpprint.c
+
+3. In source/generic/rtpstr.c
+   modified function rtp_memcmp ()
+
+4. In source/generic/rtpstr.c
+   modified function rtp_memcpy ()
+
+5. In source/generic/rtpstr.c
+   modified function rtp_memset ()
+
+6. In source/template/rtpfile.c
+   Added function defination
+   char rtp_file_get_path_seperator(void)
+   {
+   }
+
+7. In source/win32/rtpfile.c
+   Added function defination
+   char rtp_file_get_path_seperator(void)
+   {
+   }
+
+8. In source/win32/rtpnet.c
+   Added function body for
+   char rtp_net_getpeername ()
+
+9. In source/win32/rtpnet.c
+   In function rtp_net_gethostbyname ()
+   removed use of gethostbyname()
+
+10. In source/linux/rtpfile.c
+   Added function defination
+   char rtp_file_get_path_seperator(void)
+   {
+   }
+
+11. In source/linux/rtpnet.c
+   Modified to support ipv4 and ipv6 stacks.
+
+12. In source/linux/rtpsignl.c
+    Implement semaphore support for linux.
+
+13. In source/linux/rtpthrd.c
+    updated functions for thread handling in linux
+
+14. In file rtp.h, revised rtplatform version to:
+    #define RTPLATFORM_VERSION       0041  /* 0.4.1 */
+====================================================================

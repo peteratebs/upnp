@@ -1,0 +1,1106 @@
+
+ ==<SSDP_SendAlive SEND (t=      31) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=      31) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=      31) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=      31) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=      31) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=      31) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER READ (t=    1170) (c= 219) >== 
+GET /device.xml HTTP/1.1
+Accept: text/xml, application/xml
+User-Agent: Mozilla/4.0 (compatible; UPnP/1.0; Windows NT/5.1)
+Host: 192.168.1.19:5010
+Connection: Keep-Alive
+Cache-Control: no-cache
+Pragma: no-cache
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=    1170) (c=1452) >== 
+HTTP/1.1 200 OK
+Date: Thu, 15 Apr 2010 20:10:02 GMT
+Server: RT-Platform/1.0 UPnP/1.0 EBS Mi
+Connection: keep-alive
+Content-Type: text/xml; charset="utf-8"
+Content-Length: 1471
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+<specVersion>
+<major>1</major>
+<minor>0</minor>
+</specVersion>
+<URLBase>http://192.168.1.19:5010/</URLBase>
+<device>
+<deviceType>urn:schemas-upnp-org:device:BinaryLight:1</deviceType>
+<friendlyName>EBS UPnP Light</friendlyName>
+<manufacturer>EBS Inc</manufacturer>
+<manufacturerURL>http://www.ebsembeddedsoftware.com</manufacturerURL>
+<modelDescription>UPnP Test Bulb</modelDescription>
+<modelName>EBS Light Bulb Demo</modelName>
+<modelNumber>XPC-L1</modelNumber>
+<modelURL>http://www.ebsembeddedsoftware.com</modelURL>
+<UDN>uuid:9de82eea-b4a2-41ae-b182-058befd73af8</UDN>
+<iconList>
+<icon>
+<mimetype>image/png</mimetype>
+<width>32</width>
+<height>32</height>
+<depth>8</depth>
+<url>/icon.png</url>
+</icon>
+</iconList>
+<serviceList>
+<service>
+<serviceType>urn:schemas-upnp-org:service:SwitchPower:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:SwitchPower.0001</serviceId>
+<SCPDURL>_SwitchPower.0001_scpd.xml</SCPDURL>
+<controlURL>_SwitchPower.0001_control</controlURL>
+<eventSubURL>_SwitchPower.0001_event</eventSubURL>
+</service>
+<service>
+<serviceType>urn:schemas-upnp-org:service:DimmingService:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:DimmingService.0001</serviceId
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=    1170) (c= 203) >== 
+>
+<SCPDURL>_DimmingService.0001_scpd.xml</SCPDURL>
+<controlURL>_DimmingService.0001_control</controlURL>
+<eventSubURL>_DimmingService.0001_event</eventSubURL>
+</service>
+</serviceList>
+</device>
+</root>
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=    5787) (c= 101) >== 
+M-SEARCH * HTTP/1.1
+MX: 5
+HOST: 239.255.255.250:1900
+MAN: "ssdp:discover"
+ST: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=    5787) (c= 101) >== 
+M-SEARCH * HTTP/1.1
+MX: 5
+HOST: 239.255.255.250:1900
+MAN: "ssdp:discover"
+ST: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=    9874) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=    9874) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=    9874) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=    9874) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=    9874) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=    9874) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER READ (t=    9890) (c=  72) >== 
+GET /device.xml HTTP/1.1
+HOST: 192.168.1.19:5010
+Content-Length: 0
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=    9890) (c=1452) >== 
+HTTP/1.1 200 OK
+Date: Thu, 15 Apr 2010 20:10:11 GMT
+Server: RT-Platform/1.0 UPnP/1.0 EBS Mi
+Connection: close
+Content-Type: text/xml; charset="utf-8"
+Content-Length: 1471
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+<specVersion>
+<major>1</major>
+<minor>0</minor>
+</specVersion>
+<URLBase>http://192.168.1.19:5010/</URLBase>
+<device>
+<deviceType>urn:schemas-upnp-org:device:BinaryLight:1</deviceType>
+<friendlyName>EBS UPnP Light</friendlyName>
+<manufacturer>EBS Inc</manufacturer>
+<manufacturerURL>http://www.ebsembeddedsoftware.com</manufacturerURL>
+<modelDescription>UPnP Test Bulb</modelDescription>
+<modelName>EBS Light Bulb Demo</modelName>
+<modelNumber>XPC-L1</modelNumber>
+<modelURL>http://www.ebsembeddedsoftware.com</modelURL>
+<UDN>uuid:9de82eea-b4a2-41ae-b182-058befd73af8</UDN>
+<iconList>
+<icon>
+<mimetype>image/png</mimetype>
+<width>32</width>
+<height>32</height>
+<depth>8</depth>
+<url>/icon.png</url>
+</icon>
+</iconList>
+<serviceList>
+<service>
+<serviceType>urn:schemas-upnp-org:service:SwitchPower:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:SwitchPower.0001</serviceId>
+<SCPDURL>_SwitchPower.0001_scpd.xml</SCPDURL>
+<controlURL>_SwitchPower.0001_control</controlURL>
+<eventSubURL>_SwitchPower.0001_event</eventSubURL>
+</service>
+<service>
+<serviceType>urn:schemas-upnp-org:service:DimmingService:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:DimmingService.0001</serviceId>
+<SC
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=    9890) (c= 198) >== 
+PDURL>_DimmingService.0001_scpd.xml</SCPDURL>
+<controlURL>_DimmingService.0001_control</controlURL>
+<eventSubURL>_DimmingService.0001_event</eventSubURL>
+</service>
+</serviceList>
+</device>
+</root>
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER READ (t=    9906) (c=  88) >== 
+GET /_SwitchPower.0001_scpd.xml HTTP/1.1
+HOST: 192.168.1.19:5010
+Content-Length: 0
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER READ (t=    9906) (c=  91) >== 
+GET /_DimmingService.0001_scpd.xml HTTP/1.1
+HOST: 192.168.1.19:5010
+Content-Length: 0
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=    9952) (c=1309) >== 
+HTTP/1.1 200 OK
+Date: Thu, 15 Apr 2010 20:10:11 GMT
+Server: RT-Platform/1.0 UPnP/1.0 EBS Mi
+Connection: close
+Content-Type: text/xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <actionList>
+      <action>
+         <name>GetStatus</name>
+         <argumentList>
+            <argument>
+               <name>ResultStatus</name>
+               <direction>out</direction>
+               <relatedStateVariable>Status</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+      <action>
+         <name>SetTarget</name>
+         <argumentList>
+            <argument>
+               <name>newTargetValue</name>
+               <direction>in</direction>
+               <relatedStateVariable>Target</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+   </actionList>
+   <serviceStateTable>
+      <stateVariable sendEvents="yes">
+         <name>Status</name>
+         <dataType>boolean</dataType>
+      </stateVariable>
+      <stateVariable sendEvents="no">
+         <name>Target</name>
+         <dataType>boolean</dataType>
+      </stateVariable>
+   </serviceStateTable>
+</scpd>
+ ==<HTTP SERVER WRITE (t=    9952) (c=1452) >== 
+
+ ==<===========================================>==
+HTTP/1.1 200 OK
+Date: Thu, 15 Apr 2010 20:10:11 GMT
+Server: RT-Platform/1.0 UPnP/1.0 EBS Mi
+Connection: close
+Content-Type: text/xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <actionList>
+      <action>
+         <name>GetLoadLevelStatus</name>
+         <argumentList>
+            <argument>
+               <name>RetLoadLevelStatus</name>
+               <direction>out</direction>
+               <relatedStateVariable>LoadLevelStatus</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+      <action>
+         <name>GetMinLevel</name>
+         <argumentList>
+            <argument>
+               <name>MinLevel</name>
+               <direction>out</direction>
+               <relatedStateVariable>MinLevel</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+      <action>
+         <name>SetLoadLevelTarget</name>
+         <argumentList>
+            <argument>
+               <name>NewLoadLevelTarget</name>
+               <direction>in</direction>
+               <relatedStateVariable>LoadLevelTarget</relatedStateVariable>
+            </argument>
+         </argumentList>
+      </action>
+   </actionList>
+   <serviceStateTable>
+      <stateVariable sendEvents="no">
+         <name>MinLevel</name>
+    
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=    9952) (c= 624) >== 
+     <dataType>ui1</dataType>
+      </stateVariable>
+      <stateVariable sendEvents="yes">
+         <name>LoadLevelStatus</name>
+         <dataType>ui1</dataType>
+         <allowedValueRange>
+            <minimum>0</minimum>
+            <maximum>100</maximum>
+         </allowedValueRange>
+      </stateVariable>
+      <stateVariable sendEvents="no">
+         <name>LoadLevelTarget</name>
+         <dataType>ui1</dataType>
+         <allowedValueRange>
+            <minimum>0</minimum>
+            <maximum>100</maximum>
+         </allowedValueRange>
+      </stateVariable>
+   </serviceStateTable>
+</scpd>
+ ==<===========================================>==
+
+ ==<SSDPSendResponse SEND (t=   10623) (c= 222) >== 
+HTTP/1.1 200 OK
+LOCATION: http://192.168.1.19:5010/device.xml
+EXT: 
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+CACHE-CONTROL: max-age=1800
+ST: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDPSendResponse SEND (t=   10623) (c= 222) >== 
+HTTP/1.1 200 OK
+LOCATION: http://192.168.1.19:5010/device.xml
+EXT: 
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+CACHE-CONTROL: max-age=1800
+ST: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER READ (t=   19718) (c= 547) >== 
+POST /_SwitchPower.0001_control HTTP/1.1
+HOST: 192.168.1.19:5010
+SOAPACTION: "urn:schemas-upnp-org:service:SwitchPower:1#SetTarget"
+CONTENT-TYPE: text/xml ; charset="utf-8"
+Content-Length: 347
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <u:SetTarget xmlns:u="urn:schemas-upnp-org:service:SwitchPower:1">
+         <newTargetValue>1</newTargetValue>
+      </u:SetTarget>
+   </s:Body>
+</s:Envelope>
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=   19718) (c= 436) >== 
+HTTP/1.1 200 OK
+Date: Thu, 15 Apr 2010 20:10:21 GMT
+Server: RT-Platform/1.0 UPnP/1.0 EBS Mi
+Connection: close
+Ext: 
+Content-Type: text/xml; charset="utf-8"
+Content-Length: 251
+
+<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><u:SetTargetResponse xmlns:u="urn:schemas-upnp-org:service:SwitchPower:1"></u:SetTargetResponse>
+</s:Body></s:Envelope>
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   19874) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   19874) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   19874) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   19874) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   19874) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   19874) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   29889) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   29889) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   29889) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   29889) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   29889) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   29889) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<HTTP SERVER READ (t=   31746) (c= 592) >== 
+POST /_DimmingService.0001_control HTTP/1.1
+HOST: 192.168.1.19:5010
+SOAPACTION: "urn:schemas-upnp-org:service:DimmingService:1#SetLoadLevelTarget"
+CONTENT-TYPE: text/xml ; charset="utf-8"
+Content-Length: 377
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <u:SetLoadLevelTarget xmlns:u="urn:schemas-upnp-org:service:DimmingService:1">
+         <NewLoadLevelTarget>30</NewLoadLevelTarget>
+      </u:SetLoadLevelTarget>
+   </s:Body>
+</s:Envelope>
+ ==<===========================================>==
+
+ ==<HTTP SERVER WRITE (t=   31761) (c= 457) >== 
+HTTP/1.1 200 OK
+Date: Thu, 15 Apr 2010 20:10:33 GMT
+Server: RT-Platform/1.0 UPnP/1.0 EBS Mi
+Connection: close
+Ext: 
+Content-Type: text/xml; charset="utf-8"
+Content-Length: 272
+
+<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><u:SetLoadLevelTargetResponse xmlns:u="urn:schemas-upnp-org:service:DimmingService:1"></u:SetLoadLevelTargetResponse>
+</s:Body></s:Envelope>
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   39873) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   39873) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   39873) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   39873) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   39873) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   39873) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   49889) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   49889) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   49889) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   49889) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   49889) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   49889) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   59873) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   59873) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   59873) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   59873) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   59873) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   59873) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   69904) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   69904) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendAlive SEND (t=   69904) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   69904) (c= 279) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+CACHE-CONTROL: max-age=1800
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   69904) (c= 288) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+CACHE-CONTROL: max-age=1800
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   69904) (c= 331) >== 
+NOTIFY * HTTP/1.1
+LOCATION: http://192.168.1.19:5010/device.xml
+HOST: 239.255.255.250:1900
+SERVER: RTPlatform/1.0, UPnP/1.0, EBS UPnPSDK/2.9
+NTS: ssdp:alive
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::urn:schemas-upnp-org:device:BinaryLight:1
+CACHE-CONTROL: max-age=1800
+NT: urn:schemas-upnp-org:device:BinaryLight:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendByeBye SEND (t=   74459) (c= 153) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   74459) (c= 153) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8::upnp:rootdevice
+NT: upnp:rootdevice
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendByeBye SEND (t=   74459) (c= 162) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendByeBye SEND (t=   74459) (c= 162) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   74459) (c= 162) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   74459) (c= 162) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+NT: uuid:9de82eea-b4a2-41ae-b182-058befd73af8
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendByeBye SEND (t=   74459) (c= 205) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: urn:upnp-org:serviceId:SwitchPower.0001::urn:schemas-upnp-org:service:SwitchPower:1
+NT: urn:schemas-upnp-org:service:SwitchPower:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   74459) (c= 205) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: urn:upnp-org:serviceId:SwitchPower.0001::urn:schemas-upnp-org:service:SwitchPower:1
+NT: urn:schemas-upnp-org:service:SwitchPower:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_SendByeBye SEND (t=   74459) (c= 214) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: urn:upnp-org:serviceId:DimmingService.0001::urn:schemas-upnp-org:service:DimmingService:1
+NT: urn:schemas-upnp-org:service:DimmingService:1
+
+
+ ==<===========================================>==
+
+ ==<SSDP_McastRead Recv (t=   74459) (c= 214) >== 
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+NTS: ssdp:byebye
+USN: urn:upnp-org:serviceId:DimmingService.0001::urn:schemas-upnp-org:service:DimmingService:1
+NT: urn:schemas-upnp-org:service:DimmingService:1
+
+
+ ==<===========================================>==

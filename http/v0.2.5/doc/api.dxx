@@ -1,0 +1,23 @@
+/**
+ @name API_XXX
+ @memo The API
+*/
+
+//@{
+	/** @name APIinline */
+		/** @name HTTP Managed Client Core Module */
+		//@{
+			//@Include: ../source/httpmcli.c
+		//@}
+
+		/** @name Basic and Digest Authentication Module */
+		//@{
+
+			//@Include: ../source/httpauth.c
+		//@}
+
+		/** @name Client-side Cookies Module */
+		//@{
+			//@Include: ../source/hcookie.c
+		//@}
+//@}

@@ -1,0 +1,68 @@
+<html>
+<head>
+<title> EBS Runtime Platform Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=800>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsembeddedsoftware.com/' target='_blank'><img border=0 src='ebs.gif' align=right></a>
+
+<H2>void* <A HREF="#DOC.DOCU">rtp_gui_list_execute_item</A></H2><H2>(void* vplist)</H2><BLOCKQUOTE>Display the content contained in a list or menu object. And retrieve user input. </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>Displays the items added to the object by calls to rtp_gui_list_add_item() in its various forms
+and asks the user to select a choice. <br>
+rtp_gui_list_execute() uses the style, indent and isgreyed attribute to format the lists and to process
+the input with sub-menu support. If all options are greyed, like in a help screen or a status screen,
+a "Press Return" prompt is provided.<br>
+The generic version of rtp_gui_list_execute() is implemented using Rtplatfrom terminal IO primitives.
+If a GUI is available this function can be re-implemented in the target specific subdirectory using the GUI's native API.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>vplist</B> -   Handle returned from <!1><A HREF="rtp_gui_list_init.html">rtp_gui_list_init</A>() <BR><DT><B>Returns:</B><DD>  A handle to the item in the list. <br> See also rtp_gui_list_execute_int(), and rtp_gui_list_execute_void().
+<BR><DT><B>Preconditions:</B><DD>  rtp_gui_list_init must be called first, rtp_gui_list_add_item() or rtp_gui_list_add_int_item() must
+have been called one or more times
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2009.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

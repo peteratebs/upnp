@@ -1,0 +1,129 @@
+<html>
+<head>
+<title> EBS UPnP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+
+<H2> <A HREF="#DOC.DOCU">Discovery/SSDP</A></H2></H2>
+<HR>
+<DL>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_ServerInit"></A>
+<A HREF=SSDP_ServerInit.html><B>SSDP_ServerInit</B></A><DD><I>SSDP server initialization routine. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_ServerAddToSelectList"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_ServerAddToSelectList</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_ServerProcessState"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_ServerProcessState</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_ServerDestroy"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_ServerDestroy</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SendNotify"></A>
+<A HREF=SSDP_SendNotify.html><B>SSDP_SendNotify</B></A><DD><I>Send a SSDP notification for the device or service. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SendResponse"></A>
+<A HREF=SSDP_SendResponse.html><B>SSDP_SendResponse</B></A><DD><I>Deliver a responce to SSDP discovery request.</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="_SSDP_ProcessOneRequest"></A>
+<A HREF=_SSDP_ProcessOneRequest.html><B>_SSDP_ProcessOneRequest</B></A><DD><I>Process an incoming SSDP discovery request. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_ParseRequest"></A>
+<A HREF=SSDP_ParseRequest.html><B>SSDP_ParseRequest</B></A><DD><I>Extract SSDP request. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_McastRead"></A>
+<A HREF=SSDP_McastRead.html><B>SSDP_McastRead</B></A><DD><I>Reads all messages posted to the multicast address</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="_SSDP_ReadMSearchHeader"></A>
+<A HREF=_SSDP_ReadMSearchHeader.html><B>_SSDP_ReadMSearchHeader</B></A><DD><I>Extracts MX and St headers from a SSDP request</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="_SSDP_ReadNotifyHeader"></A>
+<A HREF=_SSDP_ReadNotifyHeader.html><B>_SSDP_ReadNotifyHeader</B></A><DD><I>Extracts MX and St headers from a SSDP request</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_QueueSearchResponse"></A>
+<A HREF=SSDP_QueueSearchResponse.html><B>SSDP_QueueSearchResponse</B></A><DD><I>Queues a response to the response list based on its scheduled delivery time.</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_CheckPendingResponses"></A>
+<A HREF=SSDP_CheckPendingResponses.html><B>SSDP_CheckPendingResponses</B></A><DD><I>Delivers responses scheduled for delivery. </I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_ProcessError"></A>
+<A HREF=SSDP_ProcessError.html><B>SSDP_ProcessError</B></A><DD><I>Process SSDP Errors</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_RandMax"></A>
+<A HREF=SSDP_RandMax.html><B>SSDP_RandMax</B></A><DD><I>generates a random number between 0 and mxLimit</I>
+<DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SearchInit"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_SearchInit</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SearchDestroy"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_SearchDestroy</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SearchExecute"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_SearchExecute</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SearchAddToSelectList"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_SearchAddToSelectList</B></A><DT>
+
+<IMG ALT="o" BORDER=0 SRC=icon1.gif><A NAME="SSDP_SearchProcessState"></A>
+<A HREF=DiscoverySSDP.html><B>SSDP_SearchProcessState</B></A></DL>
+<A NAME="DOC.DOCU"></A>
+<BLOCKQUOTE>These functions are <b>not</b> at the API level and should not be called from
+code outside the UPnP library. </BLOCKQUOTE>
+<DL><DT><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2005.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

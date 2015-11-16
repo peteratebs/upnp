@@ -1,0 +1,201 @@
+/**
+ @name Multiple simultaneous GET Example
+ @memo Downloading multiple files simultaneously using the GET method
+ @doc  This code demonstrates the necessary steps to connect to a
+       server and download files using the GET command.
+
+<pre>
+#include "httpmcli.h"
+
+...
+
+#define NUM_SESSIONS 3
+
+    HTTPManagedClient managedClient;
+    unsigned success = 0;
+
+    /* Create an HTTP Managed Client context; this is necessary for all
+       managed client calls * /
+    if (HTTP_ManagedClientInit (
+            &managedClient,
+            "EBSnet Test Application" /* User-Agent * /,
+            "text/*"                  /* Accept (mime types) * /,
+            0                         /* KeepAlive (bool) * /,
+            0                         /* Cookie context * /,
+            0                         /* Authentication context * /,
+            0                         /* SSL context * /,
+            0                         /* SSL enabled? (bool) * /,
+            8192                      /* write buffer size * /,
+            0                         /* max connections (0 == no limit) * /,
+            0                         /* max connections per host (0 == no limit) * /
+        ) >= 0)
+    {
+        int n, i;
+        int sessionState[NUM_SESSIONS];
+        HTTPManagedClientSession* writeList[NUM_SESSIONS];
+        HTTPManagedClientSession* readList[NUM_SESSIONS];
+        HTTPManagedClientSession* errorList[NUM_SESSIONS];
+        HTTP_INT16 numWrite;
+        HTTP_INT16 numRead;
+        HTTP_INT16 numError;
+        HTTPManagedClientSession* session[NUM_SESSIONS];
+        HTTP_INT32 result;
+        HTTP_UINT8 buffer[1024];
+        HTTP_INT32 size = 1024;
+        HTTPResponseInfo info;
+        HTTP_CHAR* servers[NUM_SESSIONS] = {
+                "www.google.com",
+                "news.google.com",
+                "images.google.com"
+            };
+        unsigned done = 0;
+
+        /* A HTTPManagedClientSession is the abstraction for a SINGLE
+           HTTP request/response pair.  Thus a new session must be opened
+           for each HTTP operation (although this may not cause a new connection
+           to be established, if keep alive is used), and closed when the
+           operation has completed (though, again, this may not actually
+           close a physical network connection) * /
+
+        for (n = 0; n < NUM_SESSIONS; n++)
+        {
+            if (HTTP_ManagedClientStartTransaction (
+                    &managedClient,
+                    servers[n],
+                    80,
+                    HTTP_SESSION_TYPE_TCP,
+                    0, /* blocking? * /
+                    &session[n]
+                ) < 0)
+            {
+                for (; n > 0; n--)
+                {
+                    HTTP_ManagedClientCloseSession(session[n-1]);
+                }
+                break;
+            }
+
+            sessionState[n] = 0;
+        }
+
+        if (n > 0)
+        {
+            success = 1;
+
+            while (!done)
+            {
+                numRead = 0;
+                numWrite = 0;
+                numError = 0;
+
+                done = 1;
+
+                for (n = 0; n < NUM_SESSIONS; n++)
+                {
+                    errorList[numError++] = session[n];
+
+                    switch (sessionState[n])
+                    {
+                        case 0: /* waiting for connect * /
+                            writeList[numWrite++] = session[n];
+                            done = 0;
+                            break;
+
+                        case 1: /* waiting for response * /
+                        case 2: /* waiting for data * /
+                            readList[numRead++] = session[n];
+                            done = 0;
+                            break;
+                    }
+                }
+
+                if (done)
+                {
+                    break;
+                }
+
+                if (HTTP_ManagedClientSelect (
+                        writeList, &numWrite,
+                        readList,  &numRead,
+                        errorList, &numError,
+                        RTP_TIMEOUT_INFINITE
+                    ) < 0)
+                {
+                    success = 0;
+                    break;
+                }
+
+                for (n = 0; n < NUM_SESSIONS; n++)
+                {
+                    switch (sessionState[n])
+                    {
+                        case 0: /* waiting for connect * /
+                            for (i = 0; i < numWrite; i++)
+                            {
+                                if (writeList[i] == session[n])
+                                {
+                                    printf("\nSession %d connected; sending request...", n);
+                                    if (HTTP_ManagedClientGet(session[n], "/", 0 /* if-modified-since * /) >= 0)
+                                    {
+                                        printf("request sent");
+                                    }
+                                    else
+                                    {
+                                        printf("request failed");
+                                    }
+
+                                    sessionState[n] = 1; /* set state to reading response * /
+                                    break;
+                                }
+                            }
+                            break;
+
+                        case 1: /* waiting for response * /
+                            for (i = 0; i < numRead; i++)
+                            {
+                                if (readList[i] == session[n])
+                                {
+                                    HTTP_ManagedClientReadResponseInfo(session[n], &info);
+                                    sessionState[n] = 2; /* set state to reading data * /
+                                    break;
+                                }
+                            }
+                            break;
+
+                        case 2: /* waiting for data * /
+                            for (i = 0; i < numRead; i++)
+                            {
+                                if (readList[i] == session[n])
+                                {
+                                    result = HTTP_ManagedClientRead(session[n], buffer, size);
+                                    if (result <= 0)
+                                    {
+                                        sessionState[n] = 3; /* set state to done * /
+                                        if (result < 0)
+                                        {
+                                            success = 0;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+
+            /* close the sessions * /
+            for (n = 0; n < NUM_SESSIONS; n++)
+            {
+                HTTP_ManagedClientCloseSession(session[n]);
+            }
+        }
+
+        /* When all HTTP client activity is completed, the managed client context
+           may safely be destroyed * /
+        HTTP_ManagedClientDestroy(&managedClient);
+    }
+
+</pre>
+
+ */

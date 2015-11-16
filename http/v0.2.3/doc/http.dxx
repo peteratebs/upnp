@@ -1,0 +1,41 @@
+/**@name EBS HTTP
+ <center>
+ Embedded HTTP Library version 0.1 <br>
+ <br>
+ </center>
+ */
+//@{
+	//@Include: intro.dxx
+	//@Include: example7.dxx
+	//@Include: example8.dxx
+    //@Include: example1.dxx
+	//@Include: example2.dxx
+	//@Include: example3.dxx
+	//@Include: example4.dxx
+	//@Include: example5.dxx
+	//@Include: example6.dxx
+	/** @name API Reference Manual */
+	//@{
+		/** @name HTTP Managed Server Module */
+		//@{
+			//@Include: ../source/httpsrv.c
+		//@}
+
+		/** @name HTTP Managed Client Core Module */
+		//@{
+			//@Include: ../source/httpmcli.c
+		//@}
+
+		/** @name Basic and Digest Authentication Module */
+		//@{
+
+			//@Include: ../source/httpauth.c
+		//@}
+
+		/** @name Client-side Cookies Module */
+		//@{
+			//@Include: ../source/hcookie.c
+		//@}
+	//@}
+
+//@}

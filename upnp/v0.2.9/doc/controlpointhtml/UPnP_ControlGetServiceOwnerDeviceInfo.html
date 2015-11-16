@@ -1,0 +1,73 @@
+<html>
+<head>
+<title> EBS UPnP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+
+<H2>int <A HREF="#DOC.DOCU">UPnP_ControlGetServiceOwnerDeviceInfo</A></H2><H2>( UPnPControlDeviceHandle handle,<BR>&nbsp;  UPNP_CHAR* serviceId,<BR>&nbsp;  UPnPControlDeviceInfo* info )</H2><BLOCKQUOTE>Get information for the parent device of a service </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+Populates the fields of the specified UPnPControlDeviceInfo
+structure with various information about the parent device of the
+given service.  By contrast, <!1><A HREF="UPnP_ControlGetDeviceInfo.html">UPnP_ControlGetDeviceInfo</A> gets
+information about the root device ONLY.  This function is useful for
+gathering information about embedded UPnP devices.
+
+<P>Generates:
+(no events)
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>handle</B> -   handle returned by
+<!1><A HREF="UPnP_ControlOpenDevice.html">UPnP_ControlOpenDevice</A> 
+<BR><B>serviceId</B> -   serviceId of service for whose
+parent to get info 
+<BR><B>info</B> -   UPnPControlDeviceInfo to
+populate <BR><DT><B>Returns:</B><DD>  error code
+<BR><DT><B>See Also:</B><DD><!1><A HREF="UPnP_ControlGetDeviceInfo.html">UPnP_ControlGetDeviceInfo</A>, <!1><A HREF="UPnP_ControlGetServiceType.html">UPnP_ControlGetServiceType</A>
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2005.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

@@ -1,0 +1,343 @@
+
+ ==<_HTTP_WriteUDP WRITE (t=    6364) (c= 158) >== 
+M-SEARCH * HTTP/1.1
+Host: 239.255.255.250:1900
+User-Agent: EBS Control Point
+MX: 2
+Man: "ssdp:discover"
+ST: urn:schemas-upnp-org:device:MediaServer:1
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ManagedClientReadFrom READ (t=    7269) (c= 444) >== 
+HTTP/1.1 200 OK
+ST:urn:schemas-upnp-org:device:MediaServer:1
+USN:uuid:de02620e-abd9-4026-9857-e36ab4531f1c::urn:schemas-upnp-org:device:MediaServer:1
+Location:http://127.0.0.1:2869/upnphost/udhisapi.dll?content=uuid:de02620e-abd9-4026-9857-e36ab4531f1c
+OPT:"http://schemas.upnp.org/upnp/1/0/"; ns=01
+01-NLS:e10f95b6b44c2bac98c495b5c3bd1ba7
+Cache-Control:max-age=900
+Server:Microsoft-Windows-NT/5.1 UPnP/1.0 UPnP-Device-Host/1.0
+Ext:
+
+
+ ==<===========================================>==
+
+ ==<_HTTP_ClientWrite WRITE (t=   32495) (c= 161) >== 
+GET /upnphost/udhisapi.dll?content=uuid:de02620e-abd9-4026-9857-e36ab4531f1c HTTP/1.1
+Host: 127.0.0.1:2869
+User-Agent: EBS Control Point
+Connection: close
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ClientRead READ (t=   32495) (c=1024) >== 
+HTTP/1.1 200 OK
+Content-Length: 5808
+Content-Type: text/xml; charset="utf-8"
+Server: Microsoft-Windows-NT/5.1 UPnP/1.0 UPnP-Device-Host/1.0 Microsoft-HTTPAPI/2.0
+Date: Thu, 15 Apr 2010 18:57:35 GMT
+Connection: close
+
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+	<specVersion>
+		<major>1</major>
+		<minor>0</minor>
+	</specVersion>
+	<device>
+		<UDN>uuid:de02620e-abd9-4026-9857-e36ab4531f1c</UDN>
+		<friendlyName>KRISHNA-PC: EBS_1:</friendlyName>
+		<deviceType>urn:schemas-upnp-org:device:MediaServer:1</deviceType>
+		<manufacturer>Microsoft Corporation</manufacturer>
+		<manufacturerURL>http://www.microsoft.com</manufacturerURL>
+		<modelName>Windows Media Player Sharing</modelName>
+		<modelNumber>12.0</modelNumber>
+		<modelURL>http://go.microsoft.com/fwlink/?LinkId=105926</modelURL>
+		<serialNumber>{03C61D07-74D1-42A6-A8E1-BAB3B6280802}</serialNumber>
+		<dlna:X_DLNADOC xmlns:dlna="urn:schemas-dlna-org:device-1-0">DMS-1.50</dlna:X_DLNADOC>
+		<microsoft:magicPacketWakeSu
+ ==<===========================================>==
+
+ ==<HTTP_ClientRead READ (t=   32495) (c=5008) >== 
+pported xmlns:microsoft="urn:schemas-microsoft-com:WMPNSS-1-0">1</microsoft:magicPacketWakeSupported>
+		<iconList>
+			<icon>
+				<mimetype>image/jpeg</mimetype>
+				<width>120</width>
+				<height>120</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:ec3c037a-2b7b-4399-a12c-3f5632d604f2</url>
+			</icon>
+			<icon>
+				<mimetype>image/png</mimetype>
+				<width>120</width>
+				<height>120</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:3ed2d914-740a-49bf-a74e-9e88f4fa9dc6</url>
+			</icon>
+			<icon>
+				<mimetype>image/jpeg</mimetype>
+				<width>48</width>
+				<height>48</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:b589582d-5437-4c9c-b691-34b0bcce48b8</url>
+			</icon>
+			<icon>
+				<mimetype>image/png</mimetype>
+				<width>48</width>
+				<height>48</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:3e326ae3-1db7-46c7-8e8d-382e0641b1ef</url>
+			</icon>
+			<icon>
+				<mimetype>image/bmp</mimetype>
+				<width>48</width>
+				<height>48</height>
+				<depth>16</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:94872962-9fa2-4724-bcfb-df65832cc3ee</url>
+			</icon>
+			<icon>
+				<mimetype>image/jpeg</mimetype>
+				<width>32</width>
+				<height>32</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:f7dbe900-8cfa-4359-862c-2c5453052d48</url>
+			</icon>
+			<icon>
+				<mimetype>image/bmp</mimetype>
+				<width>32</width>
+				<height>32</height>
+				<depth>16</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:014d4461-8545-41c7-a3ff-7036b739822f</url>
+			</icon>
+			<icon>
+				<mimetype>image/jpeg</mimetype>
+				<width>120</width>
+				<height>120</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:aace2c25-46c9-47be-a11c-7944011ba442</url>
+			</icon>
+			<icon>
+				<mimetype>image/png</mimetype>
+				<width>120</width>
+				<height>120</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:671f95f0-f842-48da-9ceb-40ad7d91be69</url>
+			</icon>
+			<icon>
+				<mimetype>image/jpeg</mimetype>
+				<width>48</width>
+				<height>48</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:7c6c9158-2a96-4a5b-b74e-5181c0b66ffd</url>
+			</icon>
+			<icon>
+				<mimetype>image/png</mimetype>
+				<width>48</width>
+				<height>48</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:ceb66074-17b7-420f-a324-0631211145ca</url>
+			</icon>
+			<icon>
+				<mimetype>image/bmp</mimetype>
+				<width>48</width>
+				<height>48</height>
+				<depth>16</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:b9721187-9a88-4711-bc01-bb5fd9e23fe5</url>
+			</icon>
+			<icon>
+				<mimetype>image/jpeg</mimetype>
+				<width>32</width>
+				<height>32</height>
+				<depth>24</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:956a2268-4108-4b8e-b5ea-77706afd2314</url>
+			</icon>
+			<icon>
+				<mimetype>image/bmp</mimetype>
+				<width>32</width>
+				<height>32</height>
+				<depth>16</depth>
+				<url>/upnphost/udhisapi.dll?content=uuid:dc9af6df-b4da-4bf4-9a84-e8f632b36876</url>
+			</icon>
+		</iconList>
+		<serviceList>
+			<service>
+				<serviceType>urn:schemas-upnp-org:service:ConnectionManager:1</serviceType>
+				<serviceId>urn:upnp-org:serviceId:ConnectionManager</serviceId>
+				<controlURL>/upnphost/udhisapi.dll?control=uuid:de02620e-abd9-4026-9857-e36ab4531f1c+urn:upnp-org:serviceId:ConnectionManager</controlURL>
+				<eventSubURL>/upnphost/udhisapi.dll?event=uuid:de02620e-abd9-4026-9857-e36ab4531f1c+urn:upnp-org:serviceId:ConnectionManager</eventSubURL>
+				<SCPDURL>/upnphost/udhisapi.dll?content=uuid:5a067085-5852-4ca7-a42d-076153a92453</SCPDURL>
+			</service>
+			<service>
+				<serviceType>urn:schemas-upnp-org:service:ContentDirectory:1</serviceType>
+				<serviceId>urn:upnp-org:serviceId:ContentDirectory</serviceId>
+				<controlURL>/upnphost/udhisapi.dll?control=uuid:de02620e-abd9-4026-9857-e36ab4531f1c+urn:upnp-org:serviceId:ContentDirectory</controlURL>
+				<eventSubURL>/upnphost/udhisapi.dll?event=uuid:de02620e-abd9-4026-9857-e36ab4531f1c+urn:upnp-org:serviceId:ContentDirectory</eventSubURL>
+				<SCPDURL>/upnphost/udhisapi.dll?content=uuid:99429c60-5049-4f4f-bb76-101aab00b24b</SCPDURL>
+			</service>
+			<service>
+				<serviceType>urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1</serviceType>
+				<serviceId>urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar</serviceId>
+				<controlURL>/upnphost/udhisapi.dll?control=uuid:de02620e-abd9-4026-9857-e36ab4531f1c+urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar</controlURL>
+				<eventSubURL>/upnphost/udhisapi.dll?event=uuid:de02620e-abd9-4026-9857-e36ab4531f1c+urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar</eventSubURL>
+				<SCPDURL>/upnphost/udhisapi.dll?content=uuid:9ef9cac1-cff0-4f60-8e0e-d2cd8dbe69ca</SCPDURL>
+			</service>
+		</serviceList>
+	</device>
+</root>
+
+ ==<===========================================>==
+
+ ==<_HTTP_WriteUDP WRITE (t=   41199) (c= 160) >== 
+M-SEARCH * HTTP/1.1
+Host: 239.255.255.250:1900
+User-Agent: EBS Control Point
+MX: 2
+Man: "ssdp:discover"
+ST: urn:schemas-upnp-org:device:MediaRenderer:1
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ManagedClientReadFrom READ (t=   42182) (c= 305) >== 
+HTTP/1.1 200 OK
+LOCATION: http://192.168.1.7:61322/
+EXT: 
+USN: uuid:b41fcea4-16ff-471c-8368-25e00d56069b::urn:schemas-upnp-org:device:MediaRenderer:1
+SERVER: Windows NT/5.0, UPnP/1.0, Intel CLR SDK/1.0
+CACHE-CONTROL: max-age=900
+ST: urn:schemas-upnp-org:device:MediaRenderer:1
+Content-Length: 0
+
+
+ ==<===========================================>==
+
+ ==<_HTTP_ClientWrite WRITE (t=   46332) (c=  93) >== 
+GET / HTTP/1.1
+Host: 192.168.1.7:61322
+User-Agent: EBS Control Point
+Connection: close
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ClientRead READ (t=   46332) (c=1024) >== 
+HTTP/1.1 200 OK
+CONTENT-TYPE: text/xml
+Content-Length: 2371
+
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <URLBase>http://192.168.1.7:61322/</URLBase>
+   <device>
+      <deviceType>urn:schemas-upnp-org:device:MediaRenderer:1</deviceType>
+      <presentationURL>/</presentationURL>
+      <friendlyName>Intel Media Renderer (vikram)</friendlyName>
+      <manufacturer>Intel's Connected and Extended PC Lab</manufacturer>
+      <manufacturerURL>http://www.intel.com/labs</manufacturerURL>
+      <modelDescription>Intel's UPnP/AV Media Renderer Device</modelDescription>
+      <modelName>UPnP Renderer</modelName>
+      <modelURL>http://www.intel.com/labs</modelURL>
+      <UDN>uuid:b41fcea4-16ff-471c-8368-25e00d56069b</UDN>
+      <serviceList>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:RenderingControl:1</serviceType>
+            <serviceId>urn:
+ ==<===========================================>==
+
+ ==<HTTP_ClientRead READ (t=   46332) (c=1412) >== 
+upnp-org:serviceId:urn:schemas-upnp-org:service:RenderingControl</serviceId>
+            <SCPDURL>_urn:schemas-upnp-org:service:RenderingControl_scpd.xml</SCPDURL>
+            <controlURL>_urn:schemas-upnp-org:service:RenderingControl_control</controlURL>
+            <eventSubURL>_urn:schemas-upnp-org:service:RenderingControl_event</eventSubURL>
+         </service>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:AVTransport:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:urn:schemas-upnp-org:service:AVTransport</serviceId>
+            <SCPDURL>_urn:schemas-upnp-org:service:AVTransport_scpd.xml</SCPDURL>
+            <controlURL>_urn:schemas-upnp-org:service:AVTransport_control</controlURL>
+            <eventSubURL>_urn:schemas-upnp-org:service:AVTransport_event</eventSubURL>
+         </service>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:ConnectionManager:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:urn:schemas-upnp-org:service:ConnectionManager</serviceId>
+            <SCPDURL>_urn:schemas-upnp-org:service:ConnectionManager_scpd.xml</SCPDURL>
+            <controlURL>_urn:schemas-upnp-org:service:ConnectionManager_control</controlURL>
+            <eventSubURL>_urn:schemas-upnp-org:service:ConnectionManager_event</eventSubURL>
+         </service>
+      </serviceList>
+   </device>
+</root>
+ ==<===========================================>==
+
+ ==<_HTTP_ClientWrite WRITE (t=   51230) (c= 161) >== 
+GET /upnphost/udhisapi.dll?content=uuid:de02620e-abd9-4026-9857-e36ab4531f1c HTTP/1.1
+Host: 127.0.0.1:2869
+User-Agent: EBS Control Point
+Connection: close
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ClientRead READ (t=   51230) (c= 224) >== 
+HTTP/1.1 200 OK
+Content-Length: 5808
+Content-Type: text/xml; charset="utf-8"
+Server: Microsoft-Windows-NT/5.1 UPnP/1.0 UPnP-Device-Host/1.0 Microsoft-HTTPAPI/2.0
+Date: Thu, 15 Apr 2010 18:57:54 GMT
+Connection: close
+
+
+ ==<===========================================>==
+
+ ==<_HTTP_ClientWrite WRITE (t=   55614) (c= 161) >== 
+GET /upnphost/udhisapi.dll?content=uuid:de02620e-abd9-4026-9857-e36ab4531f1c HTTP/1.1
+Host: 127.0.0.1:2869
+User-Agent: EBS Control Point
+Connection: close
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ClientRead READ (t=   55614) (c= 224) >== 
+HTTP/1.1 200 OK
+Content-Length: 5808
+Content-Type: text/xml; charset="utf-8"
+Server: Microsoft-Windows-NT/5.1 UPnP/1.0 UPnP-Device-Host/1.0 Microsoft-HTTPAPI/2.0
+Date: Thu, 15 Apr 2010 18:57:58 GMT
+Connection: close
+
+
+ ==<===========================================>==
+
+ ==<_HTTP_WriteUDP WRITE (t=   57080) (c= 158) >== 
+M-SEARCH * HTTP/1.1
+Host: 239.255.255.250:1900
+User-Agent: EBS Control Point
+MX: 2
+Man: "ssdp:discover"
+ST: urn:schemas-upnp-org:device:MediaServer:1
+
+
+ ==<===========================================>==
+
+ ==<HTTP_ManagedClientReadFrom READ (t=   57891) (c= 444) >== 
+HTTP/1.1 200 OK
+ST:urn:schemas-upnp-org:device:MediaServer:1
+USN:uuid:de02620e-abd9-4026-9857-e36ab4531f1c::urn:schemas-upnp-org:device:MediaServer:1
+Location:http://127.0.0.1:2869/upnphost/udhisapi.dll?content=uuid:de02620e-abd9-4026-9857-e36ab4531f1c
+OPT:"http://schemas.upnp.org/upnp/1/0/"; ns=01
+01-NLS:e10f95b6b44c2bac98c495b5c3bd1ba7
+Cache-Control:max-age=900
+Server:Microsoft-Windows-NT/5.1 UPnP/1.0 UPnP-Device-Host/1.0
+Ext:
+
+
+ ==<===========================================>==

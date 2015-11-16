@@ -1,0 +1,346 @@
+/**********************************************************************/
+/******************   releasenotes.txt       **************************/
+/**********************************************************************/
+
+
+Shown below is the complete directory structure for this UPnP SDK package:
+ ______
+| ROOT |
+|______|
+   |
+   |
+   |   ____________
+   |__| rtplatform |   EBS's Porting Layer
+   |  |____________|
+   |      |___    ________
+   |          |__| V0.4.1 |
+   |             |________|
+   |                 |___
+   |                     |    __________
+   |                     |___| includes |
+   |                     |   |__________|
+   |                     |       |
+   |                     |       +----- include files needed for porting layer
+   |                     |
+   |                     |    ________
+   |                     |___| source |
+   |                     |   |________|
+   |                     |       |
+   |                     |       +----- contains directory specific to different platforms
+   |                     |              for example the demo applications are written for
+   |                     |               windows platform and use files under win32
+   |                     |               directory for porting.
+   |                     |    ________
+
+   |                     |___| manual |
+   |                         |________|
+   |                             |
+   |                             |
+   |                             +----- contains manuals on RTPlatform
+   |
+   |   ______
+   |__| ixml |
+   |  |______|
+   |      |___    ______
+   |          |__| V1.2 |
+   |             |______|
+   |                 |___
+   |                     |    _____
+   |                     |___| inc |
+   |                     |   |_____|
+   |                     |       |
+   |                     |       |----- ixml.h
+   |                     |              Header file nedded for XML parser. XML Parser API
+   |                     |              definition are listed in this header file.
+   |                     |    _____
+   |                     |___| src |
+   |                     |   |_____|
+   |                     |       |
+   |                     |       +----- contains XML parser related source files
+   |                     |
+   |                     |    _____
+   |                     |___| doc |
+   |                         |_____|
+   |                             |    ______
+   |                             |___| html |
+   |                             |   |______|
+   |                                     |
+   |                                     |------ index.html - index page for html
+   |                                             documentation for XML parser module
+   |
+   |   ______
+   |__| http |
+   |  |______|
+   |      |___    ________
+   |          |__| v0.2.2 |
+   |             |________|
+   |                 |    _________
+   |                 |___| include |
+   |                 |   |_________|
+   |                 |        |
+   |                 |        +----- header files for internal web server and web client
+   |                 |
+   |                 |    ________
+   |                 |___| source |
+   |                     |________|
+   |                          |
+   |                          +----- c source files for web server and web client
+   |
+   |   ______
+   |__| UPnP |
+      |______|
+          |___    ________
+              |__| v0.2.4 |
+                 |________|
+                     |   ________
+                     |__| source |
+                     |  |________|
+                     |      |        _____________
+                     |      |_______|control point|
+                     |      |       |_____________|
+                     |      |              |
+                     |      |              +----------c source files for upnp Control point
+                     |      |        ______
+                     |      |_______|device|
+                     |      |       |______|
+                     |      |          |
+                     |      |          +---------- c source files for upnp device
+                     |      |
+                     |      +-------- common source files
+                     |
+                     |   _________
+                     |__| include |
+                     |  |_________|
+                     |      |        _____________
+                     |      |_______|control point|
+                     |      |       |_____________|
+                     |      |              |
+                     |      |              +----------header files for upnp Control point
+                     |      |        ______
+                     |      |_______|device|
+                     |      |       |______|
+                     |      |          |
+                     |      |          +---------- header files for upnp device
+                     |      |
+                     |      +-------- common header files
+                     |
+                     |
+                     |   ________
+                     |__| project | source files for building demo applications
+                     |  |_________|
+                     |      |___
+                     |          |
+                     |          |
+                     |          |   ______________
+                     |          |__| msvs.net2003 |
+                     |             |______________|
+                     |                    |
+                     |                    +------ UPnP Device and Control Point Demo Project
+                     |                            for microsoft VC++ .NET
+                     |
+                     |
+                     |   _____
+                     |__| doc |
+                        |_____|
+                            |___    __________________
+                                |__| controlpointhtml |
+                                |  |__________________|
+                                |          |
+                                |          |------ index.html - index page for function and
+                                |                  API documentation for UPnP SDK.
+                                |
+                                |   ____________
+                                |__| devicehtml |
+                                   |____________|
+                                           |
+                                           |------ index.html - index page for function and
+                                                   API documentation for UPnP SDK.
+
+
+/**********************************************************************/
+/******************   UPnP Device SDK     *****************************/
+/**********************************************************************/
+
+Release Notes:
+--------------
+
+This is version 0.2.3 of EBS UPnP Device SDK. This SDK package comprises of
+
+ * core UPnP stack code
+ * http server source
+ * XML parser source
+ * RTPlatform - EBS's porting layer library source.
+ * sample upnp device
+
+Demo application:
+------------------
+
+The SDK comes with a device side demo applications name devdemo.c
+DevDemo is written in 'C' with an aim to demonstrate the basics of using the SDK
+in application development. This demo can be built in microsoft visual studio
+VC++ .net environment.
+
+UPnP requires a control point (client side) application to control and monitor a UPnP
+enabled device. If EBS's control point appliation is not available, Intel provides a
+free UPnP development tool which includes device spy ( a control point application)
+and a device sniffer - sniffs UPnP traffic on the network along with other useful
+applications.
+
+This tool is no longer available from Intel but these tools are included in the folder:
+
+IntelUPNPtool
+
+
+This tool requires Microsoft .NET Framework version 1.1 be installed on the machine.
+.NET framework is distributed by Microsoft free of cost and is available at :
+http://www.microsoft.com
+
+About the Demos:
+----------------
+
+The UPnP Device device demo:
+
+The devDemo application simulates a UPnP enabled light bulb device. The device offers two services,
+first to turn the bulb on/off, second to increase/decrease the intensity of light. The application
+is designed such that the services cannot be controlled from the device side. A control point
+application should be used to monitor the the services. Control point can perform actions on these
+services and change their value, any change that the control point makes on the device is reflected on
+the device. The control point can also subscribe to a service and receive event notification in case
+the value of the service change.
+
+
+Running the sample device application:
+--------------------------------------
+The demo directory located in the UPnP directory contains executables file for the two demo
+applications. The sample contains www-root directory which contains the description documents
+needed by UPnP at runtime. Copy this directory to c:\ of your computer.
+
+Note that this sample device will not function if www-root directory is not placed in the root
+(c:) directory. www-root acts as the root directory for UPnP's internal web-server,
+this directory contains the description documents which this web server needs to serve for
+the device.
+
+Next step is to run the .exe located under application directory (upnp\v0.2\devsample\Temperature Controller\application\)
+
+
+
+/**********************************************************************/
+/************* EBS UPnP Control Point SDK **************************/
+/**********************************************************************/
+
+Release Notes:
+--------------
+
+This is an version 0.2.3 of EBS UPnP Control Point SDK. This SDK package
+comprises of
+
+ * core UPnP stack code
+ * http server source
+ * http client source
+ * XML parser source
+ * RTPlatform - EBS's porting layer library source.
+ * Visual Studio C++ .net project for the demo application
+
+Demo applications:
+------------------
+
+================================================================================
+media controller demo - The media controller demo application is a simple
+interactive shell program with the following capabilities.
+
+. Scan the network for media server and media renderer devices.
+. Browse the contents (video, music, images) on a media server.
+. Send data from a media server to a media renderer for display.
+. Control the play of the content, (play, pause, stop).
+
+You can use the media controller, typing in commands, similarly to how you
+use Windows media player to search for and then display content.
+
+
+This is the menu displayed when the media controller runs. Note that
+x'ed out menu items become active after renderers and servers have been
+selected.
+
+   EBS Media Controller Demo
+   Main Menu
+ (  0)   Help
+ (  1)   Show current selections for server, renderer, file..
+ (  2)   Select a Media Server (UPnP_ControlOpenDevice (MediaServer:1
+ (  3)   Select a Media Renderer (UPnP_ControlOpenDevice (MediaRender
+x        Return to the root directory
+x        Browse Selected Container (Browse id=current_container Brows
+x        Browse all subdirectories below current directory.
+x        Select a File (Search ContainerID="",SearchCriteria="",Filte
+x        Play Selected File (SetAVTransportURI, Stop, Play)
+x        Queue File for Renderer (SetAVTransportURI)
+x        Play queued file on the renderer (Play)
+x        Stop file playing on the renderer (Stop)
+x        Show search capabilities list (GetSearchCapabilities)
+x        Show sort capabilities list (GetSortCapabilities)
+ (  4)   Quit
+   Command > :
+
+
+================================================================================
+control point demo  - The control point demo is a more basic demo that scans the
+network for any UPnP devices and prints statistics about them.
+
+This evaluation version comes with a control point demo application located at
+upnp\v0.2\project\msvs.net2003\win32\upnp control Point demo\control point demo
+for Microsoft Visual Studio .net project.
+
+This directory contains cpdemo.c which is the source file containing the demo
+application and a Microsoft visual studio VC++ .net project called UPnP Control Point.vcproj
+
+cpdemo is written in 'C' with an aim to demonstrate the basics of using the SDK in application
+development.
+
+A UPnP device is needed to test the various features of the control point applicaiton. EBS's
+sample device (available with device side sdk) can be used for this purpose. We found Intel's
+UPnP development tools to be a good aid for testing various upnp features. Intel provides
+a free UPnP development tool which includes network light ( a upnp device application ), device spy
+( a control point application) and a device sniffer - sniffs UPnP traffic on the network along with
+other useful applications.
+
+This tool is no longer available from Intel but these tools are included in the folder:
+
+IntelUPNPtool
+
+
+This tool requires Microsoft .NET Framework version 1.1 be installed on the machine.
+.NET framework is distributed by Microsoft free of cost and is available at :
+http://www.microsoft.com
+
+
+================================================================================
+
+Media server and media renderer demos - Demos are provided for the UPnP-AV library.
+
+These demos have been functional but they may need some updating.
+In general the UPNP-AV library is less mature  then the control point and device libraries.
+
+media server demo  - Provides a media server application that media controllers
+can access to browse the content folders and to stream the content to media renderer
+applications for display.
+
+
+media renderer demo
+
+Two versions of the project are provided-
+
+Avrendererdemo - Provides a media renderer application that displays content it
+                 recieves over the internet by calling win32 APIs to render the
+                 content.
+mediarendererdemo - Provides a portable media renderer application that passes
+                  content to stub functions that must be populated to display the
+                  content.
+
+
+Other resources:
+
+The XBMC media player.
+Windows includes UPnP support in media player.
+The are quite a few downloadable UPnP AV implementations available.
+Google "free upnp media server"
+
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+   <specVersion>
+      <major>1</major>
+      <minor>0</minor>
+   </specVersion>
+   <URLBase>http://192.168.0.6:80/</URLBase>
+   <device>
+      <deviceType>urn:schemas-upnp-org:device:Temperature Controller:1</deviceType>
+      <friendlyName>EBSnet Temperature Controller</friendlyName>
+      <manufacturer>EBSnet Inc.</manufacturer>
+      <manufacturerURL>http://www.ebsnetinc.com</manufacturerURL>
+      <modelDescription>Software Emulated Temperature Controller</modelDescription>
+      <modelName>Temperature Controller Version 1</modelName>
+      <modelNumber>XPC-L1</modelNumber>
+      <modelURL>http://www.ebsnetinc.com/</modelURL>
+      <UDN>uuid:3de8ae7e-a535-4a50-a689-a6d8923fb73f</UDN>
+      <iconList>
+         <icon>
+            <mimetype>image/png</mimetype>
+            <width>32</width>
+            <height>32</height>
+            <depth>8</depth>
+            <url>/icon.png</url>
+         </icon>
+      </iconList>
+      <serviceList>         
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:TemperatureService:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:TemperatureService.0001</serviceId>
+            <SCPDURL>_TemperatureService.0001_scpd.xml</SCPDURL>
+            <controlURL>_TemperatureService.0001_control</controlURL>
+            <eventSubURL>_TemperatureService.0001_event</eventSubURL>
+         </service>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:DecreaseThermostatTempService:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:DecreaseThermostatTempService.0001</serviceId>
+            <SCPDURL>_DecreaseThermostatTempService.0001_scpd.xml</SCPDURL>
+            <controlURL>_DecreaseThermostatTempService.0001_control</controlURL>
+            <eventSubURL>_DecreaseThermostatTempService.0001_event</eventSubURL>
+         </service>
+         <service>
+            <serviceType>urn:schemas-upnp-org:service:IncreaseThermostatTempService:1</serviceType>
+            <serviceId>urn:upnp-org:serviceId:IncreaseThermostatTempService.0001</serviceId>
+            <SCPDURL>_IncreaseThermostatTempService.0001_scpd.xml</SCPDURL>
+            <controlURL>_IncreaseThermostatTempService.0001_control</controlURL>
+            <eventSubURL>_IncreaseThermostatTempService.0001_event</eventSubURL>
+         </service>
+      </serviceList>
+   </device>
+</root>

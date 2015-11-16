@@ -1,0 +1,39 @@
+/**@name EBSnet HTTP 0.1
+ <center>
+ Embedded HTTP Library version 0.1 <br>
+ <br>
+ </center>
+ */
+//@{
+	//@Include: intro.dxx
+
+	/** @name API */
+	//@{
+		/** @name HTTP Managed Client Core Module */
+		//@{
+			//@Include: ../source/httpmcli.c
+		//@}
+			
+		/** @name Basic and Digest Authentication Module */
+		//@{
+			
+			//@Include: ../source/httpauth.c
+		//@}
+		
+		/** @name Client-side Cookies Module */
+		//@{
+			//@Include: ../source/hcookie.c
+		//@}
+	//@}
+	
+	/** @name Examples */
+	//@{
+		//@Include: example1.dxx
+		//@Include: example2.dxx
+		//@Include: example3.dxx
+		//@Include: example4.dxx
+		//@Include: example5.dxx
+		//@Include: example6.dxx
+	//@}
+
+//@}

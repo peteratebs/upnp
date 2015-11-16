@@ -1,0 +1,1 @@
+java -classpath ".;crimson.jar;jaxp.jar;xalan.jar" Intel.DeviceSniffer.MainApp

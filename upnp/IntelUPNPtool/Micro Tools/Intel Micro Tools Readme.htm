@@ -1,0 +1,207 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Intel</title>
+</head>
+
+<body>
+
+<h1>Disclaimers</h1>
+<p><font size="2">INTEL CORPORATION MAKES NO WARRANTY OF ANY KIND WITH REGARD TO 
+THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. INTEL CORPORATION ASSUMES 
+NO RESPONSIBILITY FOR ANY ERRORS THAT MAY APPEAR IN THIS DOCUMENT. INTEL 
+CORPORATION MAKES NO COMMITMENT TO UPDATE NOR TO KEEP CURRENT THE INFORMATION 
+CONTAINED IN THIS DOCUMENT. THIS SPECIFICATION IS COPYRIGHTED BY AND SHALL 
+REMAIN THE PROPERTY OF INTEL CORPORATION. NO LICENSE, EXPRESS OR IMPLIED, BY 
+ESTOPPEL OR OTHERWISE TO ANY INTELLECTUAL PROPERTY RIGHTS IS GRANTED HEREIN. 
+INTEL DISCLAIMS ALL LIABILITY, INCLUDING LIABILITY FOR INFRINGEMENT OF ANY 
+PROPRIETARY RIGHTS, RELATING TO IMPLEMENTATION OF INFORMATION IN THIS 
+SPECIFICATION. INTEL DOES NOT WARRANT OR REPRESENT THAT SUCH IMPLEMENTATIONS 
+WILL NOT INFRINGE SUCH RIGHTS. NO PART OF THIS DOCUMENT MAY BE COPIED OR 
+REPRODUCED IN ANY FORM OR BY ANY MEANS WITHOUT PRIOR WRITTEN CONSENT OF INTEL 
+CORPORATION. INTEL CORPORATION RETAINS THE RIGHT TO MAKE CHANGES TO THESE 
+SPECIFICATIONS AT ANY TIME, WITHOUT NOTICE. </font></p>
+<p><font size="2">Legal Notices Intel software products are copyrighted by and 
+shall remain the property of Intel Corporation. Use, duplication or disclosure 
+is subject to restrictions stated in Intel's Software License Agreement, or in 
+the case of software delivered to the government, in accordance with the 
+software license agreement as defined in FAR 52.227-7013. </font></p>
+<p><font size="2">The Intel logo is a registered trademark of Intel Corporation.</font></p>
+<p><font size="2">Other brands and names are the property of their respective 
+owners.</font></p>
+
+<p><font size="2">Intel copyright 2002.</font></p>
+
+<p>&nbsp;</p>
+
+<p><b><font size="6">Intel Authoring Tools for UPnP Technologies</font></b></p>
+
+<p>The <b>Intel Micro Tools for UPnP Technologies</b> are built tools included 
+in the <b>Intel Authoring Tools for UPnP Technologies</b>. All of the source 
+code for the Micro Tools is also included within the Authoring Tools, and is 
+available for download in the Intel corporate web site at:
+<a href="http://www.intel.com/labs/connectivity/upnp/">
+http://www.intel.com/labs/connectivity/upnp/</a></p>
+
+<p>Code used within the Micro Tools was generated using the Intel Device Builder 
+code generator tool. In addition to Intel Device Builder, some Micro Tools use 
+code in the AV Microstacks or Remote I/O Microstacks. The Micro Tools highlight 
+just how small UPnP applications can be built, while being completely 
+interoperable.</p>
+
+<p>For support on the <b>Intel Authoring Tools for UPnP Technologies</b>, <b>Intel 
+Device Builder</b>, please contact:</p>
+
+<p>&nbsp;&nbsp;&nbsp; Ylian Saint-Hilaire, Senior Architect<br>
+&nbsp;&nbsp;&nbsp; <a href="mailto:ylian.saint-hilaire@intel.com">ylian.saint-hilaire@intel.com</a></p>
+<p>&nbsp;&nbsp;&nbsp; Nelson Kidd, UPnP AV Expert<br>
+&nbsp;&nbsp;&nbsp; <a href="mailto:nelson.kidd@intel.com">nelson.kidd@intel.com</a></p>
+<p>&nbsp;&nbsp;&nbsp; Bryan Roe, UPnP &amp; UPnP AV Expert<br>
+&nbsp;&nbsp;&nbsp; <a href="mailto:bryan.y.roe@intel.com">bryan.y.roe@intel.com</a></p>
+<p>&nbsp;</p>
+
+<p><b><font size="6">Intel Micro Tools for UPnP Technologies</font></b><br>
+<br>
+These applications are compiled for ARM based Pocket PC devices with a similar 
+version compiled under Windows is also provided. They have been 
+known to work on PocketPC 2000 and 2002 on Compaq iPAQ's and HP Jordana. No 
+installation software is provided, simply copy the executables on to the 
+handheld device and run.</p>
+
+<p><b>Intel Device Scanner (Size: 60.5k)</b></p>
+
+<blockquote>
+
+<p>This simple application allows a user on the PocketPC device to list all of 
+the UPnP devices on the network and for each device, which embedded devices and 
+services are available. This application is similar to Intel Device Spy, but 
+does not allow action invocation and event subscription.</p>
+
+</blockquote>
+
+<p><b>Intel Micro Light (Size: 52k)</b></p>
+
+<blockquote>
+
+<p>A simple light bulb device, similar to the one provided with main tool set. 
+To keep the application light weight, the screen simply changes color to match 
+the switch power and dimmer settings. This application binds it's web server to 
+a random port, it's UPnP presentation page will map to the UPnP device 
+description.</p>
+
+</blockquote>
+
+<p><b>Intel Micro Media Server (Size: 76k)</b></p>
+
+<blockquote>
+
+<p>This is the light weight version of the Intel Media Server, it provider the 
+strict minimum functionality a content directory server must have to pass 
+compliance testing. Micro Media Server will share the root directory of the 
+device. Micro Media 
+Server does no keep any metadata of database of any kind, instead, the response 
+to a browse action is built and sent on-the-fly, as file items are read from the 
+file system.</p>
+
+</blockquote>
+
+<p><b>Intel Micro Media Browser (Size: 69k)</b></p>
+
+<blockquote>
+
+<p>This is the light weight UPnP AV Media Server content directory browser 
+application. It allows PocketPC devices to discovery AV content directory 
+servers (CDS) on the network, and browse content starting from the root 
+container. This application does not yet allow the user to do anything with the 
+content, just browse it.</p>
+
+</blockquote>
+
+<p><b>Intel Micro Media Renderer (Size: 149k)</b></p>
+
+<blockquote>
+
+<p>This is the light weight version of the AV Media Renderer. Under Windows, it 
+uses the Media Player ActiveX control. Under PocketPC, if uses the Media Player 
+Control that must be installed separately. The control is available at: <a href="http://www.microsoft.com/windows/windowsmedia/create/embedppc.asp">
+http://www.microsoft.com/windows/windowsmedia/create/embedppc.asp</a></p>
+
+<p>The Micro Renderer will stream and play audio (MP3, WMA) and video (WMV). It 
+does not currently support M3U play lists.</p>
+
+</blockquote>
+
+<p><b>Intel Micro Remote I/O Client (Size: 71.5k)</b></p>
+
+<blockquote>
+
+<p>This is the PocketPC version of a Remote I/O Client what supports the XRT2 
+display remoting protocol. This application will make the entire display of the 
+PocketPC device available for a Remote I/O Server to remote an application to. 
+Once run, the screen will turn black as the application is waiting for a server 
+to be available. To exit the application, hit the top left button of the 
+PocketPC (the Recorder button). A Remote I/O Server is provided separately in 
+the Intel Remote I/O for UPnP Technologies available on the Intel corporate web 
+site at: <a href="http://www.intel.com/labs/connectivity/upnp/">
+http://www.intel.com/labs/connectivity/upnp/</a></p>
+
+</blockquote>
+
+<p><b>Intel Micro Remote I/O Control (Size: 73k)</b></p>
+
+<blockquote>
+
+<p>This PocketPC application will list all Remote I/O Clients on the network and 
+for each, all available user interfaces for each Remote I/O Client. A Remote I/O 
+client can be told to switch to a new user interface by double-tapping on a user 
+interface. To make Remote I/O work, a Remote I/O Server is provided separately 
+in the Intel Remote I/O for UPnP Technologies available on the Intel corporate 
+web site at: <a href="http://www.intel.com/labs/connectivity/upnp/">
+http://www.intel.com/labs/connectivity/upnp/</a></p>
+
+</blockquote>
+
+<p><b>Intel Micro Remote I/O Server (Size: 81k)</b></p>
+
+<blockquote>
+
+<p>This PocketPC application will list all Remote I/O Clients on the network and 
+make a small sample application available to them. The remoted application will 
+simply display 100 random fill boxes on the Remote I/O client each time a key is 
+pressed on the client. This server can be used along with the Intel Remote I/O for UPnP Technologies 
+package available on the Intel corporate 
+web site at: <a href="http://www.intel.com/labs/connectivity/upnp/">
+http://www.intel.com/labs/connectivity/upnp/</a></p>
+
+</blockquote>
+
+<p><b>Additional notes on running these applications on PocketPC</b></p>
+
+<blockquote>
+
+<p>You must have a network interface card connected to the handheld before 
+running these applications. If the application immediately closes, it is 
+probably due to problems initializing the network interface. PocketPC 2000 and 
+2002 have a problem that makes it impossible to change the selected multicast 
+interface, due to this, our PocketPC Microstack will only advertise on the 
+currently selected multicast interface. Depending on the handheld, the selected 
+multicast interface may be different and change if docked to a host PC. On an 
+iPAQ 3835 for example, the handheld must be detached from the host PC before 
+running these applications.</p>
+
+<p>When tapping the upper right &quot;X&quot;, the application will keep running in 
+background. To completely unload an application, go in the File menu and select 
+&quot;Exit&quot;. Applications cannot be loaded twice, running an application again will 
+cause the currently running application to be activate and sent to the 
+foreground.</p>
+
+</blockquote>
+
+</body>
+
+</html>

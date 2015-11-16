@@ -1,0 +1,140 @@
+/**
+ @name Authentication Example
+ @memo Downloading a file using authentication
+ @doc  This code demonstrates the necessary steps to connect to a
+       server and use GET to download a file from a server that
+       requires authentication.
+
+<pre>
+#include "httpmcli.h"
+#include "httpauth.h"
+
+...
+
+HTTPAuthContext authContext;
+HTTPManagedClient managedClient;
+unsigned success = 0;
+
+if (HTTP_AuthContextInit(&authContext) < 0)
+{
+    return (0);
+}
+
+HTTP_SetAuthorization (
+        &authContext,
+        "66.189.87.81",
+        80,
+        "/restricted/",
+        "tony",
+        "______", /* password removed for security reasons * /
+        RTP_TIMEOUT_INFINITE
+    );
+
+/* Create an HTTP Managed Client context; this is necessary for all 
+   managed client calls * /
+if (HTTP_ManagedClientInit (
+        &managedClient,
+        "EBSnet Test Application" /* User-Agent * /,
+        "text/*"                  /* Accept (mime types) * /,
+        0                         /* KeepAlive (bool) * /,
+        0                         /* Cookie context * /,
+        &authContext              /* Authentication context * /,
+        0                         /* SSL context * /,
+        0                         /* SSL enabled? (bool) * /,
+        8192                      /* write buffer size * /,
+        0                         /* max connections (0 == no limit) * /,
+        0                         /* max connections per host (0 == no limit) * /
+    ) >= 0)
+{
+    HTTPManagedClientSession* session = 0;
+
+    /* Simple GET test with authentication * /
+       
+    if (HTTP_ManagedClientStartTransaction (
+            &managedClient,
+            "66.189.87.81",
+            80,
+            HTTP_SESSION_TYPE_TCP,
+            1, /* blocking? * /
+            &session
+        ) >= 0)
+    {
+        HTTP_INT32 result;
+        HTTP_UINT8 buffer[1024];
+        HTTP_INT32 size = 1024;
+        HTTPResponseInfo info;
+
+        /* Once the session is open, one command may be issued; in this case
+           a GET (by calling HTTP_ManagedClientGet) * /
+        HTTP_ManagedClientGet(session, "/restricted/", 0 /* if-modified-since * /);
+        
+        /* This may be called at any time after the command is issued to 
+           get information about the server response; this info includes 
+           the status code given, date when the request was processed, 
+           file mime type information (if a file is transferred as the 
+           result of a command), authentication information, etc. * /
+           
+        HTTP_ManagedClientReadResponseInfo(session, &info);
+
+        /* If the first attempt fails, it may be because the server wants to
+           use a different authentication scheme or different options for 
+           that scheme.  In this case, the initial rejection doesn't mean
+           the user/password are invalid.  This is what an authStatus value of
+           HTTP_AUTH_STATUS_RETRY_REQUEST means. * /
+
+        if (info.authStatus == HTTP_AUTH_STATUS_RETRY_REQUEST)
+        {
+            HTTP_ManagedClientCloseSession(session);
+
+            if (HTTP_ManagedClientStartTransaction (
+                    &managedClient,
+                    "66.189.87.81",
+                    80,
+                    HTTP_SESSION_TYPE_TCP,
+                    1, /* blocking? * /
+                    &session
+                ) >= 0)
+            {
+                HTTP_ManagedClientGet(session, "/restricted/", 0 /* if-modified-since * /);         
+                HTTP_ManagedClientReadResponseInfo(session, &info);
+            }
+            else
+            {
+                session = 0;
+            }
+        }
+
+        if (session)
+        {
+            if (info.status == HTTP_STATUS_200_OK)
+            {
+                do
+                {
+                    /* Read data from the session * /
+                    result = HTTP_ManagedClientRead(session, buffer, size);
+                }
+                while (result > 0);
+
+                if (result == 0)
+                {
+                    success = 1;
+                }
+            }
+
+            /* Now we are done; close the session (see note above about sessions) * /
+            HTTP_ManagedClientCloseSession(session);
+        }
+    }
+
+    /* When all HTTP client activity is completed, the managed client context 
+       may safely be destroyed * /
+    HTTP_ManagedClientDestroy(&managedClient);
+}
+
+HTTP_AuthContextDestroy(&authContext);
+
+</pre>
+
+ */
+
+ 

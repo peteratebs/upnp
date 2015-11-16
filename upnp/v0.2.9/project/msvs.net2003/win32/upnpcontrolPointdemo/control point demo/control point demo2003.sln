@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "control point demo", "control point demo2003.vcproj", "{21CAFA5B-5710-4E16-968A-C0C7BB3EB445}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{21CAFA5B-5710-4E16-968A-C0C7BB3EB445}.Debug.ActiveCfg = Debug|Win32
+		{21CAFA5B-5710-4E16-968A-C0C7BB3EB445}.Debug.Build.0 = Debug|Win32
+		{21CAFA5B-5710-4E16-968A-C0C7BB3EB445}.Release.ActiveCfg = Release|Win32
+		{21CAFA5B-5710-4E16-968A-C0C7BB3EB445}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

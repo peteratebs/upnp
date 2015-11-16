@@ -1,0 +1,14 @@
+/**
+ @name Web server example
+ @memo Starts a simple web server.
+ @doc  This code demonstrates the necessary steps to start a web server and assign as
+       default root. It also demonstrates how to assign callback hndlers fro specic URLs.
+       Note: This is not REAL done and needs to be updated !!!!!!.
+<pre>
+
+Please copy the source for example_server.c here before releasing the manual
+
+</pre>
+
+
+ */

@@ -1,0 +1,76 @@
+<html>
+<head>
+<title> EBS HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black;
+	background-color: white;
+	background-image: URL("background_small.jpeg");
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsembeddedsoftware.com/' target='_blank'><img border=0 src='ebs.gif' align=right></a>
+
+<H2>int <A HREF="#DOC.DOCU">HTTP_SetCookie</A></H2><H2>( HTTPCookieContext* ctx,<BR>&nbsp;  const HTTP_CHAR* cookieStr,<BR>&nbsp;  const HTTP_CHAR* defaultDomain,<BR>&nbsp;  const HTTP_CHAR* defaultPath )</H2><BLOCKQUOTE>Enter a cookie into the database. </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>This function is normally called automatically by the HTTP client
+when a server response contains a "Set-Cookie" header option.  It
+will pass the cookie through the user-specified filter function, if
+it has been set.
+
+<P>In case the cookie does not explicitly specify a DNS domain or 
+server path for which the cookie applies, the host name that the 
+original request was sent to, along with the path on that server that
+the request was for, should be passed into this function as 
+the defaultDomain and defaultPath parameters.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>ctx</B> -   the cookie database in which to store
+the cookie if it is accepted 
+<BR><B>cookieStr</B> -   the contents of the HTTP "Set-Cookie" 
+option header 
+<BR><B>defaultDomain</B> -   the host name that the original request
+was sent to 
+<BR><B>defaultPath</B> -   the path requested on the server <BR><DT><B>Returns:</B><DD>  0 on success, negative on failure
+<BR><DT><B>See Also:</B><DD><!1><A HREF="HTTP_SetCookieFilter.html">HTTP_SetCookieFilter</A>
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBS Inc, 1993-2009.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBS, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsembeddedsoftware.com' target=_blank>www.ebsembeddedsoftware.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

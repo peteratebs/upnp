@@ -1,0 +1,52 @@
+/**@name EBS UPNP Control Point SDK
+ <center>
+ Embedded UPnP Library version 1.0 <br>
+ <br>
+ </center>
+ */
+//@{
+	/** @name API Reference */
+	//@{
+		//@Include: ../source/upnp.c
+		//@Include: ../source/controlPoint/upnpcli.c
+	//@}
+
+
+	/** @name Internal Library Documentation
+        @doc These functions are <b>not</b> at the API level and should not be called from
+              code outside the UPnP library. */
+	//@{
+		/** @name Discovery/SSDP
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/ssdpsrv.c
+			//@Include: ../source/controlPoint/ssdpcli.c
+			//@Include: ../source/controlPoint/controlDiscover.c
+		//@}
+
+		/** @name Description
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/controlPoint/controlDescribe.c
+		//@}
+
+		/** @name Control/SOAP
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/controlPoint/soapcli.c
+			//@Include: ../source/controlPoint/controlAction.c
+		//@}
+
+		/** @name Eventing/GENA
+	        @doc These functions are <b>not</b> at the API level and should not be called from
+	              code outside the UPnP library. */
+		//@{
+			//@Include: ../source/controlPoint/genacli.c
+			//@Include: ../source/controlPoint/controlEvent.c
+		//@}
+	//@}
+
+//@}

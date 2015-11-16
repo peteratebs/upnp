@@ -1,0 +1,115 @@
+====================================================================
+Functional changes between in version 0.2.4 versus version 0.2.3
+Date: Oct/22/07
+
+Httpmcli.c - Added HTTP_ManagedClientRequestExExperimental() function. This is used by the
+SOAP POST commands. HTTP_ManagedClientRequestEx() is still used for other UPnP client
+requests. The HTTP_ManagedClientRequestEx() does not properly include all fields in the content length
+because those fileds are appended after it is called. This caused a at least one stack to reject
+post meessages.
+
+httpsrv.c
+    Corrected error in processing http version numbers..
+
+    Changed:
+   if (request->httpMajorVersion >= 1 && request->httpMinorVersion >= 0)
+   To:
+   if (request->httpMajorVersion > 1 || (request->httpMajorVersion == 1 && request->httpMinorVersion >= 1))
+
+
+====================================================================
+Functional changes between in version 0.2.2 versus version 0.2.3
+Date: 01/05/07
+1. In file httpsrv.c
+   removed line 46
+   #define rtp_strpbrk     strpbrk
+
+2. In file httpp.c
+   At line 746, added WriteString type for 3rd parameter of function
+   HTTP_SetRequestHeaderFn
+   At line 973, added WriteString type for 3rd parameter of function
+   HTTP_SetResponseHeaderFn
+   At line 1116, explicitly casted _HTTP_WriteStrLenBuffered to WriteFn
+
+3. In file httpmcli.c
+   At line 2370, explicitly casted _HTTP_ManagedClientCookieWrite to WriteString
+   At line 2380, explicitly casted _HTTP_ManagedClientAuthWrite to WriteString
+
+4. In file httpp.h
+   Added new type defination for,
+   typedef HTTP_INT32 (*WriteString) (void* privateData, WriteFn writeFn,
+                       void* requestStream);
+   typedef HTTP_INT32 (*WriteString) (void* privateData, WriteFn writeFn,
+                       void* requestStream);
+   Line 258,
+   updated - structure s_HTTPStringObject
+   Line 372,
+   updated - prototype for function HTTP_SetRequestHeaderFn
+   Line 421,
+   updated - prototype for function HTTP_SetResponseHeaderFn
+
+Date: 01/24/07
+5. In file httpsrv.c, function _HTTP_ServerAddPath( ) at line 497
+   chaged from -
+   return (-1);
+   to -
+   return (-2);
+   a return value of -2 indicated a non error condition indicating a file
+   path already exists.
+Date:02/05/2007
+6. In file httpsrv.c, function _HTTP_ServerHandleRequest( ) at line 1070
+   fixed bug caused by rejecting a request from http 2.0 client.
+   chaged from -
+   if (request->httpMajorVersion >= 1 && request->httpMinorVersion >= 1)
+   to -
+   if (request->httpMajorVersion >= 1 && request->httpMinorVersion >= 0)
+
+7. In file fileext.c, table gpFileExtensionTable[] entry of extention
+   "xml" is misplaced. Fixed by moving "xml" entry from line 147 to line 143
+
+8. In file fileext.c, table gpFileExtensionTable[] entry of extention
+   "cpp" is misplaced. Fixed by moving "cpp" entry from line 61 to line 65
+
+9. In file fileext.c, table gpFileExtensionTable[] entry of extention
+   "HTC" is misplaced. Fixed by moving "HTC" entry from line 80 to line 78
+
+10. In file fileext.c, table gpFileExtensionTable[] entry of extention
+   "PNM" is misplaced. Fixed by moving "PNM" entry from line 115 to line 114
+
+11.
+
+
+====================================================================
+Functional changes between in version 0.2.1 versus version 0.2.2
+
+Date: July 21 2006
+1. In file fileext.c
+   At line 25 fixed a bug in upper case calculation.
+   Changed From
+   #define UPPERCASE(X) (((X) >= 'a' || (X) <= 'z')? ((X) + 'A' - 'a') : (X))
+   To:
+   #define UPPERCASE(X) (((X) >= 'a' && (X) <= 'z')? ((X) + 'A' - 'a') : (X))
+
+2. In file fileext.c
+   At line 138, inserted defination for .wmv file type
+   {"WMV",   FILE_TYPE_VIDEO_X_MSVIDEO},
+
+3. In file httpsrv.c
+   At line 322 added following piece of code to fix the the bug in executing
+   the job thread from the last job slot.
+   connectCtxArray[n].job.execute = _HTTP_ServerExecuteJob;
+   connectCtxArray[n].server = server;
+
+====================================================================
+Functional changes between in version 0.2.0 versus version 0.2.1
+
+1. In file httpsrv.c
+   Removed local defination "HTTP_SERVER_LOCAL_PATH_SEPERATOR"
+   All usage of this defination is replaced with rtplatform call
+   rtp_file_get_path_seperator to obtain the path seperator of
+   a local file system.
+
+2. In file HTTPP.H added verion definition
+    #define HTTP_VERSION                       0021  /* 0.2.1 */
+
+====================================================================

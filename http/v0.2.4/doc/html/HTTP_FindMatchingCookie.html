@@ -1,0 +1,72 @@
+<html>
+<head>
+<title> EBSnet HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black; 
+	background-color: white; 
+	background-image: URL("background_small.jpeg"); 
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsnetinc.com/' target='_blank'><img border=0 src='ebsnet.gif' align=right></a>
+
+<H2>HTTPCookieInfo* <A HREF="#DOC.DOCU">HTTP_FindMatchingCookie</A></H2><H2>( HTTPCookieContext* ctx,<BR>&nbsp;  const HTTP_CHAR* name,<BR>&nbsp;  const HTTP_CHAR* host,<BR>&nbsp;  const HTTP_CHAR* path,<BR>&nbsp;  int num )</H2><BLOCKQUOTE>Find a cookie in the database that matches the given host/path </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>There may be a number of cookies that match a given host and path,
+so this function returns the nth such cookie.  This function actually
+temporarily removes the cookie from the database; so when the caller
+of this function is done manipulating the cookie, it must be released
+using either <!1><A HREF="HTTP_ReleaseCookie.html">HTTP_ReleaseCookie</A> (which will give it back to the
+database) or <!1><A HREF="HTTP_DeleteCookie.html">HTTP_DeleteCookie</A> (which deletes it).  Until either
+of these functions are called, the cookie will not be sent along with
+any outgoing HTTP client requests.
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>ctx</B> -   the cookie database to search 
+<BR><B>name</B> -   option: the name of the cookie; 0 if unspecified 
+<BR><B>host</B> -   the host to match 
+<BR><B>path</B> -   the path to match 
+<BR><B>num</B> -   the index of the cookie <BR><DT><B>Returns:</B><DD>  pointer to cookie if found, 0 otherwise
+<BR><DT><B>See Also:</B><DD><!1><A HREF="HTTP_ReleaseCookie.html">HTTP_ReleaseCookie</A>, <!1><A HREF="HTTP_DeleteCookie.html">HTTP_DeleteCookie</A>, <!1><A HREF="HTTP_FindExactCookie.html">HTTP_FindExactCookie</A>
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBSnet Inc, 1993-2004.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBSnet, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsnetinc.com' target=_blank>www.ebsnetinc.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>

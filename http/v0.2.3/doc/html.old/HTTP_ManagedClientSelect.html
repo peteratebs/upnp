@@ -1,0 +1,76 @@
+<html>
+<head>
+<title> EBSnet HTTP Library Reference </title>
+</head>
+<body bgcolor=#bbbbbb>
+
+<style>
+HR { visibility: hidden }
+A:visited { color: #a43; }
+A:link { color: #14a; }
+IMG:link { border: none; }
+PRE { background-color: #d9e0e3; font-size: 8pt; }
+
+</style>
+
+<table border=0 cellpadding=5 cellspacing=0 width=750>
+<tr><td>
+<div style='
+	border: 1px solid black; 
+	background-color: white; 
+	background-image: URL("background_small.jpeg"); 
+	background-repeat: repeat-x;'>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top rowspan=3 width=45><a href='index.html'><img src='sidebar.jpg' border=0></a></td>
+<td colspan=2 height=8>&nbsp;</td>
+</tr>
+<tr>
+<td style='font-family: arial narrow, arial, sans-serif; ' width=747>
+<a href='http://www.ebsnetinc.com/' target='_blank'><img border=0 src='ebsnet.gif' align=right></a>
+
+<H2>int <A HREF="#DOC.DOCU">HTTP_ManagedClientSelect</A></H2><H2>( HTTPManagedClientSession** writeList,<BR>&nbsp;  HTTP_INT16* writeNum,<BR>&nbsp;  HTTPManagedClientSession** readList,<BR>&nbsp;  HTTP_INT16* readNum,<BR>&nbsp;  HTTPManagedClientSession** errList,<BR>&nbsp;  HTTP_INT16* errNum,<BR>&nbsp;  HTTP_INT32 timeoutMsec )</H2><BLOCKQUOTE>Select sessions for read-ready, write-ready or error condition </BLOCKQUOTE>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>This function serves a purpose very similar to the sockets API call
+"select".  It blocks for at most timeoutMsec milliseconds (possibly
+less, if one of the sessions is in the specified condition).  When
+it returns, all sessions NOT in the condition associated with each
+of the three arrays will have been removed from those respective arrays
+(and the associated sizes of the arrays modified accordingly).
+
+<P>If a session is in non-blocking mode, then selecting for write
+using this function will indicate the connection is in a state to
+send a request using <!1><A HREF="HTTP_ManagedClientGet.html">HTTP_ManagedClientGet</A>,
+<!1><A HREF="HTTP_ManagedClientPut.html">HTTP_ManagedClientPut</A>, or <!1><A HREF="HTTP_ManagedClientPost.html">HTTP_ManagedClientPost</A>
+
+<P></BLOCKQUOTE>
+<DL><DT><DT><B>Parameters:</B><DD><B>writeList</B> -   pointer to an array of HTTPManagedClientSession pointers to be selected for writing 
+<BR><B>writeNum</B> -   pointer to an integer storing the number of elements in writeList 
+<BR><B>readList</B> -   pointer to an array of HTTPManagedClientSession pointers to be selected for reading 
+<BR><B>readNum</B> -   pointer to an integer storing the number of elements in readList 
+<BR><B>errList</B> -   pointer to an array of HTTPManagedClientSession pointers to be selected for errors 
+<BR><B>errNum</B> -   pointer to an integer storing the number of elements in errList 
+<BR><B>timeoutMsec</B> -   maximum time to block for (milliseconds) <BR><DT><B>Returns:</B><DD>  non-negative on success, negative on failure
+<BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I></P><HR>
+</td>
+<td rowspan=2 width=8>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<center><img border=0 src='centerline.gif'></center><br>
+<i>Copyright EBSnet Inc, 1993-2004.<br>All rights reserved.<br>
+This document may not be redistributed in any form without the consent of EBSnet, Inc.</i><br>
+<font size=-1 face=arial><a href='http://www.ebsnetinc.com' target=_blank>www.ebsnetinc.com</a></font>
+</td>
+</tr>
+<tr>
+<td height=8 colspan=2>&nbsp;</td>
+</tr>
+
+</table>
+</div>
+</tr></td></table>
